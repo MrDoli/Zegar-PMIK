@@ -1,0 +1,35 @@
+Sprzêt: 
+- wyœwietlacz OLED (dwu-kolorowy) interfejs I2C
+- pilot po podczerwieni (trochê rzeŸby, ewentualnie poszukaæ ³atwiejszego/szybszego rozwi¹zania/implementacji) 
+- jak zaakceptuje i bêdziemy mieli chêæ to robimy na klawiaturze 
+- piszczek/g³oœniczek do sygnalizacji alarmu 
+- sprawdziæ czy wyœwietlacz ma obs³u¿y³by zminê jasnoœci 
+- zapamietanie godziny (zapis do pamiêci na mikrokontrolerze)
+
+- poszukaæ inspiracji zegarowych internecie 
+- sprawdziæ czy nasz Discovery bêdzie w stanie to obs³u¿yæ/zrealizowaæn
+
+Lista zakupów:
+- OLED
+- Piszczek
+- Pilot
+- odbiornik podczerwieni
+- usb na micro usb 
+- fotorezystor
+- p³ytka prototypowa + kabelki (mêsko-mêskie itd.) (ta bia³a) ???
+- zapytaæ w bionik czy maj¹ fajne peryferiale 
+
+Funkcjonalnoœæ:
+- budzik (dŸwiêk + ewentualnie napis)
+- stoper
+- rozjaœnianie przyciemnianie ekranu (dodatkowo mo¿liwoœæ zmiany fizycznej)
+- zegarek
+- zapamiêtywanie godziny budzika 
+- zmiana godziny, budzika
+- w³¹czenie, zatrzymanie stopera
+- menu (zmiana trybow) 
+
+KORZYSTAÆ Z CUBE MX i HAL-a
+
+Oprogramowanie:
+- dopytaæ jakie IDE jest polecane!
