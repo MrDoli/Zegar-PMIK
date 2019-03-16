@@ -78,6 +78,32 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LED_GREEN_PIN_Pin GPIO_PIN_12
+#define LED_GREEN_PIN_GPIO_Port GPIOD
+#define LED_ORANGE_PIN_Pin GPIO_PIN_13
+#define LED_ORANGE_PIN_GPIO_Port GPIOD
+#define LED_RED_PIN_Pin GPIO_PIN_14
+#define LED_RED_PIN_GPIO_Port GPIOD
+#define KEYPAD_PIN_0_Pin GPIO_PIN_0
+#define KEYPAD_PIN_0_GPIO_Port GPIOD
+#define KEYPAD_PIN_0_EXTI_IRQn EXTI0_IRQn
+#define KEYPAD_PIN_1_Pin GPIO_PIN_1
+#define KEYPAD_PIN_1_GPIO_Port GPIOD
+#define KEYPAD_PIN_1_EXTI_IRQn EXTI1_IRQn
+#define KEYPAD_PIN_2_Pin GPIO_PIN_2
+#define KEYPAD_PIN_2_GPIO_Port GPIOD
+#define KEYPAD_PIN_2_EXTI_IRQn EXTI2_IRQn
+#define KEYPAD_PIN_3_Pin GPIO_PIN_3
+#define KEYPAD_PIN_3_GPIO_Port GPIOD
+#define KEYPAD_PIN_3_EXTI_IRQn EXTI3_IRQn
+#define KEYPAD_PIN_4_Pin GPIO_PIN_4
+#define KEYPAD_PIN_4_GPIO_Port GPIOD
+#define KEYPAD_PIN_5_Pin GPIO_PIN_5
+#define KEYPAD_PIN_5_GPIO_Port GPIOD
+#define KEYPAD_PIN_6_Pin GPIO_PIN_6
+#define KEYPAD_PIN_6_GPIO_Port GPIOD
+#define KEYPAD_PIN_7_Pin GPIO_PIN_7
+#define KEYPAD_PIN_7_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

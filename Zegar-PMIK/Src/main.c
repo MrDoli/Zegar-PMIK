@@ -43,6 +43,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdint.h"
+#include "inttypes.h"
+#include "keypad.c"
 
 /*Biblioteka do wyswietlacza OLED */
 #include "../Drivers/ssd1306/ssd1306.h"
@@ -115,6 +118,8 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4, GPIO_PIN_RESET);
 
   /*OLED*/
   /* Inicjalizacja wyswietlacza OLED*/
@@ -141,6 +146,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HAL_GPIO_EXTI_Callback(GPIO_PIN_4);
+	  HAL_GPIO_EXTI_Callback(GPIO_PIN_5);
+	  HAL_GPIO_EXTI_Callback(GPIO_PIN_6);
   }
   /* USER CODE END 3 */
 }
@@ -231,20 +239,45 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN_Pin|LED_ORANGE_PIN_Pin|LED_RED_PIN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PD0 PD1 PD2 PD3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  /*Configure GPIO pins : LED_GREEN_PIN_Pin LED_ORANGE_PIN_Pin LED_RED_PIN_Pin */
+  GPIO_InitStruct.Pin = LED_GREEN_PIN_Pin|LED_ORANGE_PIN_Pin|LED_RED_PIN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PD4 PD5 PD6 PD7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pin : KEYPAD_PIN_0_Pin */
+  GPIO_InitStruct.Pin = KEYPAD_PIN_0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(KEYPAD_PIN_0_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : KEYPAD_PIN_1_Pin KEYPAD_PIN_2_Pin KEYPAD_PIN_3_Pin */
+  GPIO_InitStruct.Pin = KEYPAD_PIN_1_Pin|KEYPAD_PIN_2_Pin|KEYPAD_PIN_3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : KEYPAD_PIN_4_Pin KEYPAD_PIN_5_Pin KEYPAD_PIN_6_Pin KEYPAD_PIN_7_Pin */
+  GPIO_InitStruct.Pin = KEYPAD_PIN_4_Pin|KEYPAD_PIN_5_Pin|KEYPAD_PIN_6_Pin|KEYPAD_PIN_7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI2_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
 }
 
