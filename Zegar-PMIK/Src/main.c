@@ -45,7 +45,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-#include "keypad.c"
+#include "keypad.h"
 
 /*Biblioteka do wyswietlacza OLED */
 #include "../Drivers/ssd1306/ssd1306.h"
@@ -79,7 +79,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
-
+//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -146,9 +146,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_GPIO_EXTI_Callback(GPIO_PIN_4);
-	  HAL_GPIO_EXTI_Callback(GPIO_PIN_5);
-	  HAL_GPIO_EXTI_Callback(GPIO_PIN_6);
+	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_4);
+	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_5);
+	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_6);
+
+	 /* HAL_GPIO_EXTI_Callback(KEYPAD_PIN_4_Pin);
+	  HAL_GPIO_EXTI_Callback(KEYPAD_PIN_5_Pin);
+	  HAL_GPIO_EXTI_Callback(KEYPAD_PIN_6_Pin);*/
   }
   /* USER CODE END 3 */
 }
