@@ -300,23 +300,30 @@ void I2C1_ER_IRQHandler(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == KEYPAD_PIN_3_Pin) //sprawdzic
     {
-		HAL_GPIO_WritePin(GPIOD, LED_ORANGE_PIN_GPIO_Port, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOD, LED_ORANGE_Pin, GPIO_PIN_SET);
 	}else{
-		HAL_GPIO_WritePin(GPIOD, LED_ORANGE_PIN_GPIO_Port, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOD, LED_ORANGE_Pin, GPIO_PIN_RESET);
 	}
 
-	if(GPIO_Pin == KEYPAD_PIN_4_Pin) //sprawdzic czy to dziala
+	if(GPIO_Pin == KEYPAD_PIN_2_Pin) //sprawdzic czy to dziala
 	{
-		HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN_GPIO_Port, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOD, LED_GREEN_Pin, GPIO_PIN_SET);
 	}else{
-		HAL_GPIO_WritePin(GPIOD, LED_GREEN_PIN_GPIO_Port, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOD, LED_GREEN_Pin, GPIO_PIN_RESET);
 	}
 
-	if(GPIO_Pin == KEYPAD_PIN_5_Pin)
+	if(GPIO_Pin == KEYPAD_PIN_1_Pin)
 	{
-		HAL_GPIO_WritePin(GPIOD, LED_RED_PIN_GPIO_Port, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOD, LED_RED_Pin, GPIO_PIN_SET);
 	}else{
-		HAL_GPIO_WritePin(GPIOD, LED_RED_PIN_GPIO_Port, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOD, LED_RED_Pin, GPIO_PIN_RESET);
+	}
+
+	if(GPIO_Pin == KEYPAD_PIN_0_Pin)
+	{
+			HAL_GPIO_WritePin(GPIOD, LED_BLUE_Pin, GPIO_PIN_SET);
+	}else{
+		HAL_GPIO_WritePin(GPIOD, LED_BLUE_Pin, GPIO_PIN_RESET);
 	}
 }
 /* USER CODE END 1 */
