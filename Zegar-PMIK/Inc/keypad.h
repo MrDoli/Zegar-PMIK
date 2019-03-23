@@ -9,7 +9,7 @@
 #define KEYPAD_H_
 
 #include "..\Src\keypad.c"
-
-//void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
-
+//extern int counter;
+//char buffer[3];
+void getCharKeypad();
 #endif /* KEYPAD_H_ */
