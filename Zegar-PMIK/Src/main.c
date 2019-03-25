@@ -133,7 +133,7 @@ int main(void)
   /* START przyk³adowego testu wyœwietlacza*/
   /*Bardziej z³o¿one testy znajduj¹ siê w Drivers/ssd1306/ssd1306_tests.c */
   ssd1306_Fill(Black);
-  ssd1306_SetCursor(14, 0);
+  /*ssd1306_SetCursor(14, 0);
   ssd1306_WriteString("Alarm off", Font_11x18, White);
   ssd1306_SetCursor(24, 32);
   ssd1306_WriteString("00:00", Font_16x26, White);
@@ -151,13 +151,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_4);
-	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_5);
-	  //HAL_GPIO_EXTI_Callback(GPIO_PIN_6);
 
-	 /* HAL_GPIO_EXTI_Callback(KEYPAD_PIN_4_Pin);
-	  HAL_GPIO_EXTI_Callback(KEYPAD_PIN_5_Pin);
-	  HAL_GPIO_EXTI_Callback(KEYPAD_PIN_6_Pin);*/
+
   }
   /* USER CODE END 3 */
 }
@@ -311,7 +306,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : KEYPAD_PIN_0_OUT_Pin KEYPAD_PIN_1_OUT_Pin KEYPAD_PIN_2_OUT_Pin KEYPAD_PIN_3_OUT_Pin */
   GPIO_InitStruct.Pin = KEYPAD_PIN_0_OUT_Pin|KEYPAD_PIN_1_OUT_Pin|KEYPAD_PIN_2_OUT_Pin|KEYPAD_PIN_3_OUT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
@@ -326,9 +321,15 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+
  if(htim->Instance == TIM2){ // Je¿eli przerwanie pochodzi od timera 10
+	 char znak =' ';
 	 counter++;
-	 getCharKeypad();
+	  //ssd1306_Fill(Black);
+	 znak = getCharKeypad();
+	 ssd1306_SetCursor(24, 32);
+	 if(znak!=' ') ssd1306_WriteChar(znak,  Font_16x26, White);
+	 ssd1306_UpdateScreen();
  }
 }
 /* USER CODE END 4 */

@@ -11,5 +11,5 @@
 #include "..\Src\keypad.c"
 //extern int counter;
 //char buffer[3];
-void getCharKeypad();
+char getCharKeypad();
 #endif /* KEYPAD_H_ */
