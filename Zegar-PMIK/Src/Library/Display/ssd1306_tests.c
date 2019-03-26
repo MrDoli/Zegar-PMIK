@@ -1,5 +1,5 @@
 #include <string.h>
-#include "../../Drivers/ssd1306/ssd1306.h"
+#include "ssd1306.h"
 
 void ssd1306_TestBorder() {
     ssd1306_Fill(Black);

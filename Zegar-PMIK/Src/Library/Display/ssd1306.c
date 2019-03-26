@@ -1,4 +1,4 @@
-#include "../../Drivers/ssd1306/ssd1306.h"
+#include "ssd1306.h"
 
 void ssd1306_Reset(void) {
 	/* for I2C - do nothing */

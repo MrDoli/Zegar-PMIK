@@ -45,10 +45,9 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-//#include "keypad.h"
 
 /*Biblioteka do wyswietlacza OLED */
-#include "../Drivers/ssd1306/ssd1306.h"
+#include "Library/Display/ssd1306.h"
 
 /* USER CODE END Includes */
 
@@ -130,15 +129,6 @@ int main(void)
   /* Inicjalizacja wyswietlacza OLED*/
   ssd1306_Init();
 
-  /* START przyk³adowego testu wyœwietlacza*/
-  /*Bardziej z³o¿one testy znajduj¹ siê w Drivers/ssd1306/ssd1306_tests.c */
-  ssd1306_Fill(Black);
-  /*ssd1306_SetCursor(14, 0);
-  ssd1306_WriteString("Alarm off", Font_11x18, White);
-  ssd1306_SetCursor(24, 32);
-  ssd1306_WriteString("00:00", Font_16x26, White);
-  ssd1306_UpdateScreen();
-  /*KONIEC przyk³adowego testu wyœwietlacza*/
   /*OLED*/
   HAL_TIM_Base_Start_IT(&htim2);
 

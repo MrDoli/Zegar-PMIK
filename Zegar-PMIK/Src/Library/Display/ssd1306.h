@@ -11,7 +11,7 @@
 #include "stm32f4xx_hal.h"
 
 
-#include "../../Drivers/ssd1306/ssd1306_fonts.h"
+#include "ssd1306_fonts.h"
 
 /* vvv I2C config vvv */
 
