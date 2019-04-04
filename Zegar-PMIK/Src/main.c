@@ -76,6 +76,9 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
+char time[8];
+char date[8];
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -155,6 +158,24 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  /*RTC_TimeTypeDef* stimeststuctureget;
+
+	  	  HAL_RTC_GetTime(&hrtc, stimeststuctureget, RTC_FORMAT_BIN); // Get Time
+
+	  	  uint8_t Time[3];
+
+	  	  Time[0] = stimeststuctureget->Hours;
+	  	  Time[1] = stimeststuctureget->Minutes;
+	  	  Time[2] = stimeststuctureget->Seconds;
+
+	  	  printf("%d:", Time[0]);
+	  	  printf("%d:", Time[1]);
+	  	  printf("%d \n\r", Time[2]);
+
+	  	ssd1306_SetCursor(24, 32);
+	  	ssd1306_WriteChar(Time[0],  Font_16x26, White);
+	  	ssd1306_UpdateScreen();
+	  	HAL_Delay(1000);*/
 
   }
   /* USER CODE END 3 */
@@ -257,6 +278,10 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 0 */
 
+  RTC_TimeTypeDef sTime = {0};
+  RTC_DateTypeDef sDate = {0};
+  RTC_AlarmTypeDef sAlarm = {0};
+
   /* USER CODE BEGIN RTC_Init 1 */
 
   /* USER CODE END RTC_Init 1 */
@@ -273,8 +298,50 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN RTC_Init 2 */
 
+  /* USER CODE BEGIN Check_RTC_BKUP */
+    
+  /* USER CODE END Check_RTC_BKUP */
+
+  /** Initialize RTC and set the Time and Date 
+  */
+  sTime.Hours = 0x0;
+  sTime.Minutes = 0x0;
+  sTime.Seconds = 0x0;
+  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sDate.WeekDay = RTC_WEEKDAY_MONDAY;
+  sDate.Month = RTC_MONTH_JANUARY;
+  sDate.Date = 0x1;
+  sDate.Year = 0x0;
+
+  if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Enable the Alarm A 
+  */
+  sAlarm.AlarmTime.Hours = 0x0;
+  sAlarm.AlarmTime.Minutes = 0x0;
+  sAlarm.AlarmTime.Seconds = 0x0;
+  sAlarm.AlarmTime.SubSeconds = 0x0;
+  sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+  sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
+  sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
+  sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+  sAlarm.AlarmDateWeekDay = 0x1;
+  sAlarm.Alarm = RTC_ALARM_A;
+  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN RTC_Init 2 */
+  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
   /* USER CODE END RTC_Init 2 */
 
 }
@@ -377,6 +444,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	 if(znak!=' ') ssd1306_WriteChar(znak,  Font_16x26, White);
 	 ssd1306_UpdateScreen();
  }
+ get_time();
+ 	  ssd1306_SetCursor(15, 22);
+ 	  ssd1306_WriteString(time, Font_11x18, White);
+ 	  ssd1306_UpdateScreen();
+}
+
+void get_time(void)
+{
+  RTC_DateTypeDef gDate;
+  RTC_TimeTypeDef gTime;
+
+  /* Get the RTC current Time */
+  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
+  /* Get the RTC current Date */
+  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+
+  /* Display time Format: hh:mm:ss */
+  sprintf((char*)time,"%02d:%02d:%02d",gTime.Hours, gTime.Minutes, gTime.Seconds);
+
+  /* Display date Format: dd-mm-yy */
+  sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
 }
 /* USER CODE END 4 */
 
