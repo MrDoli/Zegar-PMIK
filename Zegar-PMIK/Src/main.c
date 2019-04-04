@@ -49,6 +49,9 @@
 /*Biblioteka do wyswietlacza OLED */
 #include "Library/Display/ssd1306.h"
 
+/*Obs³uga pamiêci Flash*/
+#include "Library/Flash/flash.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -88,6 +91,9 @@ static void MX_TIM2_Init(void);
 /* USER CODE BEGIN 0 */
 char buffer[3];
 int counter;
+/*Do testow pamieci*/
+//uint32_t data[3] = {0x01,0x02,0x03};
+//uint32_t data1[3];
 /* USER CODE END 0 */
 
 /**
@@ -132,6 +138,9 @@ int main(void)
   /*OLED*/
   HAL_TIM_Base_Start_IT(&htim2);
 
+  /* Zapis do Flash, musiz podac w funkcji uint8_t!*/
+  //Save_Alarm(data);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -139,6 +148,9 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
+	  /*Odczyt z Flash*/
+	  //Read_Alarm(data1);
 
     /* USER CODE BEGIN 3 */
 
