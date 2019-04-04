@@ -138,7 +138,7 @@ int main(void)
   /*OLED*/
   HAL_TIM_Base_Start_IT(&htim2);
 
-  /* Zapis do Flash, musiz podac w funkcji uint8_t!*/
+  /* Zapis do Flash, musiz podac w funkcji uint32_t!*/
   //Save_Alarm(data);
 
   /* USER CODE END 2 */
