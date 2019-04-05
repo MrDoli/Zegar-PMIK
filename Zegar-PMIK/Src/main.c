@@ -74,10 +74,8 @@ I2C_HandleTypeDef hi2c1;
 
 RTC_HandleTypeDef hrtc;
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
-
-char time[8];
-char date[8];
 
 /* USER CODE BEGIN PV */
 
@@ -89,6 +87,7 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_RTC_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 //void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* USER CODE END PFP */
@@ -133,6 +132,7 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   MX_RTC_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7, GPIO_PIN_SET);
@@ -157,26 +157,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-	  /*RTC_TimeTypeDef* stimeststuctureget;
-
-	  	  HAL_RTC_GetTime(&hrtc, stimeststuctureget, RTC_FORMAT_BIN); // Get Time
-
-	  	  uint8_t Time[3];
-
-	  	  Time[0] = stimeststuctureget->Hours;
-	  	  Time[1] = stimeststuctureget->Minutes;
-	  	  Time[2] = stimeststuctureget->Seconds;
-
-	  	  printf("%d:", Time[0]);
-	  	  printf("%d:", Time[1]);
-	  	  printf("%d \n\r", Time[2]);
-
-	  	ssd1306_SetCursor(24, 32);
-	  	ssd1306_WriteChar(Time[0],  Font_16x26, White);
-	  	ssd1306_UpdateScreen();
-	  	HAL_Delay(1000);*/
-
   }
   /* USER CODE END 3 */
 }
@@ -347,6 +327,52 @@ static void MX_RTC_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 50;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 12500;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV4;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
@@ -444,28 +470,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	 if(znak!=' ') ssd1306_WriteChar(znak,  Font_16x26, White);
 	 ssd1306_UpdateScreen();
  }
- get_time();
- 	  ssd1306_SetCursor(15, 22);
- 	  ssd1306_WriteString(time, Font_11x18, White);
- 	  ssd1306_UpdateScreen();
+
+ if(htim->Instance == TIM1){
+	 show_time(&hrtc);
+ }
+
+ // Call gettime() and display actual time on screen
 }
 
-void get_time(void)
-{
-  RTC_DateTypeDef gDate;
-  RTC_TimeTypeDef gTime;
-
-  /* Get the RTC current Time */
-  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
-  /* Get the RTC current Date */
-  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
-
-  /* Display time Format: hh:mm:ss */
-  sprintf((char*)time,"%02d:%02d:%02d",gTime.Hours, gTime.Minutes, gTime.Seconds);
-
-  /* Display date Format: dd-mm-yy */
-  sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
-}
 /* USER CODE END 4 */
 
 /**
