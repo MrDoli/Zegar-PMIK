@@ -10,11 +10,8 @@
 
 #include "main.h"
 
-char time[7];
-char date[7];
+void updateTime(char time[]);
+void showMenuButtons();
+void showCity();
 
-char* get_time(RTC_HandleTypeDef* hrtc);
-char* get_date(RTC_HandleTypeDef* hrtc);
-
-void show_time(RTC_HandleTypeDef* hrtc );
 #endif /* CLOCK_H_ */
