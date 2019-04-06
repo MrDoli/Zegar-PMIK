@@ -10,5 +10,6 @@
 
 #include "main.h"
 
+void showAlarmScreen();
 
 #endif /* ALARM_H_ */

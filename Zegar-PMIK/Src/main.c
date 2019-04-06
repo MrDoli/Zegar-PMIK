@@ -426,10 +426,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	 if(znak!=' ') ssd1306_WriteChar(znak,  Font_16x26, White);
 	 ssd1306_UpdateScreen();
  }
- get_time();
- updateTime(time);
+ //get_time();
+ /*updateTime(time);
  showMenuButtons();
- showCity();
+ showCity();*/
+ setTimeScreen();
 }
 
 void get_time(void)

@@ -32,3 +32,15 @@ void showCity(){
 	ssd1306_WriteString(city, Font_11x18, White);
 	ssd1306_UpdateScreen();
 }
+
+void setTimeScreen(){
+	showMenuButtons();
+
+	char setButton[15] = "SET TIME";
+	char onOffButton[9] = "|SET-A|";
+	ssd1306_SetCursor(20, 0);
+	ssd1306_WriteString(setButton, Font_11x18, White);
+	ssd1306_SetCursor(20, 45);
+	ssd1306_WriteString(onOffButton, Font_11x18, White);
+	ssd1306_UpdateScreen();
+}
