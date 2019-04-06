@@ -157,7 +157,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
+	controller();
 
   }
   /* USER CODE END 3 */
@@ -430,7 +430,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  /*updateTime(time);
  showMenuButtons();
  showCity();*/
- setTimeScreen();
+ //setTimeScreen();
 }
 
 void get_time(void)

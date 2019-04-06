@@ -11,7 +11,14 @@
 #include "main.h"
 #include <stdbool.h>
 
+static bool actualScreen[3] = {true, false, false};
 
 void changeScreen();
+void controller();
+
+// Getters and setters
+void setActualScreen(bool screenArray[]);
+bool* getActualScreen(void);
+
 
 #endif /* CONTROLLER_CONTROLLER_H_ */
