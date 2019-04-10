@@ -426,7 +426,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		char znak =' ';
 		znak = getCharKeypad();
 		if(znak == 'D' || znak == '*')
+		{
+			ssd1306_Fill(Black);
 			handleDirectionButton(znak);
+		}
 		znak = ' ';
 	}
 
