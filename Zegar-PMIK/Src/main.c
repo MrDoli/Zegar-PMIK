@@ -45,7 +45,8 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-
+#include <stdbool.h>
+#include "Controller/controller.h"
 /*Biblioteka do wyswietlacza OLED */
 #include "Library/Display/ssd1306.h"
 
@@ -76,9 +77,10 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
-char time[8];
+static char time[8];
 char date[8];
 
+extern bool actualScreen[3];
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -96,7 +98,6 @@ static void MX_RTC_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 char buffer[3];
-int counter;
 /*Do testow pamieci*/
 //uint32_t data[3] = {0x01,0x02,0x03};
 //uint32_t data1[3];
@@ -147,6 +148,8 @@ int main(void)
 
   /* Zapis do Flash, musiz podac w funkcji uint32_t!*/
   //Save_Alarm(data);
+
+  controllerInit(time);
 
   /* USER CODE END 2 */
 
@@ -417,18 +420,21 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
- if(htim->Instance == TIM2){ // Je¿eli przerwanie pochodzi od timera 10
-	 char znak =' ';
-	 counter++;
-	  //ssd1306_Fill(Black);
-	 znak = getCharKeypad();
-	 ssd1306_SetCursor(24, 32);
-	 if(znak!=' ') ssd1306_WriteChar(znak,  Font_16x26, White);
-	 ssd1306_UpdateScreen();
- }
- //get_time();
- /*updateTime(time);
- showMenuButtons();
+	// Handel a button pressing
+	if(htim->Instance == TIM2)
+	{
+		char znak =' ';
+		znak = getCharKeypad();
+		if(znak == 'D' || znak == '*')
+			handleDirectionButton(znak);
+		znak = ' ';
+	}
+
+ /*if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+	 get_time();
+ 	 updateTime(time);
+ }/*
+ /*showMenuButtons();
  showCity();*/
  //setTimeScreen();
 }

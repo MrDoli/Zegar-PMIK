@@ -9,6 +9,8 @@
 #include "..\Library\Display\ssd1306.h"
 
 void showAlarmScreen(){
+	//ssd1306_Fill(Black);
+
 	showMenuButtons();
 
 	char setButton[15] = "Alarm SET-A";

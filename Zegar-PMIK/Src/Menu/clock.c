@@ -34,6 +34,8 @@ void showCity(){
 }
 
 void setTimeScreen(){
+	//ssd1306_Fill(Black);
+
 	showMenuButtons();
 
 	char setButton[15] = "SET TIME";

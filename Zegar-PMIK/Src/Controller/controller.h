@@ -13,12 +13,14 @@
 
 static bool actualScreen[3] = {true, false, false};
 
+void controllerInit();
 void changeScreen();
 void controller();
 
 // Getters and setters
 void setActualScreen(bool screenArray[]);
 bool* getActualScreen(void);
+void handleDirectionButton(char sign);
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */
