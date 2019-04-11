@@ -77,7 +77,7 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
-static char time[8];
+static char time[6];
 char date[8];
 
 extern bool actualScreen[3];
@@ -427,7 +427,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		znak = getCharKeypad();
 		if(znak == 'D' || znak == '*')
 		{
-			ssd1306_Fill(Black);
+			clearScreen();
+			//ssd1306_Fill(Black);
+			//ssd1306_UpdateScreen();
 			handleDirectionButton(znak);
 		}
 		znak = ' ';
@@ -436,7 +438,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
  /*if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
 	 get_time();
  	 updateTime(time);
- }/*
+ }*/
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();

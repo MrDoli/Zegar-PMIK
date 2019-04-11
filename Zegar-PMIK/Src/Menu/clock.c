@@ -27,9 +27,12 @@ void showMenuButtons()
 }
 
 void showCity(){
-	char city[7] = "Warsaw";
-	ssd1306_SetCursor(30, 0);
+	char city[13] = "   Warsaw   ";
+	char space[8] = "       ";
+	ssd1306_SetCursor(0, 0);
 	ssd1306_WriteString(city, Font_11x18, White);
+	ssd1306_SetCursor(20, 45);
+	ssd1306_WriteString(space, Font_11x18, White);
 	ssd1306_UpdateScreen();
 }
 
@@ -38,11 +41,22 @@ void setTimeScreen(){
 
 	showMenuButtons();
 
-	char setButton[15] = "SET TIME";
+	char setButton[15] = " SET TIME  ";
 	char onOffButton[9] = "|SET-A|";
-	ssd1306_SetCursor(20, 0);
+	ssd1306_SetCursor(0, 0);
 	ssd1306_WriteString(setButton, Font_11x18, White);
 	ssd1306_SetCursor(20, 45);
 	ssd1306_WriteString(onOffButton, Font_11x18, White);
+	ssd1306_UpdateScreen();
+}
+
+void clearScreen(){
+	char space[15] = "           ";
+	ssd1306_SetCursor(0, 0);
+	ssd1306_WriteString(space, Font_11x18, White);
+	ssd1306_SetCursor(0, 22);
+	ssd1306_WriteString(space, Font_11x18, White);
+	ssd1306_SetCursor(0, 45);
+	ssd1306_WriteString(space, Font_11x18, White);
 	ssd1306_UpdateScreen();
 }
