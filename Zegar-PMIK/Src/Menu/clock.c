@@ -10,6 +10,9 @@
 
 void updateTime(char time[])
 {
+	char space[15] = "           ";
+	ssd1306_SetCursor(0, 22);
+	ssd1306_WriteString(space, Font_11x18, White);
 	ssd1306_SetCursor(15, 22);
 	ssd1306_WriteString(time, Font_11x18, White);
 	ssd1306_UpdateScreen();

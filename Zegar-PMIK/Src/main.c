@@ -77,7 +77,7 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
-static char time[6];
+static char time[8];
 char date[8];
 
 extern bool actualScreen[3];
@@ -432,13 +432,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 			//ssd1306_UpdateScreen();
 			handleDirectionButton(znak);
 		}
-		znak = ' ';
 	}
 
- /*if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+ if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
 	 get_time();
  	 updateTime(time);
- }*/
+ }
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();
