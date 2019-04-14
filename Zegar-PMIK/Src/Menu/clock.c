@@ -53,6 +53,7 @@ void setTimeScreen(){
 	ssd1306_UpdateScreen();
 }
 
+/*NIEPOTRZEBNE*/
 void clearScreen(){
 	char space[15] = "           ";
 	ssd1306_SetCursor(0, 0);

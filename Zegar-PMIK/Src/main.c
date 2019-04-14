@@ -45,13 +45,16 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-#include <stdbool.h>
+
 #include "Controller/controller.h"
 /*Biblioteka do wyswietlacza OLED */
 #include "Library/Display/ssd1306.h"
 
 /*Obs³uga pamiêci Flash*/
 #include "Library/Flash/flash.h"
+
+/*Menu*/
+#include "../Src/Controller/controller.h"
 
 /* USER CODE END Includes */
 
@@ -62,6 +65,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define keypad_update	2
+#define screen_update	1
 
 /* USER CODE END PD */
 
@@ -77,11 +82,26 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
+/* USER CODE BEGIN PV */
 static char time[8];
+
 char date[8];
 
-extern bool actualScreen[3];
-/* USER CODE BEGIN PV */
+bool actualScreen[3] = {true, false, false};
+
+/*licznik dla timera 2*/
+uint8_t counterTIM2_screen = 0;
+uint8_t counterTIM2_keypad = 0;
+
+/*flaga dla timera*/
+uint8_t screen_flag = 0;
+uint8_t keypad_flag = 0;
+
+char buffer[3];
+
+/*Do testow pamieci*/
+//uint32_t data[3] = {0x01,0x02,0x03};
+//uint32_t data1[3];
 
 /* USER CODE END PV */
 
@@ -97,10 +117,6 @@ static void MX_RTC_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char buffer[3];
-/*Do testow pamieci*/
-//uint32_t data[3] = {0x01,0x02,0x03};
-//uint32_t data1[3];
 /* USER CODE END 0 */
 
 /**
@@ -143,13 +159,12 @@ int main(void)
   /* Inicjalizacja wyswietlacza OLED*/
   ssd1306_Init();
 
-  /*OLED*/
   HAL_TIM_Base_Start_IT(&htim2);
 
   /* Zapis do Flash, musiz podac w funkcji uint32_t!*/
   //Save_Alarm(data);
 
-  controllerInit(time);
+ // controllerInit(time);
 
   /* USER CODE END 2 */
 
@@ -157,10 +172,29 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+	  if(keypad_flag == 1)
+	  {
+		  char znak =' ';
+		  znak = getCharKeypad();
+		  if(znak == 'D' || znak == '*') handleDirectionButton(znak);
+		  keypad_flag = 0;
+		  counterTIM2_keypad = 0;
+	  }
+	  else if(screen_flag == 1)
+	  {
+		  controller();
+		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+			  get_time();
+			  updateTime(time);
+		  }
 
+		  screen_flag = 0;
+		  counterTIM2_screen = 0;
+	  }
+
+
+    /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
-	controller();
 
   }
   /* USER CODE END 3 */
@@ -419,25 +453,16 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-
 	// Handel a button pressing
 	if(htim->Instance == TIM2)
 	{
-		char znak =' ';
-		znak = getCharKeypad();
-		if(znak == 'D' || znak == '*')
-		{
-			clearScreen();
-			//ssd1306_Fill(Black);
-			//ssd1306_UpdateScreen();
-			handleDirectionButton(znak);
-		}
+		if(counterTIM2_keypad < keypad_update) counterTIM2_keypad++;
+		if(keypad_flag == 0 && counterTIM2_keypad >= keypad_update) keypad_flag = 1;
+
+		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
+		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
 	}
 
- if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
-	 get_time();
- 	 updateTime(time);
- }
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();

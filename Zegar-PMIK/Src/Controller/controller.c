@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "../Library/Display/ssd1306.h"
 
-extern bool actualScreen[3];
+//extern bool actualScreen[3];
 
 void changeScreen(){
 
@@ -54,7 +54,7 @@ void setActualScreen(bool screenArray[])
 
 void handleDirectionButton(char sign)
 {
-	ssd1306_Fill(Black);
+	//ssd1306_Fill(Black);
 
 	if(sign == 'D')
 	{
