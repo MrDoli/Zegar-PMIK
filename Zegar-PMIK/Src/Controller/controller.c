@@ -11,10 +11,17 @@
 
 //extern bool actualScreen[3];
 
+/**
+  * @brief  Zmiana ekranu.
+  */
 void changeScreen(){
 
 }
 
+/**
+  * @brief  Inicjalizacja wyswietlacza zegara.
+  * @param  Czas do wyswietlenia.
+  */
 void controllerInit(char time[]){
 	showMenuButtons();
 	showCity();
@@ -23,6 +30,9 @@ void controllerInit(char time[]){
 	setActualScreen(&timerScreen);
 }
 
+/**
+  * @brief  Zmiana wyswietlanego ekranu.
+  */
 void controller(){
 	// Mozemy sprawdzac rowniez inne elementy tablicy (w nastepnej wersji)
 	if(actualScreen[0] == true)
@@ -40,11 +50,19 @@ void controller(){
 	}
 }
 
+/**
+  * @brief  Pobranie tablicy ze statusem ekranow.
+  * @retval Tablica ze statusem ekranow.
+  */
 bool* getActualScreen(void)
 {
     return actualScreen;
 }
 
+/**
+  * @brief  Wgranie nowej tablicy ze statusem ekranow.
+  * @param  Tablica z nowym statusem ekranow.
+  */
 void setActualScreen(bool screenArray[])
 {
 	actualScreen[0] = screenArray[0];
@@ -52,10 +70,12 @@ void setActualScreen(bool screenArray[])
 	actualScreen[2] = screenArray[2];
 }
 
+/**
+  * @brief  Obsluga przemieszczania siê miedzy ekranami.
+  * @param  Znak zwrocony z klawiatury.
+  */
 void handleDirectionButton(char sign)
 {
-	//ssd1306_Fill(Black);
-
 	if(sign == 'D')
 	{
 		if(actualScreen[0] == true)

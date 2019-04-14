@@ -8,6 +8,10 @@
 #include "..\Inc\clock.h"
 #include "..\Library\Display\ssd1306.h"
 
+/**
+  * @brief  Zaktualizowanie czasu na wyswietlaczu.
+  * @param  Aktualny czas do wyswietlenia.
+  */
 void updateTime(char time[])
 {
 	char space[15] = "           ";
@@ -18,6 +22,9 @@ void updateTime(char time[])
 	ssd1306_UpdateScreen();
 }
 
+/**
+  * @brief  Wyswietlenie przyciskow do zmiany ekranu w aplikacji.
+  */
 void showMenuButtons()
 {
 	char leftButton[6] = "<*";
@@ -29,6 +36,9 @@ void showMenuButtons()
 	ssd1306_UpdateScreen();
 }
 
+/**
+  * @brief  Wyswietlenie nazwy miasta.
+  */
 void showCity(){
 	char city[13] = "   Warsaw   ";
 	char space[8] = "       ";
@@ -39,6 +49,9 @@ void showCity(){
 	ssd1306_UpdateScreen();
 }
 
+/**
+  * @brief  Wyœwietlenie ekranu do ustawienia czasu w zegarze.
+  */
 void setTimeScreen(){
 	//ssd1306_Fill(Black);
 
