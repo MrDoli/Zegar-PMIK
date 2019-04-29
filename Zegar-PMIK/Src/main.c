@@ -434,10 +434,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		}
 	}
 
- if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+ /*if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
 	 get_time();
  	 updateTime(time);
- }
+ }*/
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();
