@@ -45,13 +45,17 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-#include <stdbool.h>
+
 #include "Controller/controller.h"
+#include "Library/Keypad/keypad.h"
 /*Biblioteka do wyswietlacza OLED */
 #include "Library/Display/ssd1306.h"
 
 /*Obs³uga pamiêci Flash*/
 #include "Library/Flash/flash.h"
+
+/*Menu*/
+#include "../Src/Controller/controller.h"
 
 /* USER CODE END Includes */
 
@@ -62,6 +66,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define keypad_update	2
+#define screen_update	1
 
 /* USER CODE END PD */
 
@@ -77,11 +83,26 @@ RTC_HandleTypeDef hrtc;
 
 TIM_HandleTypeDef htim2;
 
-static char time[8];
+/* USER CODE BEGIN PV */
+char time[8];
+
 char date[8];
 
-extern bool actualScreen[3];
-/* USER CODE BEGIN PV */
+bool actualScreen[3] = {true, false, false};
+
+/*licznik dla timera 2*/
+uint8_t counterTIM2_screen = 0;
+uint8_t counterTIM2_keypad = 0;
+
+/*flaga dla timera*/
+uint8_t screen_flag = 0;
+uint8_t keypad_flag = 0;
+
+char buffer[3];
+
+/*Do testow pamieci*/
+//uint32_t data[3] = {0x01,0x02,0x03};
+//uint32_t data1[3];
 
 /* USER CODE END PV */
 
@@ -97,10 +118,6 @@ static void MX_RTC_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char buffer[3];
-/*Do testow pamieci*/
-//uint32_t data[3] = {0x01,0x02,0x03};
-//uint32_t data1[3];
 /* USER CODE END 0 */
 
 /**
@@ -143,24 +160,58 @@ int main(void)
   /* Inicjalizacja wyswietlacza OLED*/
   ssd1306_Init();
 
-  /*OLED*/
   HAL_TIM_Base_Start_IT(&htim2);
 
   /* Zapis do Flash, musiz podac w funkcji uint32_t!*/
   //Save_Alarm(data);
 
-  controllerInit(time);
+ // controllerInit(time);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char znak =' ';
+  char new_znak = '0';
   while (1)
   {
+	  /*Klawitura*/
+	  if(keypad_flag == 1)
+	  {
+		  znak = getCharKeypad();
+		  if(znak == 'D' || znak == '*') handleDirectionButton(znak);
+		  else if(znak != ' ') new_znak = znak;
+		  keypad_flag = 0;
+		  counterTIM2_keypad = 0;
+	  }
+
+	  /*Wyswietlacz*/
+	  else if(screen_flag == 1)
+	  {
+		  controller();
+		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+			  get_time();
+		  }
+		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false ){
+			  if(new_znak != 'A'){
+				  sprintf((char*)time,"%02d:%02d:%02d",0,0,0);
+				  time[6] = new_znak;
+			  }
+			  else{
+				  set_alarm(time);
+			  }
+		  }
+
+		  updateTime(time);
+
+		  screen_flag = 0;
+		  counterTIM2_screen = 0;
+	  }
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	controller();
 
   }
   /* USER CODE END 3 */
@@ -312,14 +363,14 @@ static void MX_RTC_Init(void)
   */
   sAlarm.AlarmTime.Hours = 0x0;
   sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x0;
+  sAlarm.AlarmTime.Seconds = 0x05;
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
   sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
   sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
   sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-  sAlarm.AlarmDateWeekDay = 0x1;
+  sAlarm.AlarmDateWeekDay = 1;
   sAlarm.Alarm = RTC_ALARM_A;
   if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
   {
@@ -418,31 +469,40 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
+/**
+  * @brief  Obsluga przerwania z alarum zegara RTC.
+  * @param  wskaznik hrtc do struktury RTC_HandleTypeDef ktora zawiera
+  *                informacje konfoguracyjne dla RTC.
+  */
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
+	HAL_GPIO_TogglePin(GPIOD, LED_GREEN_Pin);
+}
+
+/**
+  * @brief  Obsluga przerwania z timera.
+  * @param  wskaznik htim do struktury RTC_HandleTypeDef ktora zawiera
+  *                informacje konfoguracyjne dla timera.
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	// Handel a button pressing
 	if(htim->Instance == TIM2)
 	{
-		char znak =' ';
-		znak = getCharKeypad();
-		if(znak == 'D' || znak == '*')
-		{
-			clearScreen();
-			//ssd1306_Fill(Black);
-			//ssd1306_UpdateScreen();
-			handleDirectionButton(znak);
-		}
+		if(counterTIM2_keypad < keypad_update) counterTIM2_keypad++;
+		if(keypad_flag == 0 && counterTIM2_keypad >= keypad_update) keypad_flag = 1;
+
+		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
+		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
 	}
 
- /*if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
-	 get_time();
- 	 updateTime(time);
- }*/
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();
 }
 
+/**
+  * @brief  Pobranie czasu z RTC.
+  */
 void get_time(void)
 {
   RTC_DateTypeDef gDate;
@@ -459,6 +519,39 @@ void get_time(void)
   /* Display date Format: dd-mm-yy */
   sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
 }
+
+/**
+  * @brief  Ustawienie alarmu.
+  * @param  Godzina alarmu.
+  */
+void set_alarm(char time[])
+{
+	uint32_t x = time[6] - '0';
+
+	RTC_AlarmTypeDef sAlarm = {0};
+
+	sAlarm.AlarmTime.Hours = 0x0;
+	sAlarm.AlarmTime.Minutes = 0x0;
+	sAlarm.AlarmTime.Seconds = 0x20;
+	sAlarm.AlarmTime.SubSeconds = 0x0;
+	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+	sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
+	sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
+	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
+	sAlarm.AlarmDateWeekDay = 1;
+	sAlarm.Alarm = RTC_ALARM_A;
+
+	//Set alarm
+	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+	  /* USER CODE BEGIN RTC_Init 2 */
+	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
+	  /* USER CODE END RTC_Init 2 */
+}
+
 /* USER CODE END 4 */
 
 /**

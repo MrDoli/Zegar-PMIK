@@ -14,6 +14,8 @@ void updateTime(char time[]);
 void showMenuButtons();
 void showCity();
 void setTimeScreen();
+
+/*NIEPOTRZEBNE*/
 void clearScreen();
 
 #endif /* CLOCK_H_ */

@@ -8,6 +8,9 @@
 #include "..\Inc\alarm.h"
 #include "..\Library\Display\ssd1306.h"
 
+/**
+  * @brief  Wyswietlenie ekranu do ustawienia alarmu.
+  */
 void showAlarmScreen(){
 	//ssd1306_Fill(Black);
 

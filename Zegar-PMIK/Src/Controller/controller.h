@@ -11,8 +11,8 @@
 #include "main.h"
 #include <stdbool.h>
 
-static bool actualScreen[3] = {true, false, false};
-
+//static bool actualScreen[3] = {true, false, false};
+extern bool actualScreen[3];
 void controllerInit();
 void changeScreen();
 void controller();

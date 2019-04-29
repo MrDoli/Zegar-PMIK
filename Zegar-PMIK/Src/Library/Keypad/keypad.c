@@ -5,10 +5,12 @@
  *      Author: Marcin Dolicher
  */
 
-#include "stdint.h"
-#include "main.h" // musi byc bo tam zadeklarowane zmienne pinow
-#include "Library/Display/ssd1306.h"
+#include "keypad.h"
 
+/**
+  * @brief Pobieranie znakow z klawiatury.
+  * @retval Pobrany znak z klawiatury.
+  */
 char getCharKeypad(){
 
 	unsigned int GPIO_Pin_row , GPIO_Pin_col , i, j;
