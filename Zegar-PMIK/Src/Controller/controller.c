@@ -8,6 +8,7 @@
 #include "controller.h"
 #include <stdbool.h>
 #include "../Library/Display/ssd1306.h"
+#include <stdint.h>
 
 //extern bool actualScreen[3];
 
@@ -113,4 +114,56 @@ void handleDirectionButton(char sign)
 			actualScreen[1] = true;
 		}
 	}
+}
+
+void setTimeUser()
+{
+	char znak = getCharKeypad();
+	int counter = 0;
+	setTimeInRTC(12,30,50); //wyswietlacz wyswietla liczby w zapisie hex dlaczego?
+/*
+	while( counter < 2 )
+	{
+		znak = getCharKeypad();
+		if(znak == 'A')
+		{
+			counter++;
+			ssd1306_SetCursor(10, 20);
+			ssd1306_WriteString("1", Font_11x18, White);
+			return;
+		}
+		//counter++;
+		showCity();
+	}
+	*/
+}
+
+void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
+{
+	  RTC_HandleTypeDef hrtc;
+	  RTC_TimeTypeDef sTime = {0};
+
+	  hrtc.Instance = RTC;
+	    hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+	    hrtc.Init.AsynchPrediv = 127;
+	    hrtc.Init.SynchPrediv = 255;
+	    hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+	    hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	    hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	    if (HAL_RTC_Init(&hrtc) != HAL_OK)
+	    {
+	      Error_Handler();
+	    }
+
+	  sTime.Hours = hours;
+	  sTime.Minutes = minutes;
+	  sTime.Seconds = seconds;
+	  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+	  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
+	  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+
+	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
 }

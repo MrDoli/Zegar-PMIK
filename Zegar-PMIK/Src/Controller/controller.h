@@ -21,6 +21,9 @@ void controller();
 void setActualScreen(bool screenArray[]);
 bool* getActualScreen(void);
 void handleDirectionButton(char sign);
+void setTimeUser();
+void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
+
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */

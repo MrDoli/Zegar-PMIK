@@ -175,6 +175,11 @@ int main(void)
   char new_znak = '0';
   while (1)
   {
+
+	  /*
+	   * TU PRZEROBIC TAK ZEBY BYLO TYLKO controller() tak jak bylo na poczatku
+	   * logika dzialania ma sie odbywac w tej funkcji
+	   */
 	  /*Klawitura*/
 	  if(keypad_flag == 1)
 	  {
@@ -192,6 +197,7 @@ int main(void)
 		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
 			  get_time();
 		  }
+
 		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false ){
 			  if(new_znak != 'A'){
 				  sprintf((char*)time,"%02d:%02d:%02d",0,0,0);
@@ -202,12 +208,21 @@ int main(void)
 			  }
 		  }
 
+		  // setowanie aktualnej godziny
+		  if(actualScreen[0] == false && actualScreen[1] == false && actualScreen[2] == true ){
+		  	  if(new_znak == 'A'){
+		  		  setTimeUser();
+
+		   	  }
+
+		  }
+
 		  updateTime(time);
 
 		  screen_flag = 0;
 		  counterTIM2_screen = 0;
-	  }
 
+	  }
 
     /* USER CODE END WHILE */
 
@@ -509,12 +524,12 @@ void get_time(void)
   RTC_TimeTypeDef gTime;
 
   /* Get the RTC current Time */
-  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
+  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BCD);
   /* Get the RTC current Date */
-  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BCD);
 
   /* Display time Format: hh:mm:ss */
-  sprintf((char*)time,"%02d:%02d:%02d",gTime.Hours, gTime.Minutes, gTime.Seconds);
+  sprintf((int*)time,"%02d:%02d:%02d", gTime.Hours, gTime.Minutes, gTime.Seconds);
 
   /* Display date Format: dd-mm-yy */
   sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
@@ -551,7 +566,6 @@ void set_alarm(char time[])
 	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
 	  /* USER CODE END RTC_Init 2 */
 }
-
 /* USER CODE END 4 */
 
 /**
