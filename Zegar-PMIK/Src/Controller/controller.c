@@ -120,7 +120,13 @@ void setTimeUser()
 {
 	char znak = getCharKeypad();
 	int counter = 0;
-	setTimeInRTC(12,30,50); //wyswietlacz wyswietla liczby w zapisie hex dlaczego?
+	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
+	{
+		if(getCharKeypad() == 'B')
+		{
+			setTimeInRTC(12,59,40);
+		}
+	}
 /*
 	while( counter < 2 )
 	{
@@ -160,7 +166,7 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	  sTime.Seconds = seconds;
 	  sTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
 	  sTime.StoreOperation = RTC_STOREOPERATION_RESET;
-	  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BCD) != HAL_OK)
+	  if (HAL_RTC_SetTime(&hrtc, &sTime, RTC_FORMAT_BIN) != HAL_OK)
 	  {
 	    Error_Handler();
 	  }

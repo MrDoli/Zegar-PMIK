@@ -524,9 +524,9 @@ void get_time(void)
   RTC_TimeTypeDef gTime;
 
   /* Get the RTC current Time */
-  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BCD);
+  HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
   /* Get the RTC current Date */
-  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 
   /* Display time Format: hh:mm:ss */
   sprintf((int*)time,"%02d:%02d:%02d", gTime.Hours, gTime.Minutes, gTime.Seconds);
