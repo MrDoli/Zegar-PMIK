@@ -11,6 +11,8 @@
 #include <stdint.h>
 
 //extern bool actualScreen[3];
+extern int counterKpad;
+extern bool keypad_number_flag;
 
 /**
   * @brief  Zmiana ekranu.
@@ -119,12 +121,41 @@ void handleDirectionButton(char sign)
 void setTimeUser()
 {
 	char znak = getCharKeypad();
-	int counter = 0;
+	//int counter = 0;
+	int hours = 0;
+	int minutes = 0;
+	int seconds = 0;
+	int tempTime[2] = {0, 0};
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
-		if(getCharKeypad() == 'B')
+		if(getCharKeypad() == 'A')
 		{
-			setTimeInRTC(12,59,40);
+			//hours = getIntKeypad();
+			counterKpad++;
+			if(keypad_number_flag == true)
+			{
+				setTimeInRTC(14, minutes, seconds);
+
+			}
+			/*if(counter == 0)
+			{
+				tempTime[0] = getIntKeyPad();
+				counter = 1;
+				continue;
+			}
+			if(counter == 1)
+			{
+				tempTime[1] = getIntKeyPad();
+				counter = 2;
+				continue;
+			}
+			if(counter == 2)
+			{
+				hours = tempTime[0]*10 + tempTime[1];
+				setTimeInRTC(hours, minutes, seconds);
+				counter = 0;
+				continue;
+			}*/
 		}
 	}
 /*

@@ -45,6 +45,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
+//#include <stdbool.h>
 
 #include "Controller/controller.h"
 #include "Library/Keypad/keypad.h"
@@ -93,10 +94,11 @@ bool actualScreen[3] = {true, false, false};
 /*licznik dla timera 2*/
 uint8_t counterTIM2_screen = 0;
 uint8_t counterTIM2_keypad = 0;
-
+int counterKpad = 0;
 /*flaga dla timera*/
 uint8_t screen_flag = 0;
 uint8_t keypad_flag = 0;
+bool keypad_number_flag = false;
 
 char buffer[3];
 
@@ -210,7 +212,7 @@ int main(void)
 
 		  // setowanie aktualnej godziny
 		  if(actualScreen[0] == false && actualScreen[1] == false && actualScreen[2] == true ){
-		  	  if(new_znak == 'A'){
+		  	  if(new_znak == 'A' ){
 		  		  setTimeUser();
 
 		   	  }
@@ -508,8 +510,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
 		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
-	}
 
+		if(counterKpad > 10)
+			keypad_number_flag = true;
+	}
  /*showMenuButtons();
  showCity();*/
  //setTimeScreen();

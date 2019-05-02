@@ -11,5 +11,6 @@
 #define KEYPAD_H_
 
 char getCharKeypad();
+int getIntKeypad();
 
 #endif /* KEYPAD_H_ */
