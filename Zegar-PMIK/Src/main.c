@@ -511,7 +511,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
 		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
 
-		if(counterKpad > 10)
+		if(counterKpad > 100) // ewentualnie do 1000
 			keypad_number_flag = true;
 	}
  /*showMenuButtons();

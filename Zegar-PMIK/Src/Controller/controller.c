@@ -128,14 +128,17 @@ void setTimeUser()
 	int tempTime[2] = {0, 0};
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
-		if(getCharKeypad() == 'A')
+		if(getCharKeypad() != ' ' && getCharKeypad() != 'A')
 		{
-			//hours = getIntKeypad();
+			hours = getIntKeypad();
 			counterKpad++;
 			if(keypad_number_flag == true)
 			{
-				setTimeInRTC(14, minutes, seconds);
-
+				setTimeInRTC(hours, minutes, seconds);
+				keypad_number_flag = false;
+				/*
+				 * dziala dopisac potwierdzanie przyjecia liczby za pomoc B i wtedy wpisywac do setTimeInRTC
+				 */
 			}
 			/*if(counter == 0)
 			{
