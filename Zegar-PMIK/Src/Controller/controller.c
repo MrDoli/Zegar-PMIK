@@ -137,36 +137,30 @@ void setTimeUser()
 		{
 			counterKpad++;
 		}
-			if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == true && firstNumberSaved == false)
-			{
-				firstNumber = getIntKeypad();
-				firstNumberSaved = true;
-			}
 
-		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && firstNumberSaved == false)
+		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == true && firstNumberSaved == false)
 		{
 			firstNumber = getIntKeypad();
 			firstNumberSaved = true;
 		}
-			if(getCharKeypad() == 'B')
-			{
-				counterKpad2++;
-			}
 
-			if( getCharKeypad() != ' ' && getCharKeypad() != 'B' && keypad_number_2_flag == true)
-			{
-				secondNumber = getIntKeypad();
-				hours = firstNumber*10 + secondNumber;
-				setTimeInRTC(hours, minutes, seconds);
-				keypad_number_flag = false;
-				keypad_number_2_flag = false;
-				firstNumberSaved = false;
-				firstNumber = 0;
-				secondNumber = 0;
-				hours = 0;
-				counterKpad2 = 0;
-				return;
-			}
+		if(getCharKeypad() == 'B')
+		{
+			counterKpad2++;
+		}
+
+		if( getCharKeypad() != ' ' && getCharKeypad() != 'B' && keypad_number_2_flag == true)
+		{
+			secondNumber = getIntKeypad();
+			hours = firstNumber*10 + secondNumber;
+			setTimeInRTC(hours, minutes, seconds);
+			keypad_number_flag = false;
+			keypad_number_2_flag = false;
+			firstNumberSaved = false;
+			counterKpad2 = 0;
+			counterKpad = 0;
+			return;
+		}
 	}
 }
 
