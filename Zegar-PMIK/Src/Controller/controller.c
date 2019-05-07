@@ -143,6 +143,11 @@ void setTimeUser()
 				firstNumberSaved = true;
 			}
 
+		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && firstNumberSaved == false)
+		{
+			firstNumber = getIntKeypad();
+			firstNumberSaved = true;
+		}
 			if(getCharKeypad() == 'B')
 			{
 				counterKpad2++;
@@ -156,6 +161,10 @@ void setTimeUser()
 				keypad_number_flag = false;
 				keypad_number_2_flag = false;
 				firstNumberSaved = false;
+				firstNumber = 0;
+				secondNumber = 0;
+				hours = 0;
+				counterKpad2 = 0;
 				return;
 			}
 	}
