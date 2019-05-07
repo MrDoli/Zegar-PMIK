@@ -17,6 +17,10 @@ extern int counterKpad2;
 extern bool keypad_number_flag;
 extern bool keypad_number_2_flag;
 
+// gdy to globalne to dziala, sprobowac to wrzucic do funckji
+RTC_TimeTypeDef gTime;
+RTC_DateTypeDef gDate;
+
 /**
   * @brief  Zmiana ekranu.
   */
@@ -123,17 +127,39 @@ void handleDirectionButton(char sign)
 
 void setTimeUser()
 {
+	bool hoursIsSet = false;
+	bool minutesIsSet = false;
+	hoursIsSet = setHourMinOrSec('H');
+	if(hoursIsSet == true)
+		minutesIsSet = setHourMinOrSec('M');
+	if(minutesIsSet == true)
+	{
+		setHourMinOrSec('S');
+		hoursIsSet = false;
+		minutesIsSet = false;
+	}
+}
+
+bool setHourMinOrSec(char whichPartToSet)
+{
 	char znak = getCharKeypad();
-	//int counter = 0;
 	int hours = 0;
 	int minutes = 0;
 	int seconds = 0;
 	int firstNumber = 0;
 	int secondNumber = 0;
 	bool firstNumberSaved = false;
+
+	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
+	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
+
+	hours = (int) gTime.Hours;
+	minutes = (int) gTime.Minutes;
+	seconds = (int) gTime.Seconds;
+
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
-		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == false && firstNumberSaved == false)
+		if(getCharKeypad() != ' ' && getCharKeypad() == 'A' && keypad_number_flag == false && firstNumberSaved == false)
 		{
 			counterKpad++;
 		}
@@ -152,16 +178,31 @@ void setTimeUser()
 		if( getCharKeypad() != ' ' && getCharKeypad() != 'B' && keypad_number_2_flag == true)
 		{
 			secondNumber = getIntKeypad();
-			hours = firstNumber*10 + secondNumber;
+			switch (whichPartToSet)
+			{
+				case 'H':
+					hours = firstNumber*10 + secondNumber;
+					break;
+				case 'M':
+					minutes = firstNumber*10 + secondNumber;
+					break;
+				case 'S':
+					seconds = firstNumber*10 + secondNumber;
+					break;
+				default:
+					return false;
+			}
+
 			setTimeInRTC(hours, minutes, seconds);
 			keypad_number_flag = false;
 			keypad_number_2_flag = false;
 			firstNumberSaved = false;
 			counterKpad2 = 0;
 			counterKpad = 0;
-			return;
+			return true;
 		}
 	}
+	return false; // dobrze???
 }
 
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)

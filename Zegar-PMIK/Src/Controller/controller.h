@@ -23,7 +23,7 @@ bool* getActualScreen(void);
 void handleDirectionButton(char sign);
 void setTimeUser();
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
-
+bool setHourMinOrSec(char whichPartToSet);
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */
