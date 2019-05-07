@@ -95,10 +95,12 @@ bool actualScreen[3] = {true, false, false};
 uint8_t counterTIM2_screen = 0;
 uint8_t counterTIM2_keypad = 0;
 int counterKpad = 0;
+int counterKpad2 = 0;
 /*flaga dla timera*/
 uint8_t screen_flag = 0;
 uint8_t keypad_flag = 0;
 bool keypad_number_flag = false;
+bool keypad_number_2_flag = false;
 
 char buffer[3];
 
@@ -380,7 +382,7 @@ static void MX_RTC_Init(void)
   */
   sAlarm.AlarmTime.Hours = 0x0;
   sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x05;
+  sAlarm.AlarmTime.Seconds = 0x0;
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
@@ -513,6 +515,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 		if(counterKpad > 100) // ewentualnie do 1000
 			keypad_number_flag = true;
+
+		if(counterKpad2 > 100) // ewentualnie do 1000
+					keypad_number_2_flag = true;
 	}
  /*showMenuButtons();
  showCity();*/

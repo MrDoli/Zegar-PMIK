@@ -12,7 +12,10 @@
 
 //extern bool actualScreen[3];
 extern int counterKpad;
+extern int counterKpad2;
+
 extern bool keypad_number_flag;
+extern bool keypad_number_2_flag;
 
 /**
   * @brief  Zmiana ekranu.
@@ -125,57 +128,37 @@ void setTimeUser()
 	int hours = 0;
 	int minutes = 0;
 	int seconds = 0;
-	int tempTime[2] = {0, 0};
+	int firstNumber = 0;
+	int secondNumber = 0;
+	bool firstNumberSaved = false;
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
-		if(getCharKeypad() != ' ' && getCharKeypad() != 'A')
+		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == false && firstNumberSaved == false)
 		{
-			hours = getIntKeypad();
 			counterKpad++;
-			if(keypad_number_flag == true)
+		}
+			if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == true && firstNumberSaved == false)
 			{
+				firstNumber = getIntKeypad();
+				firstNumberSaved = true;
+			}
+
+			if(getCharKeypad() == 'B')
+			{
+				counterKpad2++;
+			}
+
+			if( getCharKeypad() != ' ' && getCharKeypad() != 'B' && keypad_number_2_flag == true)
+			{
+				secondNumber = getIntKeypad();
+				hours = firstNumber*10 + secondNumber;
 				setTimeInRTC(hours, minutes, seconds);
 				keypad_number_flag = false;
-				/*
-				 * dziala dopisac potwierdzanie przyjecia liczby za pomoc B i wtedy wpisywac do setTimeInRTC
-				 */
+				keypad_number_2_flag = false;
+				firstNumberSaved = false;
+				return;
 			}
-			/*if(counter == 0)
-			{
-				tempTime[0] = getIntKeyPad();
-				counter = 1;
-				continue;
-			}
-			if(counter == 1)
-			{
-				tempTime[1] = getIntKeyPad();
-				counter = 2;
-				continue;
-			}
-			if(counter == 2)
-			{
-				hours = tempTime[0]*10 + tempTime[1];
-				setTimeInRTC(hours, minutes, seconds);
-				counter = 0;
-				continue;
-			}*/
-		}
 	}
-/*
-	while( counter < 2 )
-	{
-		znak = getCharKeypad();
-		if(znak == 'A')
-		{
-			counter++;
-			ssd1306_SetCursor(10, 20);
-			ssd1306_WriteString("1", Font_11x18, White);
-			return;
-		}
-		//counter++;
-		showCity();
-	}
-	*/
 }
 
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
