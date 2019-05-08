@@ -13,6 +13,7 @@
 //extern bool actualScreen[3];
 extern int counterKpad;
 extern int counterKpad2;
+RTC_HandleTypeDef hrtc;
 
 extern bool keypad_number_flag;
 extern bool keypad_number_2_flag;

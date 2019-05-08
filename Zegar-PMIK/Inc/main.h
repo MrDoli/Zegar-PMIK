@@ -52,7 +52,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "../Src/Library/Audio/recording.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -78,30 +78,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED_GREEN_Pin GPIO_PIN_12
-#define LED_GREEN_GPIO_Port GPIOD
-#define LED_ORANGE_Pin GPIO_PIN_13
-#define LED_ORANGE_GPIO_Port GPIOD
-#define LED_RED_Pin GPIO_PIN_14
-#define LED_RED_GPIO_Port GPIOD
-#define LED_BLUE_Pin GPIO_PIN_15
-#define LED_BLUE_GPIO_Port GPIOD
-#define KEYPAD_PIN_0_OUT_Pin GPIO_PIN_0
-#define KEYPAD_PIN_0_OUT_GPIO_Port GPIOD
-#define KEYPAD_PIN_1_OUT_Pin GPIO_PIN_1
-#define KEYPAD_PIN_1_OUT_GPIO_Port GPIOD
-#define KEYPAD_PIN_2_OUT_Pin GPIO_PIN_2
-#define KEYPAD_PIN_2_OUT_GPIO_Port GPIOD
-#define KEYPAD_PIN_3_OUT_Pin GPIO_PIN_3
+#define KEYPAD_PIN_3_OUT_Pin GPIO_PIN_8
 #define KEYPAD_PIN_3_OUT_GPIO_Port GPIOD
-#define KEYPAD_PIN_4_IN_Pin GPIO_PIN_4
+#define KEYPAD_PIN_4_IN_Pin GPIO_PIN_9
 #define KEYPAD_PIN_4_IN_GPIO_Port GPIOD
-#define KEYPAD_PIN_5_IN_Pin GPIO_PIN_5
+#define KEYPAD_PIN_5_IN_Pin GPIO_PIN_10
 #define KEYPAD_PIN_5_IN_GPIO_Port GPIOD
-#define KEYPAD_PIN_6_IN_Pin GPIO_PIN_6
+#define KEYPAD_PIN_6_IN_Pin GPIO_PIN_11
 #define KEYPAD_PIN_6_IN_GPIO_Port GPIOD
-#define KEYPAD_PIN_7_IN_Pin GPIO_PIN_7
+#define KEYPAD_PIN_7_IN_Pin GPIO_PIN_12
 #define KEYPAD_PIN_7_IN_GPIO_Port GPIOD
+#define KEYPAD_PIN_0_OUT_Pin GPIO_PIN_5
+#define KEYPAD_PIN_0_OUT_GPIO_Port GPIOD
+#define KEYPAD_PIN_1_OUT_Pin GPIO_PIN_6
+#define KEYPAD_PIN_1_OUT_GPIO_Port GPIOD
+#define KEYPAD_PIN_2_OUT_Pin GPIO_PIN_7
+#define KEYPAD_PIN_2_OUT_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 /* USER CODE END Private defines */
 

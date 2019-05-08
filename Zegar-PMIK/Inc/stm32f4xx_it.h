@@ -72,9 +72,10 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void RCC_IRQHandler(void);
+void DMA1_Stream5_IRQHandler(void);
 void TIM2_IRQHandler(void);
-void I2C1_EV_IRQHandler(void);
-void I2C1_ER_IRQHandler(void);
+void I2C2_EV_IRQHandler(void);
+void I2C2_ER_IRQHandler(void);
 void RTC_Alarm_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 

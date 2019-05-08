@@ -16,7 +16,7 @@
 /* vvv I2C config vvv */
 
 #ifndef SSD1306_I2C_PORT
-#define SSD1306_I2C_PORT		hi2c1
+#define SSD1306_I2C_PORT		hi2c2
 #endif
 
 #ifndef SSD1306_I2C_ADDR
