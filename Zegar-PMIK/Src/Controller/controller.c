@@ -13,6 +13,8 @@
 //extern bool actualScreen[3];
 extern int counterKpad;
 extern int counterKpad2;
+extern char time[8];
+
 RTC_HandleTypeDef hrtc;
 
 extern bool keypad_number_flag;
@@ -195,6 +197,8 @@ bool setHourMinOrSec(char whichPartToSet)
 			}
 
 			setTimeInRTC(hours, minutes, seconds);
+			get_time();
+			updateTime(time);
 			keypad_number_flag = false;
 			keypad_number_2_flag = false;
 			firstNumberSaved = false;
