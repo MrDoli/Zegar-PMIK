@@ -162,23 +162,42 @@ bool setHourMinOrSec(char whichPartToSet)
 
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
-		if(getCharKeypad() != ' ' && getCharKeypad() == 'A' && keypad_number_flag == false && firstNumberSaved == false)
+		char gettedChar = getCharKeypad();
+		if(gettedChar != ' ' && gettedChar == 'A' && keypad_number_flag == false && firstNumberSaved == false)
 		{
 			counterKpad++;
 		}
 
-		if(getCharKeypad() != ' ' && getCharKeypad() != 'A' && keypad_number_flag == true && firstNumberSaved == false)
+		if(gettedChar != ' ' && gettedChar != 'A' && keypad_number_flag == true && firstNumberSaved == false)
 		{
 			firstNumber = getIntKeypad();
 			firstNumberSaved = true;
+			switch (whichPartToSet)
+			{
+				case 'H':
+					hours = firstNumber*10 + secondNumber;
+					break;
+				case 'M':
+					minutes = firstNumber*10 + secondNumber;
+					break;
+				case 'S':
+					seconds = firstNumber*10 + secondNumber;
+					break;
+				default:
+					return false;
+			}
+
+			setTimeInRTC(hours, minutes, seconds);
+			get_time();
+			updateTime(time);
 		}
 
-		if(getCharKeypad() == 'B')
+		if(gettedChar == 'B')
 		{
 			counterKpad2++;
 		}
 
-		if( getCharKeypad() != ' ' && getCharKeypad() != 'B' && keypad_number_2_flag == true)
+		if( gettedChar != ' ' && gettedChar != 'B' && keypad_number_2_flag == true)
 		{
 			secondNumber = getIntKeypad();
 			switch (whichPartToSet)
