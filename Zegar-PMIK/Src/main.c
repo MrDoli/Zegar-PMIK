@@ -175,7 +175,7 @@ int main(void)
   CS43_Enable_RightLeft(CS43_RIGHT_LEFT);
 
   /* Odpalenie audio */
-  HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
+  //HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
 
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_RESET);
@@ -221,6 +221,7 @@ int main(void)
 			  get_time();
 		  }
 
+		  // setowanie alarmu
 		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false ){
 			  /*if(new_znak != 'A'){
 				  sprintf((char*)time,"%02d:%02d:%02d",0,0,0);
@@ -478,7 +479,7 @@ static void MX_RTC_Init(void)
   */
   sAlarm.AlarmTime.Hours = 0x0;
   sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x05;
+  sAlarm.AlarmTime.Seconds = 0x0;
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;

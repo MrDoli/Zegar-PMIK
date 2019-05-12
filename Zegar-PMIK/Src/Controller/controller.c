@@ -338,16 +338,16 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	  RTC_TimeTypeDef sTime = {0};
 
 	  hrtc.Instance = RTC;
-	    hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
-	    hrtc.Init.AsynchPrediv = 127;
-	    hrtc.Init.SynchPrediv = 255;
-	    hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
-	    hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-	    hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-	    if (HAL_RTC_Init(&hrtc) != HAL_OK)
-	    {
-	      Error_Handler();
-	    }
+	  hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+	  hrtc.Init.AsynchPrediv = 127;
+	  hrtc.Init.SynchPrediv = 255;
+	  hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+	  hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	  hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	  if (HAL_RTC_Init(&hrtc) != HAL_OK)
+	  {
+		  Error_Handler();
+	  }
 
 	  sTime.Hours = hours;
 	  sTime.Minutes = minutes;
@@ -373,6 +373,19 @@ void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	RTC_HandleTypeDef hrtc;
 	RTC_AlarmTypeDef sAlarm = {0};
 
+
+	hrtc.Instance = RTC;
+	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+	hrtc.Init.AsynchPrediv = 127;
+	hrtc.Init.SynchPrediv = 255;
+	hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	if (HAL_RTC_Init(&hrtc) != HAL_OK)
+	{
+		   Error_Handler();
+	}
+
 	sAlarm.AlarmTime.Hours = hours;//0x0;
 	sAlarm.AlarmTime.Minutes = minutes;//0x0;
 	sAlarm.AlarmTime.Seconds = seconds;//0x10;
@@ -386,7 +399,7 @@ void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	sAlarm.Alarm = RTC_ALARM_A;
 
 	//Set alarm
-	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
+	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK) 	// BCD ZMIENIONE NA BIN
 	  {
 	    Error_Handler();
 	  }
