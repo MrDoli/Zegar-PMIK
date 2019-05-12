@@ -130,6 +130,43 @@ void handleDirectionButton(char sign)
 	}
 }
 
+bool turnOnAlarm(bool alarmIsSet)
+{
+	if(alarmIsSet == true)
+	{
+		RTC_HandleTypeDef hrtc;
+		hrtc.Instance = RTC;
+		hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+		hrtc.Init.AsynchPrediv = 127;
+		hrtc.Init.SynchPrediv = 255;
+		hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+		hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+		hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+		if (HAL_RTC_Init(&hrtc) != HAL_OK)
+			{
+				   Error_Handler();
+			}
+
+		uint32_t alarmType = RTC_ALARM_A;
+		HAL_RTC_DeactivateAlarm(&hrtc, alarmType);
+		alarmIsSet = false;
+		return alarmIsSet;
+	}
+	else if(alarmIsSet == false)
+	{
+		RTC_AlarmTypeDef sAlarm;
+		uint32_t alarmType = RTC_ALARM_A;
+
+		HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
+		int hours = (int) sAlarm.AlarmTime.Hours;
+		int minutes = (int) sAlarm.AlarmTime.Minutes;
+		int seconds = (int) sAlarm.AlarmTime.Seconds;
+		setAlarmInRTC(hours, minutes, seconds);
+		alarmIsSet=true;
+		return alarmIsSet;
+	}
+}
+
 void setTimeUser()
 {
 	bool hoursIsSet = false;
@@ -399,7 +436,7 @@ void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	sAlarm.Alarm = RTC_ALARM_A;
 
 	//Set alarm
-	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK) 	// BCD ZMIENIONE NA BIN
+	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
 	  {
 	    Error_Handler();
 	  }

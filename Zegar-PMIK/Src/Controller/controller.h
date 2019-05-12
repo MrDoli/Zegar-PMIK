@@ -27,6 +27,7 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
 void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
 bool setHourMinOrSecInTime(char whichPartToSet);
 bool setHourMinOrSecInAlarm(char whichPartToSet);
+bool turnOnAlarm(bool alarmIsSet);
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */

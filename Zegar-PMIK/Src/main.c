@@ -196,6 +196,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   char znak =' ';
   char new_znak = '0';
+  bool alarmIsSet = false;
   while (1)
   {
 
@@ -217,24 +218,24 @@ int main(void)
 	  else if(screen_flag == 1)
 	  {
 		  controller();
-		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false ){
+		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false )
+		  {
 			  get_time();
+			  updateTime(time);
 		  }
 
 		  // setowanie alarmu
-		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false ){
-			  /*if(new_znak != 'A'){
-				  sprintf((char*)time,"%02d:%02d:%02d",0,0,0);
-				  time[6] = new_znak;
-			  }
-			  else{
-				  // set_alarm(time);
-				  setTimeUser('A');
-			  }*/
+		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false )
+		  {
 			  if(new_znak == 'A')
 			  {
 				  setAlarmUser();
 			  }
+			  else if(new_znak == 'B')
+			  {
+				  alarmIsSet = turnOnAlarm(alarmIsSet);
+			  }
+			  updateTime(alarm);
 		  }
 
 		  // setowanie aktualnej godziny
@@ -244,10 +245,11 @@ int main(void)
 		  	  {
 		  		  setTimeUser();
 		   	  }
+		  	  updateTime(time);
 
 		  }
 
-		  updateTime(time);
+		  //updateTime(time);
 
 		  screen_flag = 0;
 		  counterTIM2_screen = 0;
