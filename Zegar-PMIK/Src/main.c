@@ -94,7 +94,7 @@ TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 char time[8];
-
+char alarm[8];
 char date[8];
 
 bool actualScreen[3] = {true, false, false};
@@ -222,20 +222,26 @@ int main(void)
 		  }
 
 		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false ){
-			  if(new_znak != 'A'){
+			  /*if(new_znak != 'A'){
 				  sprintf((char*)time,"%02d:%02d:%02d",0,0,0);
 				  time[6] = new_znak;
 			  }
 			  else{
-				  set_alarm(time);
+				  // set_alarm(time);
+				  setTimeUser('A');
+			  }*/
+			  if(new_znak == 'A')
+			  {
+				  setAlarmUser();
 			  }
 		  }
 
 		  // setowanie aktualnej godziny
-		  if(actualScreen[0] == false && actualScreen[1] == false && actualScreen[2] == true ){
-		  	  if(new_znak == 'A' ){
+		  if(actualScreen[0] == false && actualScreen[1] == false && actualScreen[2] == true )
+		  {
+		  	  if(new_znak == 'A' )
+		  	  {
 		  		  setTimeUser();
-
 		   	  }
 
 		  }
@@ -648,6 +654,16 @@ void get_time(void)
 
   /* Display date Format: dd-mm-yy */
   sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
+}
+
+void getAlarm(void)
+{
+	RTC_AlarmTypeDef sAlarm;
+	uint32_t alarmType = RTC_ALARM_A;
+
+	HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
+
+	sprintf((int*) alarm, "%02d:%02d:%02d", sAlarm.AlarmTime.Hours, sAlarm.AlarmTime.Minutes, sAlarm.AlarmTime.Seconds);
 }
 
 /**

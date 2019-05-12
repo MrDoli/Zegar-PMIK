@@ -22,8 +22,11 @@ void setActualScreen(bool screenArray[]);
 bool* getActualScreen(void);
 void handleDirectionButton(char sign);
 void setTimeUser();
+void setAlarmUser();
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
-bool setHourMinOrSec(char whichPartToSet);
+void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
+bool setHourMinOrSecInTime(char whichPartToSet);
+bool setHourMinOrSecInAlarm(char whichPartToSet);
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */
