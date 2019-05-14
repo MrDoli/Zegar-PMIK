@@ -48,22 +48,41 @@ void controllerInit(char time[]){
 /**
   * @brief  Zmiana wyswietlanego ekranu.
   */
-void controller(){
+bool controller(char gotCharacter, bool alarmIsSet){
 	// Mozemy sprawdzac rowniez inne elementy tablicy (w nastepnej wersji)
 	if(actualScreen[0] == true)
 	{
 		showMenuButtons();
 		showCity();
+		get_time();
+		updateTime(time);
 	}
 	else if (actualScreen[1] == true)
 	{
 		showAlarmScreen();
+		if(gotCharacter == 'A')
+		{
+			setAlarmUser();
+		}
+		else if(gotCharacter == 'B')
+		{
+			alarmIsSet = turnOnAlarm(alarmIsSet);
+		}
+		updateTime(alarm);
 	}
 	else if (actualScreen[2] == true)
 	{
 		setTimeScreen();
+		if(gotCharacter == 'A' )
+		{
+			setTimeUser();
+		}
+		updateTime(time);
 	}
+
+	return alarmIsSet;
 }
+
 
 /**
   * @brief  Pobranie tablicy ze statusem ekranow.

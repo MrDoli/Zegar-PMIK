@@ -195,71 +195,26 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   char znak =' ';
-  char new_znak = '0';
+  char gotCharacter = '0';
   bool alarmIsSet = false;
   while (1)
   {
-
-	  /*
-	   * TU PRZEROBIC TAK ZEBY BYLO TYLKO controller() tak jak bylo na poczatku
-	   * logika dzialania ma sie odbywac w tej funkcji
-	   */
-	  /*Klawitura*/
 	  if(keypad_flag == 1)
 	  {
 		  znak = getCharKeypad();
-		  if(znak == 'D' || znak == '*') handleDirectionButton(znak);
-		  else if(znak != ' ') new_znak = znak;
+		  if(znak == 'D' || znak == '*')
+			  handleDirectionButton(znak);
+		  else if(znak != ' ')
+			  gotCharacter = znak;
 		  keypad_flag = 0;
 		  counterTIM2_keypad = 0;
 	  }
-
-	  /*Wyswietlacz*/
 	  else if(screen_flag == 1)
 	  {
-		  controller();
-		  if(actualScreen[0] == true && actualScreen[1] == false && actualScreen[2] == false )
-		  {
-			  get_time();
-			  updateTime(time);
-		  }
-
-		  // setowanie alarmu
-		  if(actualScreen[0] == false && actualScreen[1] == true && actualScreen[2] == false )
-		  {
-			  if(new_znak == 'A')
-			  {
-				  setAlarmUser();
-			  }
-			  else if(new_znak == 'B')
-			  {
-				  alarmIsSet = turnOnAlarm(alarmIsSet);
-			  }
-			  updateTime(alarm);
-		  }
-
-		  // setowanie aktualnej godziny
-		  if(actualScreen[0] == false && actualScreen[1] == false && actualScreen[2] == true )
-		  {
-		  	  if(new_znak == 'A' )
-		  	  {
-		  		  setTimeUser();
-		   	  }
-		  	  updateTime(time);
-
-		  }
-
-		  //updateTime(time);
-
+		  alarmIsSet = controller(gotCharacter, alarmIsSet);
 		  screen_flag = 0;
 		  counterTIM2_screen = 0;
-
 	  }
-
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-
   }
   /* USER CODE END 3 */
 }

@@ -15,7 +15,7 @@
 extern bool actualScreen[3];
 void controllerInit();
 void changeScreen();
-void controller();
+bool controller(char gotCharacter, bool alarmIsSet);
 
 // Getters and setters
 void setActualScreen(bool screenArray[]);
