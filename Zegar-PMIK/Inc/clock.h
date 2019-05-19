@@ -1,9 +1,8 @@
 /*
  * clock.h
  *
- *  Created on: 05.04.2019
- *      Author: Marcin Dolicher
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 
 #ifndef CLOCK_H_
 #define CLOCK_H_

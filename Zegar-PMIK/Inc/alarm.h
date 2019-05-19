@@ -1,9 +1,8 @@
 /*
  * alarm.h
  *
- *  Created on: 05.04.2019
- *      Author: Marcin Dolicher
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 
 #ifndef ALARM_H_
 #define ALARM_H_

@@ -1,9 +1,8 @@
 /*
  * flash.h
  *
- *  Created on: 04.04.2019
- *      Author: Michal
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 #include "main.h"
 //#include "stm32f4xx_hal_flash_ex.h"
 //#include "stm32f4xx_hal_flash.h"

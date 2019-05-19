@@ -1,3 +1,8 @@
+/*
+ * delay.c
+ *
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 #include "delay.h"
 
 void DelayTick(void){

@@ -1,4 +1,10 @@
 /*
+ * delay.h
+ *
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
+
+/*
  * Define a delay function for debouncing button from keypad.
  */
 

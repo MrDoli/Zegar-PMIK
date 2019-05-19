@@ -1,4 +1,9 @@
 /* USER CODE BEGIN Header */
+/*
+ * main.h
+ *
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 /**
   ******************************************************************************
   * @file           : main.h

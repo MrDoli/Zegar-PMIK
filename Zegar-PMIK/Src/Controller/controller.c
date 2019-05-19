@@ -34,9 +34,9 @@ void changeScreen(){
 }
 
 /**
-  * @brief  Inicjalizacja wyswietlacza zegara.
-  * @param  Czas do wyswietlenia.
-  */
+ * Inicjalizacja wyswietlacza zegara.
+ * @param time Czas do wyswietlenia.
+ */
 void controllerInit(char time[]){
 	showMenuButtons();
 	showCity();
@@ -46,15 +46,18 @@ void controllerInit(char time[]){
 }
 
 /**
-  * @brief  Zmiana wyswietlanego ekranu.
-  */
+ * Zmiana wyswietlanego ekranu.
+ * @param gotCharacter Wcisniety znak na klawiaturze.
+ * @param alarmIsSet Flaga oznaczajaca ze alarm jest ustawiony.
+ * @return Flaga oznaczajaca ze alarm jest ustawiony.
+ */
 bool controller(char gotCharacter, bool alarmIsSet){
 	// Mozemy sprawdzac rowniez inne elementy tablicy (w nastepnej wersji)
 	if(actualScreen[0] == true)
 	{
 		showMenuButtons();
 		showCity();
-		get_time();
+		getTime();
 		updateTime(time);
 	}
 	else if (actualScreen[1] == true)
@@ -83,20 +86,19 @@ bool controller(char gotCharacter, bool alarmIsSet){
 	return alarmIsSet;
 }
 
-
 /**
-  * @brief  Pobranie tablicy ze statusem ekranow.
-  * @retval Tablica ze statusem ekranow.
-  */
+ * Pobranie tablicy ze statusem ekranow.
+ * @return Tablica ze statusem ekranow.
+ */
 bool* getActualScreen(void)
 {
     return actualScreen;
 }
 
 /**
-  * @brief  Wgranie nowej tablicy ze statusem ekranow.
-  * @param  Tablica z nowym statusem ekranow.
-  */
+ * Tablica ze statusem ekranow.
+ * @param screenArray Tablica z nowym statusem ekranow.
+ */
 void setActualScreen(bool screenArray[])
 {
 	actualScreen[0] = screenArray[0];
@@ -105,9 +107,9 @@ void setActualScreen(bool screenArray[])
 }
 
 /**
-  * @brief  Obsluga przemieszczania siê miedzy ekranami.
-  * @param  Znak zwrocony z klawiatury.
-  */
+ * Obsluga przemieszczania siê miedzy ekranami.
+ * @param sign Znak zwrocony z klawiatury.
+ */
 void handleDirectionButton(char sign)
 {
 	if(sign == 'D')
@@ -149,6 +151,11 @@ void handleDirectionButton(char sign)
 	}
 }
 
+/**
+ * Ustawienie godziny alarmu.
+ * @param alarmIsSet Flaga oznaczajaca czy alarm jest wlaczony.
+ * @return Flaga oznaczajaca czy alarm jest wlaczony.
+ */
 bool turnOnAlarm(bool alarmIsSet)
 {
 	if(alarmIsSet == true)
@@ -186,6 +193,9 @@ bool turnOnAlarm(bool alarmIsSet)
 	}
 }
 
+/**
+ * Ustawienie czasu na zegarze.
+ */
 void setTimeUser()
 {
 	bool hoursIsSet = false;
@@ -201,6 +211,9 @@ void setTimeUser()
 	}
 }
 
+/**
+ * Ustawienie godziny alarmu budzika.
+ */
 void setAlarmUser()
 {
 	bool hoursIsSet = false;
@@ -216,6 +229,11 @@ void setAlarmUser()
 	}
 }
 
+/**
+ * Ustawienie godziny, minuty lub sekundy alarmu w budziku.
+ * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
+ * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
+ */
 bool setHourMinOrSecInAlarm(char whichPartToSet)
 {
 	char znak = getCharKeypad();
@@ -302,6 +320,11 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 	return false;
 }
 
+/**
+ * Ustawienie godziny, minuty lub sekundy w zegarze.
+ * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
+ * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
+ */
 bool setHourMinOrSecInTime(char whichPartToSet)
 {
 	char znak = getCharKeypad();
@@ -347,7 +370,7 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 			}
 
 			setTimeInRTC(hours, minutes, seconds);
-			get_time();
+			getTime();
 			updateTime(time);
 		}
 
@@ -375,7 +398,7 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 			}
 
 			setTimeInRTC(hours, minutes, seconds);
-			get_time();
+			getTime();
 			updateTime(time);
 			keypad_number_flag = false;
 			keypad_number_2_flag = false;
@@ -388,6 +411,12 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 	return false;
 }
 
+/**
+ * Ustawienie czasu zegara w RTC.
+ * @param hours Godzina do zapisania.
+ * @param minutes Minuty do zapisania.
+ * @param seconds Sekundy do zapisania.
+ */
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	  RTC_HandleTypeDef hrtc;
@@ -419,9 +448,11 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 }
 
 /**
-  * @brief  Ustawienie alarmu.
-  * @param  Godzina alarmu.
-  */
+ * Ustawienie czasu alarmu budzika w RTC.
+ * @param hours Godzina do zapisania.
+ * @param minutes Minuty do zapisania.
+ * @param seconds Sekundy do zapisania.
+ */
 void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	//uint32_t x = time[6] - '0';

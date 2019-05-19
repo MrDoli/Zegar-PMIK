@@ -1,4 +1,9 @@
 /* USER CODE BEGIN Header */
+/*
+ * main.c
+ *
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 /**
   ******************************************************************************
   * @file           : main.c
@@ -562,7 +567,7 @@ static void MX_GPIO_Init(void)
 /**
   * @brief  Obsluga przerwania z alarum zegara RTC.
   * @param  wskaznik hrtc do struktury RTC_HandleTypeDef ktora zawiera
-  *                informacje konfoguracyjne dla RTC.
+  *                informacje konfiguracyjne dla RTC.
   */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 //obsluga alarmu
@@ -597,7 +602,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 /**
   * @brief  Pobranie czasu z RTC.
   */
-void get_time(void)
+void getTime(void)
 {
   RTC_DateTypeDef gDate;
   RTC_TimeTypeDef gTime;
@@ -614,6 +619,9 @@ void get_time(void)
   sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
 }
 
+/**
+ * @brief  Pobranie godziny alarmu z RTC.
+ */
 void getAlarm(void)
 {
 	RTC_AlarmTypeDef sAlarm;
@@ -628,7 +636,7 @@ void getAlarm(void)
   * @brief  Ustawienie alarmu.
   * @param  Godzina alarmu.
   */
-void set_alarm(char time[])
+void setAlarm(char time[])
 {
 	//uint32_t x = time[6] - '0';
 

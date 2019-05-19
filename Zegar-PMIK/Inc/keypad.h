@@ -1,9 +1,8 @@
 /*
  * keypad.h
  *
- *  Created on: 20.03.2019
- *      Author: Marcin Dolicher
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 
 #ifndef KEYPAD_H_
 #define KEYPAD_H_
