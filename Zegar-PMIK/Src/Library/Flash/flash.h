@@ -9,12 +9,8 @@
 #ifndef LIBRARY_FLASH_FLASH_H_
 #define LIBRARY_FLASH_FLASH_H_
 
-uint32_t Flash_Address[3];
+uint32_t flash_addresses[3];
 void saveAlarmFlash(uint32_t* Flash_Data);
-void readAlarmFlashm(uint32_t* Flash_Data);
-/*
-void Flash_Write(uint32_t Flash_Data);
-uint32_t Flash_Read();
-*/
+void readAlarmFlash(uint32_t* Flash_Data);
 
 #endif /* LIBRARY_FLASH_FLASH_H_ */

@@ -5,8 +5,9 @@
  *      Author: Marcin Dolicher
  */
 
-#include "..\Inc\alarm.h"
+#include "alarm.h"
 #include "..\Library\Display\ssd1306.h"
+#include "clock.h"
 
 /**
   * @brief  Wyswietlenie ekranu do ustawienia alarmu.

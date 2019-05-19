@@ -5,21 +5,33 @@
 */
 #include "flash.h"
 
-uint32_t Flash_Address[3] = {0x08040000,0x08040010,0x08040020};
+/**
+ * Tablica z adresami pamieci pod ktore bedzia zapisywany czas.
+ * Pierwszy element to adres godziny, drugi - adres minut, trzeci - adres sekund.
+ */
+uint32_t flash_addresses[3] = {0x08040000,0x08040010,0x08040020};
 
-void saveAlarmFlash(uint32_t* Flash_Data)
+/**
+ * Zapisuje godzine alarmu budzika w pamieci Flash.
+ * @param flash_data Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi - minuty, trzeci - sekundy.
+ */
+void saveAlarmFlash(uint32_t* flash_data)
 {
 	HAL_FLASH_Unlock();
 	FLASH_Erase_Sector(FLASH_SECTOR_6,VOLTAGE_RANGE_3);
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,Flash_Address[0],Flash_Data[0]);
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,Flash_Address[1],Flash_Data[1]);
-	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,Flash_Address[2],Flash_Data[2]);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,flash_addresses[0],flash_data[0]);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,flash_addresses[1],flash_data[1]);
+	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,flash_addresses[2],flash_data[2]);
 	HAL_FLASH_Lock();
 }
 
-void readAlarmFlashm(uint32_t* Flash_Data)
+/**
+ * Odczytuje zapisana wczesniej godzine alarmu budzika.
+ * @param flash_data Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi - minuty, trzeci - sekundy.
+ */
+void readAlarmFlash(uint32_t* flash_data)
 {
-	Flash_Data[0] = *(uint32_t*)Flash_Address[0];
-	Flash_Data[1] = *(uint32_t*)Flash_Address[1];
-	Flash_Data[2] = *(uint32_t*)Flash_Address[2];
+	flash_data[0] = *(uint32_t*)flash_addresses[0];
+	flash_data[1] = *(uint32_t*)flash_addresses[1];
+	flash_data[2] = *(uint32_t*)flash_addresses[2];
 }

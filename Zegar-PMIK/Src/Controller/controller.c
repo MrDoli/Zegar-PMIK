@@ -6,6 +6,8 @@
  */
 
 #include "controller.h"
+#include "../Menu/clock.h"
+#include "../Library/Flash/flash.h"
 #include <stdbool.h>
 #include "../Library/Display/ssd1306.h"
 #include <stdint.h>
@@ -13,13 +15,18 @@
 //extern bool actualScreen[3];
 extern int counterKpad;
 extern int counterKpad2;
-extern char time[8];
-extern char alarm[8];
-
-RTC_HandleTypeDef hrtc;
-
+extern char time_clock[8];
+extern char alarm_clock[8];
 extern bool keypad_number_flag;
 extern bool keypad_number_2_flag;
+
+//__________________________________OBGADAC___________________________________________________________________
+//Raz u¿ywasz (setHourMinOrSecInAlarm()) a raz tworzysz nowe w danej funkcji (turnOnAlarm()), dlaczego?
+//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
+//Za bardzo powielamy kod w przeciwnym wypadku
+RTC_HandleTypeDef hrtc;
+//____________________________________________________________________________________________________________
+
 
 // gdy to globalne to dziala, sprobowac to wrzucic do funckji
 RTC_TimeTypeDef gTime;
@@ -58,7 +65,7 @@ bool controller(char gotCharacter, bool alarmIsSet){
 		showMenuButtons();
 		showCity();
 		getTime();
-		updateTime(time);
+		updateTime(time_clock);
 	}
 	else if (actualScreen[1] == true)
 	{
@@ -71,7 +78,7 @@ bool controller(char gotCharacter, bool alarmIsSet){
 		{
 			alarmIsSet = turnOnAlarm(alarmIsSet);
 		}
-		updateTime(alarm);
+		updateTime(alarm_clock);
 	}
 	else if (actualScreen[2] == true)
 	{
@@ -80,7 +87,7 @@ bool controller(char gotCharacter, bool alarmIsSet){
 		{
 			setTimeUser();
 		}
-		updateTime(time);
+		updateTime(time_clock);
 	}
 
 	return alarmIsSet;
@@ -156,6 +163,11 @@ void handleDirectionButton(char sign)
  * @param alarmIsSet Flaga oznaczajaca czy alarm jest wlaczony.
  * @return Flaga oznaczajaca czy alarm jest wlaczony.
  */
+
+//__________________________________OBGADAC___________________________________________________________________
+//Po co wylaczac i potem od nowa setowac alarm skoro wystarczy wylaczac i wlaczac audio?
+//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
+//Za bardzo powielamy kod w przeciwnym wypadku
 bool turnOnAlarm(bool alarmIsSet)
 {
 	if(alarmIsSet == true)
@@ -192,6 +204,8 @@ bool turnOnAlarm(bool alarmIsSet)
 		return alarmIsSet;
 	}
 }
+//____________________________________________________________________________________________________________
+
 
 /**
  * Ustawienie czasu na zegarze.
@@ -234,6 +248,19 @@ void setAlarmUser()
  * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
  * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
  */
+
+//__________________________________OBGADAC___________________________________________________________________
+//W warunku while(getCharKeypad() != '*' && getCharKeypad() != 'D') nie ma odszumiania,
+//po co dwa razy odszumianie?
+//if(gettedChar == 'A' && firstNumberSaved == true)
+//{
+//	counterKpadX++;
+//}
+//Wystarczy chyba raz to robic skoro i tak flaga firstNumberSaved mowi nam ktora cyfra jest wpisywana
+//Po co jest char znak = getCharKeypad();? Nie u¿ywasz tego.
+//W tej funkcji chcia³bym dac zapisywanie do pamieci FLASH.
+//W komentarzu jest napisane gdzie.
+
 bool setHourMinOrSecInAlarm(char whichPartToSet)
 {
 	char znak = getCharKeypad();
@@ -280,7 +307,7 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 
 			setAlarmInRTC(hours, minutes, seconds);
 			getAlarm();
-			updateTime(alarm);
+			updateTime(alarm_clock);
 		}
 
 		if(gettedChar == 'A' && firstNumberSaved == true)
@@ -301,6 +328,8 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
+					//uint32_t alarm_time[] = {hours, minutes, seconds};
+					//saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
 					break;
 				default:
 					return false;
@@ -308,7 +337,7 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 
 			setAlarmInRTC(hours, minutes, seconds);
 			getAlarm();
-			updateTime(alarm);
+			updateTime(alarm_clock);
 			keypad_number_flag = false;
 			keypad_number_2_flag = false;
 			firstNumberSaved = false;
@@ -319,12 +348,24 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 	}
 	return false;
 }
+//____________________________________________________________________________________________________________
+
 
 /**
  * Ustawienie godziny, minuty lub sekundy w zegarze.
  * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
  * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
  */
+
+//__________________________________OBGADAC___________________________________________________________________
+//W warunku while(getCharKeypad() != '*' && getCharKeypad() != 'D') nie ma odszumiania,
+//po co dwa razy odszumianie?
+//if(gettedChar == 'A' && firstNumberSaved == true)
+//{
+//	counterKpadX++;
+//}
+//Wystarczy chyba raz to robic skoro i tak flaga firstNumberSaved mowi nam ktora cyfra jest wpisywana
+//Po co jest char znak = getCharKeypad();? Nie u¿ywasz tego.
 bool setHourMinOrSecInTime(char whichPartToSet)
 {
 	char znak = getCharKeypad();
@@ -371,7 +412,7 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 
 			setTimeInRTC(hours, minutes, seconds);
 			getTime();
-			updateTime(time);
+			updateTime(time_clock);
 		}
 
 		if(gettedChar == 'A' && firstNumberSaved == true)
@@ -399,7 +440,7 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 
 			setTimeInRTC(hours, minutes, seconds);
 			getTime();
-			updateTime(time);
+			updateTime(time_clock);
 			keypad_number_flag = false;
 			keypad_number_2_flag = false;
 			firstNumberSaved = false;
@@ -410,6 +451,8 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 	}
 	return false;
 }
+//____________________________________________________________________________________________________________
+
 
 /**
  * Ustawienie czasu zegara w RTC.
@@ -417,6 +460,9 @@ bool setHourMinOrSecInTime(char whichPartToSet)
  * @param minutes Minuty do zapisania.
  * @param seconds Sekundy do zapisania.
  */
+//__________________________________OBGADAC___________________________________________________________________
+//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
+//Za bardzo powielamy kod w przeciwnym wypadku
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	  RTC_HandleTypeDef hrtc;
@@ -446,6 +492,8 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 
 	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
 }
+//____________________________________________________________________________________________________________
+
 
 /**
  * Ustawienie czasu alarmu budzika w RTC.
@@ -453,6 +501,10 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
  * @param minutes Minuty do zapisania.
  * @param seconds Sekundy do zapisania.
  */
+
+//__________________________________OBGADAC___________________________________________________________________
+//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
+//Za bardzo powielamy kod w przeciwnym wypadku
 void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	//uint32_t x = time[6] - '0';
@@ -494,3 +546,5 @@ void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
 	  /* USER CODE END RTC_Init 2 */
 }
+//____________________________________________________________________________________________________________
+

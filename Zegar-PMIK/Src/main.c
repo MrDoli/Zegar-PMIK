@@ -50,21 +50,12 @@
 /* USER CODE BEGIN Includes */
 #include "stdint.h"
 #include "inttypes.h"
-//#include <stdbool.h>
-
 #include "Controller/controller.h"
 #include "Library/Keypad/keypad.h"
-/*Biblioteka do wyswietlacza OLED */
 #include "Library/Display/ssd1306.h"
-
-/*Obs³uga pamiêci Flash*/
 #include "Library/Flash/flash.h"
-
-/*Obs³uga audio*/
 #include "Library/Audio/MY_CS43L22.h"
 #include "Library/Audio/recording.h"
-
-/*Menu*/
 #include "../Src/Controller/controller.h"
 
 /* USER CODE END Includes */
@@ -76,8 +67,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define keypad_update	2
-#define screen_update	1
+#define alarm_volume 40
+#define keypad_update 2
+#define screen_update 1
 
 /* USER CODE END PD */
 
@@ -98,29 +90,18 @@ RTC_HandleTypeDef hrtc;
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-char time[8];
-char alarm[8];
-char date[8];
-
+char time_clock[9];
+char alarm_clock[9];
+char date_clock[9];
 bool actualScreen[3] = {true, false, false};
-
-/*licznik dla timera 2*/
 uint8_t counterTIM2_screen = 0;
 uint8_t counterTIM2_keypad = 0;
 int counterKpad = 0;
 int counterKpad2 = 0;
-/*flaga dla timera*/
 uint8_t screen_flag = 0;
 uint8_t keypad_flag = 0;
 bool keypad_number_flag = false;
 bool keypad_number_2_flag = false;
-
-char buffer[3];
-
-/*Do testow pamieci*/
-//uint32_t data[3] = {0x01,0x02,0x03};
-//uint32_t data1[3];
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -176,25 +157,14 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   CS43_Init(hi2c1, MODE_I2S);
-  CS43_SetVolume(40);
+  CS43_SetVolume(alarm_volume);
   CS43_Enable_RightLeft(CS43_RIGHT_LEFT);
-
-  /* Odpalenie audio */
-  //HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
-
+  HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
-
-  /*OLED*/
-  /* Inicjalizacja wyswietlacza OLED*/
   ssd1306_Init();
   HAL_TIM_Base_Start_IT(&htim2);
-
-  /* Zapis do Flash, musiz podac w funkcji uint32_t!*/
-  //Save_Alarm(data);
-
- // controllerInit(time);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -439,9 +409,11 @@ static void MX_RTC_Init(void)
   }
   /** Enable the Alarm A 
   */
-  sAlarm.AlarmTime.Hours = 0x0;
-  sAlarm.AlarmTime.Minutes = 0x0;
-  sAlarm.AlarmTime.Seconds = 0x0;
+  uint32_t alarm_time[] = {0x00,0x00,0x00};
+  readAlarmFlash(alarm_time);
+  sAlarm.AlarmTime.Hours = alarm_time[0];
+  sAlarm.AlarmTime.Minutes = alarm_time[1];
+  sAlarm.AlarmTime.Seconds = alarm_time[2];
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
@@ -579,24 +551,15 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
   *                informacje konfoguracyjne dla timera.
   */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	// Handel a button pressing
 	if(htim->Instance == TIM2)
 	{
 		if(counterTIM2_keypad < keypad_update) counterTIM2_keypad++;
 		if(keypad_flag == 0 && counterTIM2_keypad >= keypad_update) keypad_flag = 1;
-
 		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
 		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
-
-		if(counterKpad > 100) // ewentualnie do 1000
-			keypad_number_flag = true;
-
-		if(counterKpad2 > 100) // ewentualnie do 1000
-					keypad_number_2_flag = true;
+		if(counterKpad > 100) keypad_number_flag = true;
+		if(counterKpad2 > 100) keypad_number_2_flag = true;
 	}
- /*showMenuButtons();
- showCity();*/
- //setTimeScreen();
 }
 
 /**
@@ -613,10 +576,9 @@ void getTime(void)
   HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 
   /* Display time Format: hh:mm:ss */
-  sprintf((int*)time,"%02d:%02d:%02d", gTime.Hours, gTime.Minutes, gTime.Seconds);
-
+  sprintf((int*)time_clock,"%02d:%02d:%02d", gTime.Hours, gTime.Minutes, gTime.Seconds);
   /* Display date Format: dd-mm-yy */
-  sprintf((char*)date,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
+  sprintf((char*)date_clock,"%02d-%02d-%2d",gDate.Date, gDate.Month, 2000 + gDate.Year);
 }
 
 /**
@@ -629,7 +591,7 @@ void getAlarm(void)
 
 	HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
 
-	sprintf((int*) alarm, "%02d:%02d:%02d", sAlarm.AlarmTime.Hours, sAlarm.AlarmTime.Minutes, sAlarm.AlarmTime.Seconds);
+	sprintf((int*) alarm_clock, "%02d:%02d:%02d", sAlarm.AlarmTime.Hours, sAlarm.AlarmTime.Minutes, sAlarm.AlarmTime.Seconds);
 }
 
 /**

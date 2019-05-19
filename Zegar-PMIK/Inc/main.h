@@ -57,7 +57,6 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "../Src/Library/Audio/recording.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

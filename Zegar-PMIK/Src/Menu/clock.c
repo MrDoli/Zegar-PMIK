@@ -5,7 +5,7 @@
  *      Author: Marcin Dolicher
  */
 
-#include "..\Inc\clock.h"
+#include "clock.h"
 #include "..\Library\Display\ssd1306.h"
 
 /**
