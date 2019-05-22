@@ -330,6 +330,7 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
+					//TREZBA POPRAWIC BO POTEM JAK WK£ADAMY DO ALARMU alarm_time TO NIE DZIA£A
 					uint32_t alarm_time[] = {hours, minutes, seconds};
 					saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
 					break;

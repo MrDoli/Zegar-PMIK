@@ -70,7 +70,7 @@
 #define alarm_volume 40
 #define keypad_update 2
 #define screen_update 1
-#define alarm_duration 120
+#define alarm_duration 40
 
 /* USER CODE END PD */
 
@@ -168,7 +168,7 @@ int main(void)
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
   ssd1306_Init();
   HAL_TIM_Base_Start_IT(&htim2);
-  //uint32_t alarm_time[] = {0x00, 0x00, 0x10};
+  //uint32_t alarm_time[] = {0x00, 0x00, 0x05};
   //saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
 
   /* USER CODE END 2 */
@@ -421,9 +421,9 @@ static void MX_RTC_Init(void)
   uint8_t minutes = (uint8_t)(alarm_time[1]);
   uint8_t seconds = (uint8_t)(alarm_time[2]);
 
-  sAlarm.AlarmTime.Hours = alarm_time[0];
-  sAlarm.AlarmTime.Minutes = alarm_time[1];
-  sAlarm.AlarmTime.Seconds = alarm_time[2];
+  sAlarm.AlarmTime.Hours = hours;
+  sAlarm.AlarmTime.Minutes = minutes;
+  sAlarm.AlarmTime.Seconds = seconds;
   sAlarm.AlarmTime.SubSeconds = 0x0;
   sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
@@ -576,6 +576,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		if(counter_alarm > alarm_duration) {
 			counter_alarm = 0;
 			CS43_Stop();
+			HAL_Delay(20);
 			HAL_I2S_DMAStop(&hi2s3);
 		}
 	}
