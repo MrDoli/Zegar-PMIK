@@ -70,6 +70,7 @@
 #define alarm_volume 40
 #define keypad_update 2
 #define screen_update 1
+#define alarm_duration 120
 
 /* USER CODE END PD */
 
@@ -96,6 +97,7 @@ char date_clock[9];
 bool actualScreen[3] = {true, false, false};
 uint8_t counterTIM2_screen = 0;
 uint8_t counterTIM2_keypad = 0;
+int counter_alarm = 0;
 int counterKpad = 0;
 int counterKpad2 = 0;
 uint8_t screen_flag = 0;
@@ -160,11 +162,15 @@ int main(void)
   CS43_SetVolume(alarm_volume);
   CS43_Enable_RightLeft(CS43_RIGHT_LEFT);
   HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
+  HAL_I2S_DMAStop(&hi2s3);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
   ssd1306_Init();
   HAL_TIM_Base_Start_IT(&htim2);
+  //uint32_t alarm_time[] = {0x00, 0x00, 0x10};
+  //saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -411,6 +417,10 @@ static void MX_RTC_Init(void)
   */
   uint32_t alarm_time[] = {0x00,0x00,0x00};
   readAlarmFlash(alarm_time);
+  uint8_t hours = (uint8_t)(alarm_time[0]);
+  uint8_t minutes = (uint8_t)(alarm_time[1]);
+  uint8_t seconds = (uint8_t)(alarm_time[2]);
+
   sAlarm.AlarmTime.Hours = alarm_time[0];
   sAlarm.AlarmTime.Minutes = alarm_time[1];
   sAlarm.AlarmTime.Seconds = alarm_time[2];
@@ -542,7 +552,10 @@ static void MX_GPIO_Init(void)
   *                informacje konfiguracyjne dla RTC.
   */
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
-//obsluga alarmu
+	MX_DMA_Init();
+	HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
+	CS43_Start();
+	counter_alarm = 1;
 }
 
 /**
@@ -559,6 +572,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
 		if(counterKpad > 100) keypad_number_flag = true;
 		if(counterKpad2 > 100) keypad_number_2_flag = true;
+		if(counter_alarm <= alarm_duration && counter_alarm != 0) counter_alarm++;
+		if(counter_alarm > alarm_duration) {
+			counter_alarm = 0;
+			CS43_Stop();
+			HAL_I2S_DMAStop(&hi2s3);
+		}
 	}
 }
 

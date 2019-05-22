@@ -70,6 +70,8 @@ bool controller(char gotCharacter, bool alarmIsSet){
 	else if (actualScreen[1] == true)
 	{
 		showAlarmScreen();
+		getAlarm();
+		updateTime(alarm_clock);
 		if(gotCharacter == 'A')
 		{
 			setAlarmUser();
@@ -264,19 +266,19 @@ void setAlarmUser()
 bool setHourMinOrSecInAlarm(char whichPartToSet)
 {
 	char znak = getCharKeypad();
-	int hours = 0;
-	int minutes = 0;
-	int seconds = 0;
-	int firstNumber = 0;
-	int secondNumber = 0;
+	uint32_t hours = 0;
+	uint32_t minutes = 0;
+	uint32_t seconds = 0;
+	uint32_t firstNumber = 0;
+	uint32_t secondNumber = 0;
 	bool firstNumberSaved = false;
 
 	uint32_t alarmType = RTC_ALARM_A;
 	HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
 
-	hours = (int) sAlarm.AlarmTime.Hours;
-	minutes = (int) sAlarm.AlarmTime.Minutes;
-	seconds = (int) sAlarm.AlarmTime.Seconds;
+	hours = (uint32_t) sAlarm.AlarmTime.Hours;
+	minutes = (uint32_t) sAlarm.AlarmTime.Minutes;
+	seconds = (uint32_t) sAlarm.AlarmTime.Seconds;
 
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
@@ -328,8 +330,8 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
-					//uint32_t alarm_time[] = {hours, minutes, seconds};
-					//saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
+					uint32_t alarm_time[] = {hours, minutes, seconds};
+					saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
 					break;
 				default:
 					return false;
