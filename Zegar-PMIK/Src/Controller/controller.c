@@ -194,6 +194,7 @@ bool turnOnAlarm(bool alarmIsSet)
 	}
 	else if(alarmIsSet == false)
 	{
+
 		RTC_AlarmTypeDef sAlarm;
 		uint32_t alarmType = RTC_ALARM_A;
 
@@ -204,7 +205,7 @@ bool turnOnAlarm(bool alarmIsSet)
 		setAlarmInRTC(hours, minutes, seconds);
 		alarmIsSet=true;
 		return alarmIsSet;
-	}
+	 }
 }
 //____________________________________________________________________________________________________________
 
