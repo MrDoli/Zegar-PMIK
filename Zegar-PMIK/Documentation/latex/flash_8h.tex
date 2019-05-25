@@ -1,0 +1,51 @@
+\hypertarget{flash_8h}{}\section{Src/\+Library/\+Flash/flash.h File Reference}
+\label{flash_8h}\index{Src/\+Library/\+Flash/flash.\+h@{Src/\+Library/\+Flash/flash.\+h}}
+
+
+Plik naglowkowy z metodami odpowiadajacymi za zapis do pamieci flash.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{flash_8h_a38e4a52a0a3add09d8b99fdd7fa8b72a}{save\+Alarm\+Flash} (uint32\+\_\+t $\ast$Flash\+\_\+\+Data)
+\item 
+void \hyperlink{flash_8h_a7b46aca57b614c3ee825d3b9e7a4b9ef}{read\+Alarm\+Flash} (uint32\+\_\+t $\ast$Flash\+\_\+\+Data)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{flash_8h_a780f300480d19fb7e16ea3682818b070}\label{flash_8h_a780f300480d19fb7e16ea3682818b070}} 
+uint32\+\_\+t {\bfseries flash\+\_\+addresses} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Plik naglowkowy z metodami odpowiadajacymi za zapis do pamieci flash. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{flash_8h_a7b46aca57b614c3ee825d3b9e7a4b9ef}\label{flash_8h_a7b46aca57b614c3ee825d3b9e7a4b9ef}} 
+\index{flash.\+h@{flash.\+h}!read\+Alarm\+Flash@{read\+Alarm\+Flash}}
+\index{read\+Alarm\+Flash@{read\+Alarm\+Flash}!flash.\+h@{flash.\+h}}
+\subsubsection{\texorpdfstring{read\+Alarm\+Flash()}{readAlarmFlash()}}
+{\footnotesize\ttfamily void read\+Alarm\+Flash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{flash\+\_\+data }\end{DoxyParamCaption})}
+
+Odczytuje zapisana wczesniej godzine alarmu budzika. 
+\begin{DoxyParams}{Parameters}
+{\em flash\+\_\+data} & Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi -\/ minuty, trzeci -\/ sekundy. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{flash_8h_a38e4a52a0a3add09d8b99fdd7fa8b72a}\label{flash_8h_a38e4a52a0a3add09d8b99fdd7fa8b72a}} 
+\index{flash.\+h@{flash.\+h}!save\+Alarm\+Flash@{save\+Alarm\+Flash}}
+\index{save\+Alarm\+Flash@{save\+Alarm\+Flash}!flash.\+h@{flash.\+h}}
+\subsubsection{\texorpdfstring{save\+Alarm\+Flash()}{saveAlarmFlash()}}
+{\footnotesize\ttfamily void save\+Alarm\+Flash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{flash\+\_\+data }\end{DoxyParamCaption})}
+
+Zapisuje godzine alarmu budzika w pamieci Flash. 
+\begin{DoxyParams}{Parameters}
+{\em flash\+\_\+data} & Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi -\/ minuty, trzeci -\/ sekundy. \\
+\hline
+\end{DoxyParams}

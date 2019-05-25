@@ -1,0 +1,184 @@
+\hypertarget{controller_8h}{}\section{Src/\+Controller/controller.h File Reference}
+\label{controller_8h}\index{Src/\+Controller/controller.\+h@{Src/\+Controller/controller.\+h}}
+
+
+Plik naglowkowy z metodami controllera.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{controller_8h_acca12f2d0888a8937bebe27206522b5d}\label{controller_8h_acca12f2d0888a8937bebe27206522b5d}} 
+void {\bfseries controller\+Init} ()
+\item 
+bool \hyperlink{controller_8h_aa099daea50870eec32c49794fc2146d4}{controller} (char got\+Character, bool alarm\+Is\+Set)
+\item 
+void \hyperlink{controller_8h_a8040ffdaafd66b662197ab1122d0ca24}{set\+Actual\+Screen} (bool screen\+Array\mbox{[}$\,$\mbox{]})
+\item 
+bool $\ast$ \hyperlink{controller_8h_abdbe226e5ad7b9d8286a2a286cf92405}{get\+Actual\+Screen} (void)
+\item 
+void \hyperlink{controller_8h_ada0aeee6af26314751b432a2ed627add}{handle\+Direction\+Button} (char sign)
+\item 
+void \hyperlink{controller_8h_ae7b8f4074b8c8d645bdcbc2d2d01b3ef}{set\+Time\+User} ()
+\item 
+void \hyperlink{controller_8h_adb198ed0fedb3f9cb162713ca5243d49}{set\+Alarm\+User} ()
+\item 
+void \hyperlink{controller_8h_a558a2f1c2c0dfa20ef378e61738524fc}{set\+Time\+In\+R\+TC} (uint8\+\_\+t hours, uint8\+\_\+t minutes, uint8\+\_\+t seconds)
+\item 
+void \hyperlink{controller_8h_a79a40763b553e9f5183d3c49c84be430}{set\+Alarm\+In\+R\+TC} (uint8\+\_\+t hours, uint8\+\_\+t minutes, uint8\+\_\+t seconds)
+\item 
+bool \hyperlink{controller_8h_acee75a6615685f9310eb3d0d3a8dae4d}{set\+Hour\+Min\+Or\+Sec\+In\+Time} (char which\+Part\+To\+Set)
+\item 
+bool \hyperlink{controller_8h_a94404bd931931ce34796effd07f2e867}{set\+Hour\+Min\+Or\+Sec\+In\+Alarm} (char which\+Part\+To\+Set)
+\item 
+bool \hyperlink{controller_8h_a307a1d7730906b5da2936ad9223edff3}{turn\+On\+Alarm} (bool alarm\+Is\+Set)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{controller_8h_ab92fa135504bd070277ce910c46d440d}\label{controller_8h_ab92fa135504bd070277ce910c46d440d}} 
+bool {\bfseries actual\+Screen} \mbox{[}3\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Plik naglowkowy z metodami controllera. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{controller_8h_aa099daea50870eec32c49794fc2146d4}\label{controller_8h_aa099daea50870eec32c49794fc2146d4}} 
+\index{controller.\+h@{controller.\+h}!controller@{controller}}
+\index{controller@{controller}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{controller()}{controller()}}
+{\footnotesize\ttfamily bool controller (\begin{DoxyParamCaption}\item[{char}]{got\+Character,  }\item[{bool}]{alarm\+Is\+Set }\end{DoxyParamCaption})}
+
+Realizuje logike programu w zaleznosci dzialan uzytkownika na klawiaturze realizuje funkcjonalnosci zegarka i budzika za pomoca zmiennej 
+\begin{DoxyParams}{Parameters}
+{\em actual\+Screen} & jest wybierany ekran do wyswietlania na wyswietlaczu L\+CD \\
+\hline
+{\em got\+Character} & Wcisniety znak na klawiaturze. \\
+\hline
+{\em alarm\+Is\+Set} & Flaga oznaczajaca ze alarm jest wlaczony. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+flaga z informacja na temat stanu alarmu. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{controller_8h_abdbe226e5ad7b9d8286a2a286cf92405}\label{controller_8h_abdbe226e5ad7b9d8286a2a286cf92405}} 
+\index{controller.\+h@{controller.\+h}!get\+Actual\+Screen@{get\+Actual\+Screen}}
+\index{get\+Actual\+Screen@{get\+Actual\+Screen}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{get\+Actual\+Screen()}{getActualScreen()}}
+{\footnotesize\ttfamily bool$\ast$ get\+Actual\+Screen (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Pobranie tablicy ze statusem ekranow. \begin{DoxyReturn}{Returns}
+Tablica ze statusem ekranow. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{controller_8h_ada0aeee6af26314751b432a2ed627add}\label{controller_8h_ada0aeee6af26314751b432a2ed627add}} 
+\index{controller.\+h@{controller.\+h}!handle\+Direction\+Button@{handle\+Direction\+Button}}
+\index{handle\+Direction\+Button@{handle\+Direction\+Button}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{handle\+Direction\+Button()}{handleDirectionButton()}}
+{\footnotesize\ttfamily void handle\+Direction\+Button (\begin{DoxyParamCaption}\item[{char}]{sign }\end{DoxyParamCaption})}
+
+Obsluga przemieszczania siê miedzy ekranami. 
+\begin{DoxyParams}{Parameters}
+{\em sign} & Znak zwrocony z klawiatury. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8h_a8040ffdaafd66b662197ab1122d0ca24}\label{controller_8h_a8040ffdaafd66b662197ab1122d0ca24}} 
+\index{controller.\+h@{controller.\+h}!set\+Actual\+Screen@{set\+Actual\+Screen}}
+\index{set\+Actual\+Screen@{set\+Actual\+Screen}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Actual\+Screen()}{setActualScreen()}}
+{\footnotesize\ttfamily void set\+Actual\+Screen (\begin{DoxyParamCaption}\item[{bool}]{screen\+Array\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Ustawia zmienne bool w tablicy actual\+Screen, na podstawie ktorej jest wybierany ekran do wyswietlania 
+\begin{DoxyParams}{Parameters}
+{\em screen\+Array} & przechowuje informacje o ekranie, który ma zostac wyswietlony \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8h_a79a40763b553e9f5183d3c49c84be430}\label{controller_8h_a79a40763b553e9f5183d3c49c84be430}} 
+\index{controller.\+h@{controller.\+h}!set\+Alarm\+In\+R\+TC@{set\+Alarm\+In\+R\+TC}}
+\index{set\+Alarm\+In\+R\+TC@{set\+Alarm\+In\+R\+TC}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Alarm\+In\+R\+T\+C()}{setAlarmInRTC()}}
+{\footnotesize\ttfamily void set\+Alarm\+In\+R\+TC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{hours,  }\item[{uint8\+\_\+t}]{minutes,  }\item[{uint8\+\_\+t}]{seconds }\end{DoxyParamCaption})}
+
+Ustawienie czasu alarmu budzika w R\+TC. 
+\begin{DoxyParams}{Parameters}
+{\em hours} & Godzina do zapisania. \\
+\hline
+{\em minutes} & Minuty do zapisania. \\
+\hline
+{\em seconds} & Sekundy do zapisania. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8h_adb198ed0fedb3f9cb162713ca5243d49}\label{controller_8h_adb198ed0fedb3f9cb162713ca5243d49}} 
+\index{controller.\+h@{controller.\+h}!set\+Alarm\+User@{set\+Alarm\+User}}
+\index{set\+Alarm\+User@{set\+Alarm\+User}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Alarm\+User()}{setAlarmUser()}}
+{\footnotesize\ttfamily void set\+Alarm\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ustawienie godziny alarmu budzika. \mbox{\Hypertarget{controller_8h_a94404bd931931ce34796effd07f2e867}\label{controller_8h_a94404bd931931ce34796effd07f2e867}} 
+\index{controller.\+h@{controller.\+h}!set\+Hour\+Min\+Or\+Sec\+In\+Alarm@{set\+Hour\+Min\+Or\+Sec\+In\+Alarm}}
+\index{set\+Hour\+Min\+Or\+Sec\+In\+Alarm@{set\+Hour\+Min\+Or\+Sec\+In\+Alarm}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Hour\+Min\+Or\+Sec\+In\+Alarm()}{setHourMinOrSecInAlarm()}}
+{\footnotesize\ttfamily bool set\+Hour\+Min\+Or\+Sec\+In\+Alarm (\begin{DoxyParamCaption}\item[{char}]{which\+Part\+To\+Set }\end{DoxyParamCaption})}
+
+Ustawienie godziny, minuty lub sekundy alarmu w budziku. 
+\begin{DoxyParams}{Parameters}
+{\em which\+Part\+To\+Set} & Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Flaga oznaczajaca czy operacje wykonano poprawnie. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{controller_8h_acee75a6615685f9310eb3d0d3a8dae4d}\label{controller_8h_acee75a6615685f9310eb3d0d3a8dae4d}} 
+\index{controller.\+h@{controller.\+h}!set\+Hour\+Min\+Or\+Sec\+In\+Time@{set\+Hour\+Min\+Or\+Sec\+In\+Time}}
+\index{set\+Hour\+Min\+Or\+Sec\+In\+Time@{set\+Hour\+Min\+Or\+Sec\+In\+Time}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Hour\+Min\+Or\+Sec\+In\+Time()}{setHourMinOrSecInTime()}}
+{\footnotesize\ttfamily bool set\+Hour\+Min\+Or\+Sec\+In\+Time (\begin{DoxyParamCaption}\item[{char}]{which\+Part\+To\+Set }\end{DoxyParamCaption})}
+
+Ustawienie godziny, minuty lub sekundy w zegarze. 
+\begin{DoxyParams}{Parameters}
+{\em which\+Part\+To\+Set} & Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Flaga oznaczajaca czy operacje wykonano poprawnie. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{controller_8h_a558a2f1c2c0dfa20ef378e61738524fc}\label{controller_8h_a558a2f1c2c0dfa20ef378e61738524fc}} 
+\index{controller.\+h@{controller.\+h}!set\+Time\+In\+R\+TC@{set\+Time\+In\+R\+TC}}
+\index{set\+Time\+In\+R\+TC@{set\+Time\+In\+R\+TC}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Time\+In\+R\+T\+C()}{setTimeInRTC()}}
+{\footnotesize\ttfamily void set\+Time\+In\+R\+TC (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{hours,  }\item[{uint8\+\_\+t}]{minutes,  }\item[{uint8\+\_\+t}]{seconds }\end{DoxyParamCaption})}
+
+Ustawienie czasu zegara w R\+TC. 
+\begin{DoxyParams}{Parameters}
+{\em hours} & Godzina do zapisania. \\
+\hline
+{\em minutes} & Minuty do zapisania. \\
+\hline
+{\em seconds} & Sekundy do zapisania. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8h_ae7b8f4074b8c8d645bdcbc2d2d01b3ef}\label{controller_8h_ae7b8f4074b8c8d645bdcbc2d2d01b3ef}} 
+\index{controller.\+h@{controller.\+h}!set\+Time\+User@{set\+Time\+User}}
+\index{set\+Time\+User@{set\+Time\+User}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{set\+Time\+User()}{setTimeUser()}}
+{\footnotesize\ttfamily void set\+Time\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ustawienie czasu na zegarze. \mbox{\Hypertarget{controller_8h_a307a1d7730906b5da2936ad9223edff3}\label{controller_8h_a307a1d7730906b5da2936ad9223edff3}} 
+\index{controller.\+h@{controller.\+h}!turn\+On\+Alarm@{turn\+On\+Alarm}}
+\index{turn\+On\+Alarm@{turn\+On\+Alarm}!controller.\+h@{controller.\+h}}
+\subsubsection{\texorpdfstring{turn\+On\+Alarm()}{turnOnAlarm()}}
+{\footnotesize\ttfamily bool turn\+On\+Alarm (\begin{DoxyParamCaption}\item[{bool}]{alarm\+Is\+Set }\end{DoxyParamCaption})}
+
+Funkcja sluzaca do wlaczenie i ustawienia alarmu na czas wpisany przez uzytkownika 
+\begin{DoxyParams}{Parameters}
+{\em alarm\+Is\+Set} & okreœla czy alarm jest w³¹czony \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+zwraca aktualny stan alarmu 
+\end{DoxyReturn}

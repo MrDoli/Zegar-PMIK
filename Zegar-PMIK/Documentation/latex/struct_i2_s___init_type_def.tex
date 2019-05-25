@@ -1,0 +1,89 @@
+\hypertarget{struct_i2_s___init_type_def}{}\section{I2\+S\+\_\+\+Init\+Type\+Def Struct Reference}
+\label{struct_i2_s___init_type_def}\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+
+
+I2S Init structure definition.  
+
+
+
+
+{\ttfamily \#include $<$stm32f4xx\+\_\+hal\+\_\+i2s.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_abcd2a46537eee4ed23fa1642c5234ea8}{Mode}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_a8fc84bad7ae403ab4231b37077f9d99f}{Standard}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_aa968e67a06e23282776bd7b615a8c1cc}{Data\+Format}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_ad0d868889f53bdda32fa5c201efa2a12}{M\+C\+L\+K\+Output}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_a5c42be6d3eb4713f0d4fc202cae95553}{Audio\+Freq}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_aff339ae5b4099da49e6970dd59c41afe}{C\+P\+OL}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_a6a0c9c91b9530465cc2347c758a2fdf3}{Clock\+Source}
+\item 
+uint32\+\_\+t \hyperlink{struct_i2_s___init_type_def_a3126fcf92721ac72c91cc870fcef1ffe}{Full\+Duplex\+Mode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+I2S Init structure definition. 
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{struct_i2_s___init_type_def_a5c42be6d3eb4713f0d4fc202cae95553}\label{struct_i2_s___init_type_def_a5c42be6d3eb4713f0d4fc202cae95553}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Audio\+Freq@{Audio\+Freq}}
+\index{Audio\+Freq@{Audio\+Freq}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Audio\+Freq}{AudioFreq}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Audio\+Freq}
+
+Specifies the frequency selected for the I2S communication. This parameter can be a value of \hyperlink{group___i2_s___audio___frequency}{I2S Audio Frequency} \mbox{\Hypertarget{struct_i2_s___init_type_def_a6a0c9c91b9530465cc2347c758a2fdf3}\label{struct_i2_s___init_type_def_a6a0c9c91b9530465cc2347c758a2fdf3}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Clock\+Source@{Clock\+Source}}
+\index{Clock\+Source@{Clock\+Source}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Clock\+Source}{ClockSource}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Clock\+Source}
+
+Specifies the I2S Clock Source. This parameter can be a value of \hyperlink{group___i2_s___clock___source}{I2S Clock Source Definition} \mbox{\Hypertarget{struct_i2_s___init_type_def_aff339ae5b4099da49e6970dd59c41afe}\label{struct_i2_s___init_type_def_aff339ae5b4099da49e6970dd59c41afe}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!C\+P\+OL@{C\+P\+OL}}
+\index{C\+P\+OL@{C\+P\+OL}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{C\+P\+OL}{CPOL}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+C\+P\+OL}
+
+Specifies the idle state of the I2S clock. This parameter can be a value of \hyperlink{group___i2_s___clock___polarity}{I2S Clock Polarity} \mbox{\Hypertarget{struct_i2_s___init_type_def_aa968e67a06e23282776bd7b615a8c1cc}\label{struct_i2_s___init_type_def_aa968e67a06e23282776bd7b615a8c1cc}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Data\+Format@{Data\+Format}}
+\index{Data\+Format@{Data\+Format}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Data\+Format}{DataFormat}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Data\+Format}
+
+Specifies the data format for the I2S communication. This parameter can be a value of \hyperlink{group___i2_s___data___format}{I2S Data Format} \mbox{\Hypertarget{struct_i2_s___init_type_def_a3126fcf92721ac72c91cc870fcef1ffe}\label{struct_i2_s___init_type_def_a3126fcf92721ac72c91cc870fcef1ffe}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Full\+Duplex\+Mode@{Full\+Duplex\+Mode}}
+\index{Full\+Duplex\+Mode@{Full\+Duplex\+Mode}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Full\+Duplex\+Mode}{FullDuplexMode}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Full\+Duplex\+Mode}
+
+Specifies the I2S Full\+Duplex mode. This parameter can be a value of \hyperlink{group___i2_s___full_duplex___mode}{I2S Full\+Duplex Mode} \mbox{\Hypertarget{struct_i2_s___init_type_def_ad0d868889f53bdda32fa5c201efa2a12}\label{struct_i2_s___init_type_def_ad0d868889f53bdda32fa5c201efa2a12}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!M\+C\+L\+K\+Output@{M\+C\+L\+K\+Output}}
+\index{M\+C\+L\+K\+Output@{M\+C\+L\+K\+Output}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{M\+C\+L\+K\+Output}{MCLKOutput}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+M\+C\+L\+K\+Output}
+
+Specifies whether the I2S M\+C\+LK output is enabled or not. This parameter can be a value of \hyperlink{group___i2_s___m_c_l_k___output}{I2S M\+C\+LK Output} \mbox{\Hypertarget{struct_i2_s___init_type_def_abcd2a46537eee4ed23fa1642c5234ea8}\label{struct_i2_s___init_type_def_abcd2a46537eee4ed23fa1642c5234ea8}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Mode@{Mode}}
+\index{Mode@{Mode}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Mode}
+
+Specifies the I2S operating mode. This parameter can be a value of \hyperlink{group___i2_s___mode}{I2S Mode} \mbox{\Hypertarget{struct_i2_s___init_type_def_a8fc84bad7ae403ab4231b37077f9d99f}\label{struct_i2_s___init_type_def_a8fc84bad7ae403ab4231b37077f9d99f}} 
+\index{I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}!Standard@{Standard}}
+\index{Standard@{Standard}!I2\+S\+\_\+\+Init\+Type\+Def@{I2\+S\+\_\+\+Init\+Type\+Def}}
+\subsubsection{\texorpdfstring{Standard}{Standard}}
+{\footnotesize\ttfamily uint32\+\_\+t I2\+S\+\_\+\+Init\+Type\+Def\+::\+Standard}
+
+Specifies the standard used for the I2S communication. This parameter can be a value of \hyperlink{group___i2_s___standard}{I2S Standard} 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Drivers/\+S\+T\+M32\+F4xx\+\_\+\+H\+A\+L\+\_\+\+Driver/\+Inc/\hyperlink{stm32f4xx__hal__i2s_8h}{stm32f4xx\+\_\+hal\+\_\+i2s.\+h}\end{DoxyCompactItemize}
