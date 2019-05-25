@@ -5,16 +5,19 @@
  *      Author: Marcin Dolicher
  */
 
+/**
+ * \file controller.h
+ * \brief Plik naglowkowy z metodami controllera
+ */
+
 #ifndef CONTROLLER_CONTROLLER_H_
 #define CONTROLLER_CONTROLLER_H_
 
 #include "main.h"
 #include <stdbool.h>
 
-//static bool actualScreen[3] = {true, false, false};
 extern bool actualScreen[3];
 void controllerInit();
-void changeScreen();
 bool controller(char gotCharacter, bool alarmIsSet);
 
 // Getters and setters

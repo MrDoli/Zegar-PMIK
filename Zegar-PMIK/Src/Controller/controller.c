@@ -5,6 +5,11 @@
  *      Author: Marcin Dolicher
  */
 
+/**
+ * \file controller.c
+ * \brief Plik implementujacy metody controllera, ktore sluza do realizacji logiki programu.
+ */
+
 #include "controller.h"
 #include "../Menu/clock.h"
 #include "../Library/Flash/flash.h"
@@ -12,7 +17,9 @@
 #include "../Library/Display/ssd1306.h"
 #include <stdint.h>
 
-//extern bool actualScreen[3];
+/**
+ * Deklaracje zmiennych extern zostaly utworzone w pliku main.c
+ */
 extern int counterKpad;
 extern int counterKpad2;
 extern char time_clock[8];
@@ -20,25 +27,10 @@ extern char alarm_clock[8];
 extern bool keypad_number_flag;
 extern bool keypad_number_2_flag;
 
-//__________________________________OBGADAC___________________________________________________________________
-//Raz u¿ywasz (setHourMinOrSecInAlarm()) a raz tworzysz nowe w danej funkcji (turnOnAlarm()), dlaczego?
-//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
-//Za bardzo powielamy kod w przeciwnym wypadku
 RTC_HandleTypeDef hrtc;
-//____________________________________________________________________________________________________________
-
-
-// gdy to globalne to dziala, sprobowac to wrzucic do funckji
 RTC_TimeTypeDef gTime;
 RTC_DateTypeDef gDate;
 RTC_AlarmTypeDef sAlarm;
-
-/**
-  * @brief  Zmiana ekranu.
-  */
-void changeScreen(){
-
-}
 
 /**
  * Inicjalizacja wyswietlacza zegara.
@@ -53,10 +45,12 @@ void controllerInit(char time[]){
 }
 
 /**
- * Zmiana wyswietlanego ekranu.
+ * Realizuje logike programu
+ * w zaleznosci dzialan uzytkownika na klawiaturze realizuje funkcjonalnosci zegarka i budzika
+ * za pomoca zmiennej \param actualScreen jest wybierany ekran do wyswietlania na wyswietlaczu LCD
  * @param gotCharacter Wcisniety znak na klawiaturze.
- * @param alarmIsSet Flaga oznaczajaca ze alarm jest ustawiony.
- * @return Flaga oznaczajaca ze alarm jest ustawiony.
+ * @param alarmIsSet Flaga oznaczajaca ze alarm jest wlaczony.
+ * @return flaga z informacja na temat stanu alarmu.
  */
 bool controller(char gotCharacter, bool alarmIsSet){
 	// Mozemy sprawdzac rowniez inne elementy tablicy (w nastepnej wersji)
@@ -105,8 +99,8 @@ bool* getActualScreen(void)
 }
 
 /**
- * Tablica ze statusem ekranow.
- * @param screenArray Tablica z nowym statusem ekranow.
+ * Ustawia zmienne bool w tablicy actualScreen, na podstawie ktorej jest wybierany ekran do wyswietlania
+ * \param screenArray przechowuje informacje o ekranie, który ma zostac wyswietlony
  */
 void setActualScreen(bool screenArray[])
 {
@@ -161,15 +155,10 @@ void handleDirectionButton(char sign)
 }
 
 /**
- * Ustawienie godziny alarmu.
- * @param alarmIsSet Flaga oznaczajaca czy alarm jest wlaczony.
- * @return Flaga oznaczajaca czy alarm jest wlaczony.
+ * Funkcja sluzaca do wlaczenie i ustawienia alarmu na czas wpisany przez uzytkownika
+ * @param alarmIsSet okreœla czy alarm jest w³¹czony
+ * @return zwraca aktualny stan alarmu
  */
-
-//__________________________________OBGADAC___________________________________________________________________
-//Po co wylaczac i potem od nowa setowac alarm skoro wystarczy wylaczac i wlaczac audio?
-//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
-//Za bardzo powielamy kod w przeciwnym wypadku
 bool turnOnAlarm(bool alarmIsSet)
 {
 	if(alarmIsSet == true)
@@ -207,7 +196,6 @@ bool turnOnAlarm(bool alarmIsSet)
 		return alarmIsSet;
 	 }
 }
-//____________________________________________________________________________________________________________
 
 
 /**
@@ -251,22 +239,8 @@ void setAlarmUser()
  * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
  * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
  */
-
-//__________________________________OBGADAC___________________________________________________________________
-//W warunku while(getCharKeypad() != '*' && getCharKeypad() != 'D') nie ma odszumiania,
-//po co dwa razy odszumianie?
-//if(gettedChar == 'A' && firstNumberSaved == true)
-//{
-//	counterKpadX++;
-//}
-//Wystarczy chyba raz to robic skoro i tak flaga firstNumberSaved mowi nam ktora cyfra jest wpisywana
-//Po co jest char znak = getCharKeypad();? Nie u¿ywasz tego.
-//W tej funkcji chcia³bym dac zapisywanie do pamieci FLASH.
-//W komentarzu jest napisane gdzie.
-
 bool setHourMinOrSecInAlarm(char whichPartToSet)
 {
-	char znak = getCharKeypad();
 	uint32_t hours = 0;
 	uint32_t minutes = 0;
 	uint32_t seconds = 0;
@@ -331,9 +305,8 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
-					//TREZBA POPRAWIC BO POTEM JAK WK£ADAMY DO ALARMU alarm_time TO NIE DZIA£A
 					uint32_t alarm_time[] = {hours, minutes, seconds};
-					saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
+					saveAlarmFlash(alarm_time);
 					break;
 				default:
 					return false;
@@ -352,27 +325,14 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 	}
 	return false;
 }
-//____________________________________________________________________________________________________________
-
 
 /**
  * Ustawienie godziny, minuty lub sekundy w zegarze.
  * @param whichPartToSet Wartosc mowiaca o tym czy bedzie ustawiana godzina, minuta, lub sekunda.
  * @return Flaga oznaczajaca czy operacje wykonano poprawnie.
  */
-
-//__________________________________OBGADAC___________________________________________________________________
-//W warunku while(getCharKeypad() != '*' && getCharKeypad() != 'D') nie ma odszumiania,
-//po co dwa razy odszumianie?
-//if(gettedChar == 'A' && firstNumberSaved == true)
-//{
-//	counterKpadX++;
-//}
-//Wystarczy chyba raz to robic skoro i tak flaga firstNumberSaved mowi nam ktora cyfra jest wpisywana
-//Po co jest char znak = getCharKeypad();? Nie u¿ywasz tego.
 bool setHourMinOrSecInTime(char whichPartToSet)
 {
-	char znak = getCharKeypad();
 	int hours = 0;
 	int minutes = 0;
 	int seconds = 0;
@@ -455,8 +415,6 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 	}
 	return false;
 }
-//____________________________________________________________________________________________________________
-
 
 /**
  * Ustawienie czasu zegara w RTC.
@@ -464,9 +422,6 @@ bool setHourMinOrSecInTime(char whichPartToSet)
  * @param minutes Minuty do zapisania.
  * @param seconds Sekundy do zapisania.
  */
-//__________________________________OBGADAC___________________________________________________________________
-//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
-//Za bardzo powielamy kod w przeciwnym wypadku
 void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
 	  RTC_HandleTypeDef hrtc;
@@ -496,7 +451,6 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 
 	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
 }
-//____________________________________________________________________________________________________________
 
 
 /**
@@ -505,14 +459,8 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
  * @param minutes Minuty do zapisania.
  * @param seconds Sekundy do zapisania.
  */
-
-//__________________________________OBGADAC___________________________________________________________________
-//Myœlê ze powinniœmy u¿ywac jednej struktury konfiguracyjnej RTC_HandleTypeDef, najlepiej z maina
-//Za bardzo powielamy kod w przeciwnym wypadku
 void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 {
-	//uint32_t x = time[6] - '0';
-
 	RTC_HandleTypeDef hrtc;
 	RTC_AlarmTypeDef sAlarm = {0};
 
@@ -542,13 +490,12 @@ void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds)
 	sAlarm.Alarm = RTC_ALARM_A;
 
 	//Set alarm
-	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-	  /* USER CODE BEGIN RTC_Init 2 */
-	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
-	  /* USER CODE END RTC_Init 2 */
+	if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN) != HAL_OK)
+	{
+	   Error_Handler();
+	}
+	/* USER CODE BEGIN RTC_Init 2 */
+	HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
+	/* USER CODE END RTC_Init 2 */
 }
-//____________________________________________________________________________________________________________
 

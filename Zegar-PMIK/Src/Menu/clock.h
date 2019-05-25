@@ -4,6 +4,12 @@
  * Author: Marcin Dolicher, Micha³ Stolarz
 */
 
+/**
+ * \file clock.h
+ * \brief Plik naglowkowy z metodami odpowiadajacymi za wyswietlanie
+ * 		ekranow zwiazanych z czasem (wyswietlanie, ustawianie).
+ */
+
 #ifndef CLOCK_H_
 #define CLOCK_H_
 
@@ -13,8 +19,5 @@ void updateTime(char time[]);
 void showMenuButtons();
 void showCity();
 void setTimeScreen();
-
-/*NIEPOTRZEBNE*/
-void clearScreen();
 
 #endif /* CLOCK_H_ */

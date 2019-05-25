@@ -5,6 +5,12 @@
  *      Author: Michal
  */
 
+/**
+ * \file recording.h
+ * \brief Plik naglowkowy dla recording.c
+ * \param AUDIO_SAMPLE zmienna przechowujaca dzwiek do odtwarzania podczas wlaczania sie alarmu
+ */
+
 #ifndef RECORDING_H_
 #define RECORDING_H_
 

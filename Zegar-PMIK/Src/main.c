@@ -6,6 +6,8 @@
 */
 /**
   ******************************************************************************
+  * @author 		Marcin Dolicher, Micha³ Stolarz
+  * @version 		1.0
   * @file           : main.c
   * @brief          : Main program body
   ******************************************************************************
@@ -178,6 +180,10 @@ int main(void)
   char znak =' ';
   char gotCharacter = '0';
   bool alarmIsSet = false;
+  /*!
+   * W petli while nastepuje odszumianie klikniec uzytkownika i uruchomienie controllera
+   * ktory realizuje logike programu
+   */
   while (1)
   {
 	  if(keypad_flag == 1)
@@ -583,7 +589,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 }
 
 /**
-  * @brief  Pobranie czasu z RTC.
+  * @brief  Pobranie czasu i daty z RTC. Zapisanie wartosci do tablic \param time_clock oraz \param date_clock
   */
 void getTime(void)
 {
@@ -602,7 +608,7 @@ void getTime(void)
 }
 
 /**
- * @brief  Pobranie godziny alarmu z RTC.
+ * @brief  Pobranie godziny alarmu z RTC i przypisanie jej do tablicy \param alarm_clock.
  */
 void getAlarm(void)
 {
@@ -616,7 +622,7 @@ void getAlarm(void)
 
 /**
   * @brief  Ustawienie alarmu.
-  * @param  Godzina alarmu.
+  * @param time Godzina alarmu.
   */
 void setAlarm(char time[])
 {

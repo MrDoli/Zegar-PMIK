@@ -6,7 +6,12 @@
 #include "flash.h"
 
 /**
- * Tablica z adresami pamieci pod ktore bedzia zapisywany czas.
+ * \file keypad.c
+ * \brief Plik implementujacy metody zapisu do pamieci flash
+ */
+
+/**
+ * \param flas_addresses Tablica z adresami pamieci pod ktore bedzia zapisywany czas.
  * Pierwszy element to adres godziny, drugi - adres minut, trzeci - adres sekund.
  */
 uint32_t flash_addresses[3] = {0x08040000,0x08040010,0x08040020};

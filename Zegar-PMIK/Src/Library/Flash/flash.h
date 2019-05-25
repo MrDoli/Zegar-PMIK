@@ -3,9 +3,13 @@
  *
  * Author: Marcin Dolicher, Micha³ Stolarz
 */
+
+/**
+ * \file flash.h
+ * \brief Plik naglowkowy z metodami odpowiadajacymi za zapis do pamieci flash.
+ */
+
 #include "main.h"
-//#include "stm32f4xx_hal_flash_ex.h"
-//#include "stm32f4xx_hal_flash.h"
 #ifndef LIBRARY_FLASH_FLASH_H_
 #define LIBRARY_FLASH_FLASH_H_
 

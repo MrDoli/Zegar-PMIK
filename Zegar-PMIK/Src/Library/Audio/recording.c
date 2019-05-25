@@ -5,6 +5,11 @@
  *      Author: Michal
  */
 
+/**
+ * \file recording.c
+ * \brief Plik z zapisanym dzwiekiem, ktory jest odtwarzany podczas dzialania alarmu
+ */
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "recording.h"

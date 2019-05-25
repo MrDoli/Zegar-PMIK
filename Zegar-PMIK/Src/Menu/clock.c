@@ -5,6 +5,12 @@
  *      Author: Marcin Dolicher
  */
 
+/**
+ * \file clock.c
+ * \brief Plik implementujacy metody odpowiadajace za wyswietlanie
+ * 		ekranow zwiazanych z czasem (wyswietlanie, ustawianie).
+ */
+
 #include "clock.h"
 #include "..\Library\Display\ssd1306.h"
 
@@ -23,7 +29,7 @@ void updateTime(char time[])
 }
 
 /**
-  * @brief  Wyswietlenie przyciskow do zmiany ekranu w aplikacji.
+  * @brief  Wyswietlanie przyciskow do zmiany ekranu w aplikacji.
   */
 void showMenuButtons()
 {
@@ -37,7 +43,7 @@ void showMenuButtons()
 }
 
 /**
-  * @brief  Wyswietlenie nazwy miasta.
+  * @brief  Wyswietlanie nazwy miasta.
   */
 void showCity(){
 	char city[13] = "   Warsaw   ";
@@ -50,30 +56,15 @@ void showCity(){
 }
 
 /**
-  * @brief  Wyœwietlenie ekranu do ustawienia czasu w zegarze.
+  * @brief  Wyœwietlanie ekranu do ustawienia czasu w zegarze.
   */
 void setTimeScreen(){
-	//ssd1306_Fill(Black);
-
 	showMenuButtons();
-
 	char setButton[15] = " SET TIME  ";
 	char onOffButton[9] = "|SET-A|";
 	ssd1306_SetCursor(0, 0);
 	ssd1306_WriteString(setButton, Font_11x18, White);
 	ssd1306_SetCursor(20, 45);
 	ssd1306_WriteString(onOffButton, Font_11x18, White);
-	ssd1306_UpdateScreen();
-}
-
-/*NIEPOTRZEBNE*/
-void clearScreen(){
-	char space[15] = "           ";
-	ssd1306_SetCursor(0, 0);
-	ssd1306_WriteString(space, Font_11x18, White);
-	ssd1306_SetCursor(0, 22);
-	ssd1306_WriteString(space, Font_11x18, White);
-	ssd1306_SetCursor(0, 45);
-	ssd1306_WriteString(space, Font_11x18, White);
 	ssd1306_UpdateScreen();
 }

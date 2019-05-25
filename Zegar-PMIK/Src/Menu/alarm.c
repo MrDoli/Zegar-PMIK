@@ -5,6 +5,11 @@
  *      Author: Marcin Dolicher
  */
 
+/**
+ * \file alarm.c
+ * \brief Plik implementujacy metody odpowiadajace za wyswietlanie ekranu z alarmem.
+ */
+
 #include "alarm.h"
 #include "..\Library\Display\ssd1306.h"
 #include "clock.h"

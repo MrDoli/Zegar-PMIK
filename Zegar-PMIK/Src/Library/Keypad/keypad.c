@@ -5,12 +5,17 @@
  *      Author: Marcin Dolicher
  */
 
+/**
+ * \file keypad.c
+ * \brief Plik implementujacy metody odpowiadajace za obsluge klawiatury
+ */
+
 #include "keypad.h"
 
 /**
   * @brief Pobieranie znakow z klawiatury.
-  * @retval Pobrany znak z klawiatury.
-  */
+  * @retval Zwraca klikniety znak przez uzytkownika z klawiatury typu char.
+*/
 char getCharKeypad(){
 
 	unsigned int GPIO_Pin_row , GPIO_Pin_col , i, j;
@@ -40,6 +45,10 @@ char getCharKeypad(){
 		return ' ';
 }
 
+/**
+ * @brief Pobieranie znakow z klawiatury.
+ * @return Zwraca klikniety znak przez uzytkownika jako zmienna typu int
+ */
 int getIntKeypad(){
 	unsigned int GPIO_Pin_row , GPIO_Pin_col , i, j;
 	const unsigned int KBkody [16] = {1,2,3,99 ,\
