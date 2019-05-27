@@ -85,17 +85,15 @@ bool controller(char gotCharacter){
 			turnOffAlarm();
 			alarmIsOn = false;
 		}
-
-		updateTime(alarm_clock);
 	}
 	else if (actualScreen[2] == true)
 	{
 		setTimeScreen();
+		updateTime(time_clock);
 		if(gotCharacter == 'A' )
 		{
 			setTimeUser();
 		}
-		updateTime(time_clock);
 	}
 
 	return alarmIsSet;
