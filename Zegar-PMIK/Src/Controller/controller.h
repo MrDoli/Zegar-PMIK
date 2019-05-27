@@ -18,7 +18,7 @@
 
 extern bool actualScreen[3];
 void controllerInit();
-bool controller(char gotCharacter, bool alarmIsSet);
+bool controller(char gotCharacter);
 
 // Getters and setters
 void setActualScreen(bool screenArray[]);
@@ -30,7 +30,8 @@ void setTimeInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
 void setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds);
 bool setHourMinOrSecInTime(char whichPartToSet);
 bool setHourMinOrSecInAlarm(char whichPartToSet);
-bool turnOnAlarm(bool alarmIsSet);
+void turnOnAlarm();
+void turnOffAlarm();
 
 
 #endif /* CONTROLLER_CONTROLLER_H_ */

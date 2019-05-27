@@ -14,10 +14,12 @@
 #define CLOCK_H_
 
 #include "main.h"
+#include <stdbool.h>
 
 void updateTime(char time[]);
 void showMenuButtons();
 void showCity();
 void setTimeScreen();
+void showAlarmState(bool alarmSet);
 
 #endif /* CLOCK_H_ */

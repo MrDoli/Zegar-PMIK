@@ -31,6 +31,7 @@ RTC_HandleTypeDef hrtc;
 RTC_TimeTypeDef gTime;
 RTC_DateTypeDef gDate;
 RTC_AlarmTypeDef sAlarm;
+bool alarmIsOn = true;
 
 /**
  * Inicjalizacja wyswietlacza zegara.
@@ -40,7 +41,7 @@ void controllerInit(char time[]){
 	showMenuButtons();
 	showCity();
 	updateTime(time);
-	bool timerScreen = {true, false, false};
+	bool timerScreen[3] = {true, false, false};
 	setActualScreen(&timerScreen);
 }
 
@@ -52,11 +53,13 @@ void controllerInit(char time[]){
  * @param alarmIsSet Flaga oznaczajaca ze alarm jest wlaczony.
  * @return flaga z informacja na temat stanu alarmu.
  */
-bool controller(char gotCharacter, bool alarmIsSet){
+bool controller(char gotCharacter){
+	bool alarmIsSet;
 	// Mozemy sprawdzac rowniez inne elementy tablicy (w nastepnej wersji)
 	if(actualScreen[0] == true)
 	{
 		showMenuButtons();
+		showAlarmState(alarmIsOn);
 		showCity();
 		getTime();
 		updateTime(time_clock);
@@ -70,10 +73,19 @@ bool controller(char gotCharacter, bool alarmIsSet){
 		{
 			setAlarmUser();
 		}
-		else if(gotCharacter == 'B')
+
+		if(gotCharacter == 'B')
 		{
-			alarmIsSet = turnOnAlarm(alarmIsSet);
+			turnOnAlarm();
+			alarmIsOn = true;
 		}
+
+		else if(gotCharacter == 'C')
+		{
+			turnOffAlarm();
+			alarmIsOn = false;
+		}
+
 		updateTime(alarm_clock);
 	}
 	else if (actualScreen[2] == true)
@@ -155,46 +167,41 @@ void handleDirectionButton(char sign)
 }
 
 /**
- * Funkcja sluzaca do wlaczenie i ustawienia alarmu na czas wpisany przez uzytkownika
- * @param alarmIsSet okreœla czy alarm jest w³¹czony
- * @return zwraca aktualny stan alarmu
+ * Funkcja sluzaca do wylaczenia przez uzytkownika
  */
-bool turnOnAlarm(bool alarmIsSet)
+void turnOffAlarm()
 {
-	if(alarmIsSet == true)
-	{
-		RTC_HandleTypeDef hrtc;
-		hrtc.Instance = RTC;
-		hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
-		hrtc.Init.AsynchPrediv = 127;
-		hrtc.Init.SynchPrediv = 255;
-		hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
-		hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-		hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-		if (HAL_RTC_Init(&hrtc) != HAL_OK)
-			{
-				   Error_Handler();
-			}
+	RTC_HandleTypeDef hrtc;
+	hrtc.Instance = RTC;
+	hrtc.Init.HourFormat = RTC_HOURFORMAT_24;
+	hrtc.Init.AsynchPrediv = 127;
+	hrtc.Init.SynchPrediv = 255;
+	hrtc.Init.OutPut = RTC_OUTPUT_DISABLE;
+	hrtc.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+	hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+	if (HAL_RTC_Init(&hrtc) != HAL_OK)
+		{
+			   Error_Handler();
+		}
 
-		uint32_t alarmType = RTC_ALARM_A;
-		HAL_RTC_DeactivateAlarm(&hrtc, alarmType);
-		alarmIsSet = false;
-		return alarmIsSet;
-	}
-	else if(alarmIsSet == false)
-	{
+	uint32_t alarmType = RTC_ALARM_A;
+	HAL_RTC_DeactivateAlarm(&hrtc, alarmType);
+}
 
-		RTC_AlarmTypeDef sAlarm;
-		uint32_t alarmType = RTC_ALARM_A;
+/**
+ * Funkcja sluzaca do wlaczenia i ustawienia alarmu na czas wpisany przez uzytkownika
+ */
+void turnOnAlarm()
+{
 
-		HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
-		int hours = (int) sAlarm.AlarmTime.Hours;
-		int minutes = (int) sAlarm.AlarmTime.Minutes;
-		int seconds = (int) sAlarm.AlarmTime.Seconds;
-		setAlarmInRTC(hours, minutes, seconds);
-		alarmIsSet=true;
-		return alarmIsSet;
-	 }
+	RTC_AlarmTypeDef sAlarm;
+	uint32_t alarmType = RTC_ALARM_A;
+
+	HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
+	int hours = (int) sAlarm.AlarmTime.Hours;
+	int minutes = (int) sAlarm.AlarmTime.Minutes;
+	int seconds = (int) sAlarm.AlarmTime.Seconds;
+	setAlarmInRTC(hours, minutes, seconds);
 }
 
 
@@ -241,19 +248,19 @@ void setAlarmUser()
  */
 bool setHourMinOrSecInAlarm(char whichPartToSet)
 {
-	uint32_t hours = 0;
-	uint32_t minutes = 0;
-	uint32_t seconds = 0;
-	uint32_t firstNumber = 0;
-	uint32_t secondNumber = 0;
+	uint8_t hours = 0;
+	uint8_t minutes = 0;
+	uint8_t seconds = 0;
+	uint8_t firstNumber = 0;
+	uint8_t secondNumber = 0;
 	bool firstNumberSaved = false;
 
 	uint32_t alarmType = RTC_ALARM_A;
 	HAL_RTC_GetAlarm(&hrtc, &sAlarm, alarmType, RTC_FORMAT_BIN);
 
-	hours = (uint32_t) sAlarm.AlarmTime.Hours;
-	minutes = (uint32_t) sAlarm.AlarmTime.Minutes;
-	seconds = (uint32_t) sAlarm.AlarmTime.Seconds;
+	hours = sAlarm.AlarmTime.Hours;
+	minutes = sAlarm.AlarmTime.Minutes;
+	seconds = sAlarm.AlarmTime.Seconds;
 
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
@@ -270,12 +277,15 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 			switch (whichPartToSet)
 			{
 				case 'H':
+					if(firstNumber>2) return false;
 					hours = firstNumber*10 + secondNumber;
 					break;
 				case 'M':
+					if(firstNumber>59) return false;
 					minutes = firstNumber*10 + secondNumber;
 					break;
 				case 'S':
+					if(firstNumber>59) return false;
 					seconds = firstNumber*10 + secondNumber;
 					break;
 				default:
@@ -299,12 +309,15 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 			{
 				case 'H':
 					hours = firstNumber*10 + secondNumber;
+					if(hours>23) return false;
 					break;
 				case 'M':
 					minutes = firstNumber*10 + secondNumber;
+					if(minutes>59) return false;
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
+					if(seconds>59) return false;
 					uint32_t alarm_time[] = {hours, minutes, seconds};
 					saveAlarmFlash(alarm_time);
 					break;
@@ -333,19 +346,19 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
  */
 bool setHourMinOrSecInTime(char whichPartToSet)
 {
-	int hours = 0;
-	int minutes = 0;
-	int seconds = 0;
-	int firstNumber = 0;
-	int secondNumber = 0;
+	uint8_t hours = 0;
+	uint8_t minutes = 0;
+	uint8_t seconds = 0;
+	uint8_t firstNumber = 0;
+	uint8_t secondNumber = 0;
 	bool firstNumberSaved = false;
 
 	HAL_RTC_GetTime(&hrtc, &gTime, RTC_FORMAT_BIN);
 	HAL_RTC_GetDate(&hrtc, &gDate, RTC_FORMAT_BIN);
 
-	hours = (int) gTime.Hours;
-	minutes = (int) gTime.Minutes;
-	seconds = (int) gTime.Seconds;
+	hours = gTime.Hours;
+	minutes = gTime.Minutes;
+	seconds = gTime.Seconds;
 
 	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
 	{
@@ -362,12 +375,15 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 			switch (whichPartToSet)
 			{
 				case 'H':
+					if(firstNumber>2) return false;
 					hours = firstNumber*10 + secondNumber;
 					break;
 				case 'M':
+					if(firstNumber>59) return false;
 					minutes = firstNumber*10 + secondNumber;
 					break;
 				case 'S':
+					if(firstNumber>59) return false;
 					seconds = firstNumber*10 + secondNumber;
 					break;
 				default:
@@ -391,12 +407,15 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 			{
 				case 'H':
 					hours = firstNumber*10 + secondNumber;
+					if(hours>23) return false;
 					break;
 				case 'M':
 					minutes = firstNumber*10 + secondNumber;
+					if(minutes>59) return false;
 					break;
 				case 'S':
 					seconds = firstNumber*10 + secondNumber;
+					if(seconds>59) return false;
 					break;
 				default:
 					return false;

@@ -179,7 +179,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   char znak =' ';
   char gotCharacter = '0';
-  bool alarmIsSet = false;
   /*!
    * W petli while nastepuje odszumianie klikniec uzytkownika i uruchomienie controllera
    * ktory realizuje logike programu
@@ -198,7 +197,7 @@ int main(void)
 	  }
 	  else if(screen_flag == 1)
 	  {
-		  alarmIsSet = controller(gotCharacter, alarmIsSet);
+		  controller(gotCharacter);
 		  screen_flag = 0;
 		  counterTIM2_screen = 0;
 	  }
@@ -620,37 +619,6 @@ void getAlarm(void)
 	sprintf((int*) alarm_clock, "%02d:%02d:%02d", sAlarm.AlarmTime.Hours, sAlarm.AlarmTime.Minutes, sAlarm.AlarmTime.Seconds);
 }
 
-/**
-  * @brief  Ustawienie alarmu.
-  * @param time Godzina alarmu.
-  */
-void setAlarm(char time[])
-{
-	//uint32_t x = time[6] - '0';
-
-	RTC_AlarmTypeDef sAlarm = {0};
-
-	sAlarm.AlarmTime.Hours = 0x0;
-	sAlarm.AlarmTime.Minutes = 0x0;
-	sAlarm.AlarmTime.Seconds = 0x10;
-	sAlarm.AlarmTime.SubSeconds = 0x0;
-	sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
-	sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
-	sAlarm.AlarmMask = RTC_ALARMMASK_NONE;
-	sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
-	sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_DATE;
-	sAlarm.AlarmDateWeekDay = 1;
-	sAlarm.Alarm = RTC_ALARM_A;
-
-	//Set alarm
-	  if (HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BCD) != HAL_OK)
-	  {
-	    Error_Handler();
-	  }
-	  /* USER CODE BEGIN RTC_Init 2 */
-	  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2);
-	  /* USER CODE END RTC_Init 2 */
-}
 /* USER CODE END 4 */
 
 /**
