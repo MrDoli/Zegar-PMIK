@@ -21,5 +21,6 @@ void showMenuButtons();
 void showCity();
 void setTimeScreen();
 void showAlarmState(bool alarmSet);
+void showPlaceToSet(char partToSet);
 
 #endif /* CLOCK_H_ */

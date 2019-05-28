@@ -70,8 +70,6 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define alarm_volume 40
-#define keypad_update 2
-#define screen_update 1
 #define alarm_duration 40
 
 /* USER CODE END PD */
@@ -97,15 +95,11 @@ char time_clock[9];
 char alarm_clock[9];
 char date_clock[9];
 bool actualScreen[3] = {true, false, false};
-uint8_t counterTIM2_screen = 0;
-uint8_t counterTIM2_keypad = 0;
 int counter_alarm = 0;
-int counterKpad = 0;
-int counterKpad2 = 0;
-uint8_t screen_flag = 0;
-uint8_t keypad_flag = 0;
-bool keypad_number_flag = false;
-bool keypad_number_2_flag = false;
+bool screen_flag = false;
+bool keypad_flag = false;
+char global_char = ' ';
+int global_int = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -163,43 +157,37 @@ int main(void)
   CS43_Init(hi2c1, MODE_I2S);
   CS43_SetVolume(alarm_volume);
   CS43_Enable_RightLeft(CS43_RIGHT_LEFT);
-  HAL_I2S_Transmit_DMA(&hi2s3, (uint16_t*)AUDIO_SAMPLE, 33000);
-  HAL_I2S_DMAStop(&hi2s3);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
   ssd1306_Init();
   HAL_TIM_Base_Start_IT(&htim2);
-  //uint32_t alarm_time[] = {0x00, 0x00, 0x05};
-  //saveAlarmFlash(alarm_time); //TU CHCÊ ZAPISYWAC DO PAMIÊCI FLASH
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  char znak =' ';
-  char gotCharacter = '0';
+  char got_char = ' ';
   /*!
    * W petli while nastepuje odszumianie klikniec uzytkownika i uruchomienie controllera
    * ktory realizuje logike programu
    */
   while (1)
   {
-	  if(keypad_flag == 1)
+	  if(keypad_flag)
 	  {
-		  znak = getCharKeypad();
-		  if(znak == 'D' || znak == '*')
-			  handleDirectionButton(znak);
-		  else if(znak != ' ')
-			  gotCharacter = znak;
-		  keypad_flag = 0;
-		  counterTIM2_keypad = 0;
+		  if(global_char == 'D' || global_char == '*')
+			  handleDirectionButton(global_char);
+		  else if(global_char != ' ') got_char = global_char;
+		  keypad_flag = false;
+	  	  global_char = ' ';
+	  	  global_int = 0;
 	  }
-	  else if(screen_flag == 1)
+	  else if(screen_flag)
 	  {
-		  controller(gotCharacter);
-		  screen_flag = 0;
-		  counterTIM2_screen = 0;
+		  controller(got_char);
+		  got_char = ' ';
+		  screen_flag = false;
 	  }
   }
   /* USER CODE END 3 */
@@ -571,12 +559,28 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim->Instance == TIM2)
 	{
-		if(counterTIM2_keypad < keypad_update) counterTIM2_keypad++;
-		if(keypad_flag == 0 && counterTIM2_keypad >= keypad_update) keypad_flag = 1;
-		if(counterTIM2_screen < screen_update) counterTIM2_screen++;
-		if(screen_flag == 0 && counterTIM2_screen >= screen_update) screen_flag = 1;
-		if(counterKpad > 100) keypad_number_flag = true;
-		if(counterKpad2 > 100) keypad_number_2_flag = true;
+		static bool press_flag = false;
+		static char old_char = ' ';
+		static int old_int = 0;
+		char local_char = getCharKeypad();
+		int local_int = getIntKeypad();
+		if(local_char != ' ')
+			{
+				press_flag = true;
+				old_char = local_char;
+				old_int = local_int;
+			}
+		else if(local_char == ' ' && press_flag) {
+			press_flag = false;
+			global_char = old_char;
+			global_int = old_int;
+			old_char = ' ';
+			old_int = 0;
+		}
+
+		if(!keypad_flag) keypad_flag = true;
+		if(!screen_flag) screen_flag = true;
+
 		if(counter_alarm <= alarm_duration && counter_alarm != 0) counter_alarm++;
 		if(counter_alarm > alarm_duration) {
 			counter_alarm = 0;

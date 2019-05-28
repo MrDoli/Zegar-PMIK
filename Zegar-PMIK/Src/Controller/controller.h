@@ -17,6 +17,8 @@
 #include <stdbool.h>
 
 extern bool actualScreen[3];
+extern char global_char;
+extern int global_int;
 void controllerInit();
 bool controller(char gotCharacter);
 

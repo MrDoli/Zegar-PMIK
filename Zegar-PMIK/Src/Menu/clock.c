@@ -14,6 +14,41 @@
 #include "..\Library\Display\ssd1306.h"
 
 /**
+  * @brief  Wskazanie uzytkownikowi czy ustawia godzine, minuty lub sekundy.
+  * @param  partToSet Wartosc mowiaca o tym czy jest ustawiana godzina, minuta, lub sekunda.
+  */
+void showPlaceToSet(char partToSet)
+{
+	uint8_t space = 11;
+	uint8_t actualXPlace = 20;
+	uint8_t actualYPlace = 22;
+	char checkToWrite = '_';
+
+	switch (partToSet)
+	{
+		case 'H':
+			ssd1306_SetCursor(actualXPlace, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+			ssd1306_SetCursor(actualXPlace+space, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+		break;
+		case 'M':
+			ssd1306_SetCursor(actualXPlace+space*3, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+			ssd1306_SetCursor(actualXPlace+space*4, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+		break;
+		case 'S':
+			ssd1306_SetCursor(actualXPlace+space*6, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+			ssd1306_SetCursor(actualXPlace+space*7, actualYPlace);
+			ssd1306_WriteChar(checkToWrite, Font_11x18, White);
+		break;
+	}
+	ssd1306_UpdateScreen();
+}
+
+/**
   * @brief  Zaktualizowanie czasu na wyswietlaczu.
   * @param  Aktualny czas do wyswietlenia.
   */

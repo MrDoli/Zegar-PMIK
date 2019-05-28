@@ -20,12 +20,8 @@
 /**
  * Deklaracje zmiennych extern zostaly utworzone w pliku main.c
  */
-extern int counterKpad;
-extern int counterKpad2;
 extern char time_clock[8];
 extern char alarm_clock[8];
-extern bool keypad_number_flag;
-extern bool keypad_number_2_flag;
 
 RTC_HandleTypeDef hrtc;
 RTC_TimeTypeDef gTime;
@@ -260,17 +256,14 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 	minutes = sAlarm.AlarmTime.Minutes;
 	seconds = sAlarm.AlarmTime.Seconds;
 
-	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
-	{
-		char gettedChar = getCharKeypad();
-		if(gettedChar != ' ' && gettedChar == 'A' && keypad_number_flag == false && firstNumberSaved == false)
-		{
-			counterKpad++;
-		}
+	showPlaceToSet(whichPartToSet);
 
-		if(gettedChar != ' ' && gettedChar != 'A' && keypad_number_flag == true && firstNumberSaved == false)
+	while(global_char != '*' && global_char != 'D')
+	{
+		if(global_char != ' ' && global_char != 'A' && firstNumberSaved == false)
 		{
-			firstNumber = getIntKeypad();
+			global_char = ' ';
+			firstNumber = global_int;
 			firstNumberSaved = true;
 			switch (whichPartToSet)
 			{
@@ -279,30 +272,28 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					hours = firstNumber*10 + secondNumber;
 					break;
 				case 'M':
-					if(firstNumber>59) return false;
+					if(firstNumber>5) return false;
 					minutes = firstNumber*10 + secondNumber;
 					break;
 				case 'S':
-					if(firstNumber>59) return false;
+					if(firstNumber>5) return false;
 					seconds = firstNumber*10 + secondNumber;
 					break;
 				default:
+					global_int = 0;
 					return false;
 			}
 
 			setAlarmInRTC(hours, minutes, seconds);
 			getAlarm();
 			updateTime(alarm_clock);
+			global_int = 0;
 		}
 
-		if(gettedChar == 'A' && firstNumberSaved == true)
+		if( global_char != ' ' && global_char != 'A' && firstNumberSaved == true)
 		{
-			counterKpad2++;
-		}
-
-		if( gettedChar != ' ' && gettedChar != 'A' && keypad_number_2_flag == true)
-		{
-			secondNumber = getIntKeypad();
+			global_char = ' ';
+			secondNumber = global_int;
 			switch (whichPartToSet)
 			{
 				case 'H':
@@ -320,17 +311,15 @@ bool setHourMinOrSecInAlarm(char whichPartToSet)
 					saveAlarmFlash(alarm_time);
 					break;
 				default:
+					global_int = 0;
 					return false;
 			}
 
 			setAlarmInRTC(hours, minutes, seconds);
 			getAlarm();
 			updateTime(alarm_clock);
-			keypad_number_flag = false;
-			keypad_number_2_flag = false;
 			firstNumberSaved = false;
-			counterKpad2 = 0;
-			counterKpad = 0;
+			global_int = 0;
 			return true;
 		}
 	}
@@ -358,17 +347,14 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 	minutes = gTime.Minutes;
 	seconds = gTime.Seconds;
 
-	while(getCharKeypad() != '*' && getCharKeypad() != 'D')
-	{
-		char gettedChar = getCharKeypad();
-		if(gettedChar != ' ' && gettedChar == 'A' && keypad_number_flag == false && firstNumberSaved == false)
-		{
-			counterKpad++;
-		}
+	showPlaceToSet(whichPartToSet);
 
-		if(gettedChar != ' ' && gettedChar != 'A' && keypad_number_flag == true && firstNumberSaved == false)
+	while(global_char != '*' && global_char != 'D')
+	{
+		if(global_char != ' ' && global_char != 'A' && firstNumberSaved == false)
 		{
-			firstNumber = getIntKeypad();
+			global_char = ' ';
+			firstNumber = global_int;
 			firstNumberSaved = true;
 			switch (whichPartToSet)
 			{
@@ -377,30 +363,28 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 					hours = firstNumber*10 + secondNumber;
 					break;
 				case 'M':
-					if(firstNumber>59) return false;
+					if(firstNumber>5) return false;
 					minutes = firstNumber*10 + secondNumber;
 					break;
 				case 'S':
-					if(firstNumber>59) return false;
+					if(firstNumber>5) return false;
 					seconds = firstNumber*10 + secondNumber;
 					break;
 				default:
+					global_int = 0;
 					return false;
 			}
 
 			setTimeInRTC(hours, minutes, seconds);
 			getTime();
 			updateTime(time_clock);
+			global_int = 0;
 		}
 
-		if(gettedChar == 'A' && firstNumberSaved == true)
+		if( global_char != ' ' && global_char != 'A' && firstNumberSaved == true)
 		{
-			counterKpad2++;
-		}
-
-		if( gettedChar != ' ' && gettedChar != 'A' && keypad_number_2_flag == true)
-		{
-			secondNumber = getIntKeypad();
+			global_char = ' ';
+			secondNumber = global_int;
 			switch (whichPartToSet)
 			{
 				case 'H':
@@ -416,17 +400,15 @@ bool setHourMinOrSecInTime(char whichPartToSet)
 					if(seconds>59) return false;
 					break;
 				default:
+					global_int = 0;
 					return false;
 			}
 
 			setTimeInRTC(hours, minutes, seconds);
 			getTime();
 			updateTime(time_clock);
-			keypad_number_flag = false;
-			keypad_number_2_flag = false;
 			firstNumberSaved = false;
-			counterKpad2 = 0;
-			counterKpad = 0;
+			global_int = 0;
 			return true;
 		}
 	}
