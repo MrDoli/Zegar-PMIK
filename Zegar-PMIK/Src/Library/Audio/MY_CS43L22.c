@@ -1,3 +1,9 @@
+/**
+ * \file MY_CS43L22.c
+ * \brief Biblioteka zewnetrzna do obslugi
+ * sterownika Audio znajdujacego sie na p³ytce rozwojowej.
+ */
+
 /*
 Library:					STM32F4 Audio Codec - CS43L22
 Written by:				Mohamed Yaqoob (MYaqoobEmbedded YouTube Channel)

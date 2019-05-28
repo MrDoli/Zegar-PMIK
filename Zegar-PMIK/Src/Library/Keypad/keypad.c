@@ -1,9 +1,8 @@
 /*
  * keypad.c
  *
- *  Created on: 16.03.2019
- *      Author: Marcin Dolicher
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 
 /**
  * \file keypad.c

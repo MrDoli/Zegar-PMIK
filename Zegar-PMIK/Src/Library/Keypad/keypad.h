@@ -1,9 +1,8 @@
 /*
  * keypad.h
  *
- *  Created on: 14.04.2019
- *      Author: Michal
- */
+ * Author: Marcin Dolicher, Micha³ Stolarz
+*/
 
 /**
  * \file keypad.h

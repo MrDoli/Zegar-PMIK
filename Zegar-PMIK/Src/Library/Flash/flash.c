@@ -3,7 +3,6 @@
  *
  * Author: Marcin Dolicher, Micha³ Stolarz
 */
-#include "flash.h"
 
 /**
  * \file keypad.c
@@ -14,6 +13,9 @@
  * \param flas_addresses Tablica z adresami pamieci pod ktore bedzia zapisywany czas.
  * Pierwszy element to adres godziny, drugi - adres minut, trzeci - adres sekund.
  */
+
+#include "flash.h"
+
 uint32_t flash_addresses[3] = {0x08040000,0x08040010,0x08040020};
 
 /**
@@ -23,7 +25,6 @@ uint32_t flash_addresses[3] = {0x08040000,0x08040010,0x08040020};
 void saveAlarmFlash(uint32_t* flash_data)
 {
 	HAL_FLASH_Unlock();
-    //__HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP | FLASH_FLAG_OPERR | FLASH_FLAG_WRPERR | FLASH_FLAG_PGAERR | FLASH_FLAG_PGSERR );
 	FLASH_Erase_Sector(FLASH_SECTOR_6,VOLTAGE_RANGE_3);
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,flash_addresses[0],flash_data[0]);
 	HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD,flash_addresses[1],flash_data[1]);

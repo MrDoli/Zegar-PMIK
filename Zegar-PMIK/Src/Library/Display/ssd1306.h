@@ -1,4 +1,10 @@
 /**
+ * \file ssd1306.h
+ * \brief Biblioteka zewnetrzna do obslugi wyswietlacza OLED.
+ * Plik zawiera interfejs obslugi wyswietlacza.
+ */
+
+/**
  * This Library was originally written by Olivier Van den Eede (4ilo) in 2016.
  * Some refactoring was done and SPI support was added by Aleksander Alekseev (afiskon) in 2018.
  *

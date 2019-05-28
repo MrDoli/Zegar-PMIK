@@ -1,8 +1,7 @@
 /*
  * recording.c
  *
- *  Created on: 19.04.2019
- *      Author: Michal
+ *      Author: Marcin Dolicher, Micha³ Stolarz
  */
 
 /**
@@ -13,26 +12,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
 #include "recording.h"
-
-/** @addtogroup STM32F4-Discovery_Audio_Player_Recorder
-  * @{
-  */
-
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
-
-
-/*
-  The provided sample audio file (stored in internal flash memory) is extracted from:
-   - Title: artofgardens-instr
-   - Artist/Composer: Dan O'Connor
-   - Creative Commons license: Attribution 3.0 United States
-     Please read the license following this link:
-     http://creativecommons.org/licenses/by/3.0/us/
-*/
 
 const uint16_t AUDIO_SAMPLE[] = {
 0x51, 

@@ -1,8 +1,7 @@
 /*
  * recording.h
  *
- *  Created on: 19.04.2019
- *      Author: Michal
+ *      Author: Marcin Dolicher, Micha³ Stolarz
  */
 
 /**
