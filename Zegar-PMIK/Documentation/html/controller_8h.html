@@ -82,8 +82,8 @@ Functions</h2></td></tr>
 <tr class="memitem:acca12f2d0888a8937bebe27206522b5d"><td class="memItemLeft" align="right" valign="top"><a id="acca12f2d0888a8937bebe27206522b5d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>controllerInit</b> ()</td></tr>
 <tr class="separator:acca12f2d0888a8937bebe27206522b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa099daea50870eec32c49794fc2146d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#aa099daea50870eec32c49794fc2146d4">controller</a> (char gotCharacter, bool alarmIsSet)</td></tr>
-<tr class="separator:aa099daea50870eec32c49794fc2146d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca617715a9eedeb90f916b15f952774a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#aca617715a9eedeb90f916b15f952774a">controller</a> (char gotCharacter)</td></tr>
+<tr class="separator:aca617715a9eedeb90f916b15f952774a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8040ffdaafd66b662197ab1122d0ca24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#a8040ffdaafd66b662197ab1122d0ca24">setActualScreen</a> (bool screenArray[])</td></tr>
 <tr class="separator:a8040ffdaafd66b662197ab1122d0ca24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdbe226e5ad7b9d8286a2a286cf92405"><td class="memItemLeft" align="right" valign="top">bool *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#abdbe226e5ad7b9d8286a2a286cf92405">getActualScreen</a> (void)</td></tr>
@@ -102,20 +102,28 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>controllerInit</b> ()
 <tr class="separator:acee75a6615685f9310eb3d0d3a8dae4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94404bd931931ce34796effd07f2e867"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#a94404bd931931ce34796effd07f2e867">setHourMinOrSecInAlarm</a> (char whichPartToSet)</td></tr>
 <tr class="separator:a94404bd931931ce34796effd07f2e867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a307a1d7730906b5da2936ad9223edff3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#a307a1d7730906b5da2936ad9223edff3">turnOnAlarm</a> (bool alarmIsSet)</td></tr>
-<tr class="separator:a307a1d7730906b5da2936ad9223edff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23f51d3bef6ca47d474b8de490640de9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#a23f51d3bef6ca47d474b8de490640de9">turnOnAlarm</a> ()</td></tr>
+<tr class="separator:a23f51d3bef6ca47d474b8de490640de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4584955ad483bb72fe913534673f6407"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="controller_8h.html#a4584955ad483bb72fe913534673f6407">turnOffAlarm</a> ()</td></tr>
+<tr class="separator:a4584955ad483bb72fe913534673f6407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ab92fa135504bd070277ce910c46d440d"><td class="memItemLeft" align="right" valign="top"><a id="ab92fa135504bd070277ce910c46d440d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>actualScreen</b> [3]</td></tr>
 <tr class="separator:ab92fa135504bd070277ce910c46d440d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fa0ea2f9ba23e52208d684452593657"><td class="memItemLeft" align="right" valign="top"><a id="a6fa0ea2f9ba23e52208d684452593657"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>global_char</b></td></tr>
+<tr class="separator:a6fa0ea2f9ba23e52208d684452593657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86bf3e45b97134e4d4be9ca6fc1947d8"><td class="memItemLeft" align="right" valign="top"><a id="a86bf3e45b97134e4d4be9ca6fc1947d8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>global_int</b></td></tr>
+<tr class="separator:a86bf3e45b97134e4d4be9ca6fc1947d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plik naglowkowy z metodami controllera. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa099daea50870eec32c49794fc2146d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa099daea50870eec32c49794fc2146d4">&#9670;&nbsp;</a></span>controller()</h2>
+<a id="aca617715a9eedeb90f916b15f952774a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca617715a9eedeb90f916b15f952774a">&#9670;&nbsp;</a></span>controller()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -124,18 +132,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>actualScreen</b> [3]<
           <td class="memname">bool controller </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>gotCharacter</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>gotCharacter</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>alarmIsSet</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -388,28 +386,39 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>actualScreen</b> [3]<
 
 </div>
 </div>
-<a id="a307a1d7730906b5da2936ad9223edff3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a307a1d7730906b5da2936ad9223edff3">&#9670;&nbsp;</a></span>turnOnAlarm()</h2>
+<a id="a4584955ad483bb72fe913534673f6407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4584955ad483bb72fe913534673f6407">&#9670;&nbsp;</a></span>turnOffAlarm()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool turnOnAlarm </td>
+          <td class="memname">void turnOffAlarm </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>alarmIsSet</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Funkcja sluzaca do wlaczenie i ustawienia alarmu na czas wpisany przez uzytkownika </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">alarmIsSet</td><td>okreœla czy alarm jest w³¹czony </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>zwraca aktualny stan alarmu </dd></dl>
+<p>Funkcja sluzaca do wylaczenia przez uzytkownika </p>
+
+</div>
+</div>
+<a id="a23f51d3bef6ca47d474b8de490640de9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23f51d3bef6ca47d474b8de490640de9">&#9670;&nbsp;</a></span>turnOnAlarm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void turnOnAlarm </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Funkcja sluzaca do wlaczenia i ustawienia alarmu na czas wpisany przez uzytkownika </p>
 
 </div>
 </div>

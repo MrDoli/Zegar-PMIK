@@ -16,7 +16,7 @@ Plik implementujacy metody controllera, ktore sluza do realizacji logiki program
 \item 
 void \hyperlink{controller_8c_a15c84598c1b604b36fda7b33bc1c05f5}{controller\+Init} (char time\mbox{[}$\,$\mbox{]})
 \item 
-bool \hyperlink{controller_8c_aa099daea50870eec32c49794fc2146d4}{controller} (char got\+Character, bool alarm\+Is\+Set)
+bool \hyperlink{controller_8c_aca617715a9eedeb90f916b15f952774a}{controller} (char got\+Character)
 \item 
 bool $\ast$ \hyperlink{controller_8c_abdbe226e5ad7b9d8286a2a286cf92405}{get\+Actual\+Screen} (void)
 \item 
@@ -24,7 +24,9 @@ void \hyperlink{controller_8c_a8040ffdaafd66b662197ab1122d0ca24}{set\+Actual\+Sc
 \item 
 void \hyperlink{controller_8c_ada0aeee6af26314751b432a2ed627add}{handle\+Direction\+Button} (char sign)
 \item 
-bool \hyperlink{controller_8c_a307a1d7730906b5da2936ad9223edff3}{turn\+On\+Alarm} (bool alarm\+Is\+Set)
+void \hyperlink{controller_8c_a4584955ad483bb72fe913534673f6407}{turn\+Off\+Alarm} ()
+\item 
+void \hyperlink{controller_8c_a23f51d3bef6ca47d474b8de490640de9}{turn\+On\+Alarm} ()
 \item 
 void \hyperlink{controller_8c_ae7b8f4074b8c8d645bdcbc2d2d01b3ef}{set\+Time\+User} ()
 \item 
@@ -41,22 +43,10 @@ void \hyperlink{controller_8c_a79a40763b553e9f5183d3c49c84be430}{set\+Alarm\+In\
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{controller_8c_abb40819d99773cbff621d31648a75170}{counter\+Kpad}
-\item 
-\mbox{\Hypertarget{controller_8c_a8fd50a108da17aca4b65fb1437fd193e}\label{controller_8c_a8fd50a108da17aca4b65fb1437fd193e}} 
-int {\bfseries counter\+Kpad2}
-\item 
-\mbox{\Hypertarget{controller_8c_ac885880bf13fd15fee01e15a8cab59c8}\label{controller_8c_ac885880bf13fd15fee01e15a8cab59c8}} 
-char {\bfseries time\+\_\+clock} \mbox{[}8\mbox{]}
+char \hyperlink{controller_8c_ac885880bf13fd15fee01e15a8cab59c8}{time\+\_\+clock} \mbox{[}8\mbox{]}
 \item 
 \mbox{\Hypertarget{controller_8c_a3eb5e60eebe22c413cd920457d387216}\label{controller_8c_a3eb5e60eebe22c413cd920457d387216}} 
 char {\bfseries alarm\+\_\+clock} \mbox{[}8\mbox{]}
-\item 
-\mbox{\Hypertarget{controller_8c_af524ad1a5b43d1d2a9169f75782d3609}\label{controller_8c_af524ad1a5b43d1d2a9169f75782d3609}} 
-bool {\bfseries keypad\+\_\+number\+\_\+flag}
-\item 
-\mbox{\Hypertarget{controller_8c_a8554967b55f9aa8d31ca5e7118d99694}\label{controller_8c_a8554967b55f9aa8d31ca5e7118d99694}} 
-bool {\bfseries keypad\+\_\+number\+\_\+2\+\_\+flag}
 \item 
 \mbox{\Hypertarget{controller_8c_aa0c7fca836406ade332e1e3f1039d8ab}\label{controller_8c_aa0c7fca836406ade332e1e3f1039d8ab}} 
 \hyperlink{struct_r_t_c___handle_type_def}{R\+T\+C\+\_\+\+Handle\+Type\+Def} {\bfseries hrtc}
@@ -69,6 +59,9 @@ bool {\bfseries keypad\+\_\+number\+\_\+2\+\_\+flag}
 \item 
 \mbox{\Hypertarget{controller_8c_a22eb04f6640dc2f76a7871fe525c7da3}\label{controller_8c_a22eb04f6640dc2f76a7871fe525c7da3}} 
 \hyperlink{struct_r_t_c___alarm_type_def}{R\+T\+C\+\_\+\+Alarm\+Type\+Def} {\bfseries s\+Alarm}
+\item 
+\mbox{\Hypertarget{controller_8c_a3bdf0f37de745dbce90820d8e75273f8}\label{controller_8c_a3bdf0f37de745dbce90820d8e75273f8}} 
+bool {\bfseries alarm\+Is\+On} = true
 \end{DoxyCompactItemize}
 
 
@@ -78,11 +71,11 @@ Plik implementujacy metody controllera, ktore sluza do realizacji logiki program
 
 
 \subsection{Function Documentation}
-\mbox{\Hypertarget{controller_8c_aa099daea50870eec32c49794fc2146d4}\label{controller_8c_aa099daea50870eec32c49794fc2146d4}} 
+\mbox{\Hypertarget{controller_8c_aca617715a9eedeb90f916b15f952774a}\label{controller_8c_aca617715a9eedeb90f916b15f952774a}} 
 \index{controller.\+c@{controller.\+c}!controller@{controller}}
 \index{controller@{controller}!controller.\+c@{controller.\+c}}
 \subsubsection{\texorpdfstring{controller()}{controller()}}
-{\footnotesize\ttfamily bool controller (\begin{DoxyParamCaption}\item[{char}]{got\+Character,  }\item[{bool}]{alarm\+Is\+Set }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool controller (\begin{DoxyParamCaption}\item[{char}]{got\+Character }\end{DoxyParamCaption})}
 
 Realizuje logike programu w zaleznosci dzialan uzytkownika na klawiaturze realizuje funkcjonalnosci zegarka i budzika za pomoca zmiennej 
 \begin{DoxyParams}{Parameters}
@@ -208,27 +201,25 @@ Ustawienie czasu zegara w R\+TC.
 \subsubsection{\texorpdfstring{set\+Time\+User()}{setTimeUser()}}
 {\footnotesize\ttfamily void set\+Time\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Ustawienie czasu na zegarze. \mbox{\Hypertarget{controller_8c_a307a1d7730906b5da2936ad9223edff3}\label{controller_8c_a307a1d7730906b5da2936ad9223edff3}} 
+Ustawienie czasu na zegarze. \mbox{\Hypertarget{controller_8c_a4584955ad483bb72fe913534673f6407}\label{controller_8c_a4584955ad483bb72fe913534673f6407}} 
+\index{controller.\+c@{controller.\+c}!turn\+Off\+Alarm@{turn\+Off\+Alarm}}
+\index{turn\+Off\+Alarm@{turn\+Off\+Alarm}!controller.\+c@{controller.\+c}}
+\subsubsection{\texorpdfstring{turn\+Off\+Alarm()}{turnOffAlarm()}}
+{\footnotesize\ttfamily void turn\+Off\+Alarm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Funkcja sluzaca do wylaczenia przez uzytkownika \mbox{\Hypertarget{controller_8c_a23f51d3bef6ca47d474b8de490640de9}\label{controller_8c_a23f51d3bef6ca47d474b8de490640de9}} 
 \index{controller.\+c@{controller.\+c}!turn\+On\+Alarm@{turn\+On\+Alarm}}
 \index{turn\+On\+Alarm@{turn\+On\+Alarm}!controller.\+c@{controller.\+c}}
 \subsubsection{\texorpdfstring{turn\+On\+Alarm()}{turnOnAlarm()}}
-{\footnotesize\ttfamily bool turn\+On\+Alarm (\begin{DoxyParamCaption}\item[{bool}]{alarm\+Is\+Set }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void turn\+On\+Alarm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Funkcja sluzaca do wlaczenie i ustawienia alarmu na czas wpisany przez uzytkownika 
-\begin{DoxyParams}{Parameters}
-{\em alarm\+Is\+Set} & okreœla czy alarm jest w³¹czony \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-zwraca aktualny stan alarmu 
-\end{DoxyReturn}
-
+Funkcja sluzaca do wlaczenia i ustawienia alarmu na czas wpisany przez uzytkownika 
 
 \subsection{Variable Documentation}
-\mbox{\Hypertarget{controller_8c_abb40819d99773cbff621d31648a75170}\label{controller_8c_abb40819d99773cbff621d31648a75170}} 
-\index{controller.\+c@{controller.\+c}!counter\+Kpad@{counter\+Kpad}}
-\index{counter\+Kpad@{counter\+Kpad}!controller.\+c@{controller.\+c}}
-\subsubsection{\texorpdfstring{counter\+Kpad}{counterKpad}}
-{\footnotesize\ttfamily int counter\+Kpad}
+\mbox{\Hypertarget{controller_8c_ac885880bf13fd15fee01e15a8cab59c8}\label{controller_8c_ac885880bf13fd15fee01e15a8cab59c8}} 
+\index{controller.\+c@{controller.\+c}!time\+\_\+clock@{time\+\_\+clock}}
+\index{time\+\_\+clock@{time\+\_\+clock}!controller.\+c@{controller.\+c}}
+\subsubsection{\texorpdfstring{time\+\_\+clock}{time\_clock}}
+{\footnotesize\ttfamily char time\+\_\+clock\mbox{[}8\mbox{]}}
 
 Deklaracje zmiennych extern zostaly utworzone w pliku \hyperlink{main_8c}{main.\+c} 

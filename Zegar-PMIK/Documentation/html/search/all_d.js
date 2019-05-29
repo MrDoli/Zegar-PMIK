@@ -34,6 +34,8 @@ var searchData=
   ['mvfr0',['MVFR0',['../struct_s_c_b___type.html#a7a1ba0f875c0e97c1673882b1106e66b',1,'SCB_Type::MVFR0()'],['../struct_f_p_u___type.html#a4f19014defe6033d070b80af19ef627c',1,'FPU_Type::MVFR0()']]],
   ['mvfr1',['MVFR1',['../struct_s_c_b___type.html#a75d6299150fdcbbcb765e22ff27c432e',1,'SCB_Type::MVFR1()'],['../struct_f_p_u___type.html#a66f8cfa49a423b480001a4e101bf842d',1,'FPU_Type::MVFR1()']]],
   ['mvfr2',['MVFR2',['../struct_s_c_b___type.html#a280ef961518ecee3ed43a86404853c3d',1,'SCB_Type::MVFR2()'],['../struct_f_p_u___type.html#a479130e53a8b3c36fd8ee38b503a3911',1,'FPU_Type::MVFR2()']]],
+  ['my_5fcs43l22_2ec',['MY_CS43L22.c',['../_m_y___c_s43_l22_8c.html',1,'']]],
+  ['my_5fcs43l22_2eh',['MY_CS43L22.h',['../_m_y___c_s43_l22_8h.html',1,'']]],
   ['mco1_20clock_20source',['MCO1 Clock Source',['../group___r_c_c___m_c_o1___clock___source.html',1,'']]],
   ['mco_20index',['MCO Index',['../group___r_c_c___m_c_o___index.html',1,'']]],
   ['mcox_20clock_20prescaler',['MCOx Clock Prescaler',['../group___r_c_c___m_c_ox___clock___prescaler.html',1,'']]]

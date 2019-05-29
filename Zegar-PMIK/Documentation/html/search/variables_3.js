@@ -61,7 +61,6 @@ var searchData=
   ['comp7',['COMP7',['../struct_d_w_t___type.html#a46db6f5289d840f0b9886ae598352452',1,'DWT_Type']]],
   ['comp8',['COMP8',['../struct_d_w_t___type.html#aee138bc70746585e4ccf62557954c07f',1,'DWT_Type']]],
   ['comp9',['COMP9',['../struct_d_w_t___type.html#abf79b853fc2d25de9c03bdb183e4aee0',1,'DWT_Type']]],
-  ['counterkpad',['counterKpad',['../controller_8c.html#abb40819d99773cbff621d31648a75170',1,'counterKpad():&#160;main.c'],['../main_8c.html#abb40819d99773cbff621d31648a75170',1,'counterKpad():&#160;main.c']]],
   ['countermode',['CounterMode',['../struct_t_i_m___base___init_type_def.html#a16d0c02a8f35426360a64c0706656e35',1,'TIM_Base_InitTypeDef']]],
   ['cpacr',['CPACR',['../struct_s_c_b___type.html#ac6a860c1b8d8154a1f00d99d23b67764',1,'SCB_Type']]],
   ['cpicnt',['CPICNT',['../struct_d_w_t___type.html#a2c08096c82abe245c0fa97badc458154',1,'DWT_Type']]],

@@ -6,6 +6,7 @@ Plik naglowkowy z metodami odpowiadajacymi za wyswietlanie ekranow zwiazanych z 
 
 
 {\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,7 +20,11 @@ void \hyperlink{clock_8h_adc76b20553ff127659310c067dc60672}{show\+City} ()
 \begin{DoxyCompactList}\small\item\em Wyswietlanie nazwy miasta. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{clock_8h_a981739154a34d8b4b36647e5f6460532}\label{clock_8h_a981739154a34d8b4b36647e5f6460532}} 
 void \hyperlink{clock_8h_a981739154a34d8b4b36647e5f6460532}{set\+Time\+Screen} ()
-\begin{DoxyCompactList}\small\item\em Wyœwietlanie ekranu do ustawienia czasu w zegarze. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wyœwietlanie ekranu do ustawienia czasu w zegarze. \end{DoxyCompactList}\item 
+void \hyperlink{clock_8h_a041997281d40f6d24ec3b56bd662fe03}{show\+Alarm\+State} (bool alarm\+Set)
+\item 
+void \hyperlink{clock_8h_ad8508d3f935332a387d592984060594f}{show\+Place\+To\+Set} (char part\+To\+Set)
+\begin{DoxyCompactList}\small\item\em Wskazanie uzytkownikowi czy ustawia godzine, minuty lub sekundy. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -28,6 +33,32 @@ Plik naglowkowy z metodami odpowiadajacymi za wyswietlanie ekranow zwiazanych z 
 
 
 \subsection{Function Documentation}
+\mbox{\Hypertarget{clock_8h_a041997281d40f6d24ec3b56bd662fe03}\label{clock_8h_a041997281d40f6d24ec3b56bd662fe03}} 
+\index{clock.\+h@{clock.\+h}!show\+Alarm\+State@{show\+Alarm\+State}}
+\index{show\+Alarm\+State@{show\+Alarm\+State}!clock.\+h@{clock.\+h}}
+\subsubsection{\texorpdfstring{show\+Alarm\+State()}{showAlarmState()}}
+{\footnotesize\ttfamily void show\+Alarm\+State (\begin{DoxyParamCaption}\item[{bool}]{alarm\+Set }\end{DoxyParamCaption})}
+
+@ brief Wyswietlenie informacji czy budzik wlaczony. 
+\begin{DoxyParams}{Parameters}
+{\em Flaga} & czy alarm jest wlaczany. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{clock_8h_ad8508d3f935332a387d592984060594f}\label{clock_8h_ad8508d3f935332a387d592984060594f}} 
+\index{clock.\+h@{clock.\+h}!show\+Place\+To\+Set@{show\+Place\+To\+Set}}
+\index{show\+Place\+To\+Set@{show\+Place\+To\+Set}!clock.\+h@{clock.\+h}}
+\subsubsection{\texorpdfstring{show\+Place\+To\+Set()}{showPlaceToSet()}}
+{\footnotesize\ttfamily void show\+Place\+To\+Set (\begin{DoxyParamCaption}\item[{char}]{part\+To\+Set }\end{DoxyParamCaption})}
+
+
+
+Wskazanie uzytkownikowi czy ustawia godzine, minuty lub sekundy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em part\+To\+Set} & Wartosc mowiaca o tym czy jest ustawiana godzina, minuta, lub sekunda. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{clock_8h_ae20d63e987468248c1821ec70ae7c650}\label{clock_8h_ae20d63e987468248c1821ec70ae7c650}} 
 \index{clock.\+h@{clock.\+h}!update\+Time@{update\+Time}}
 \index{update\+Time@{update\+Time}!clock.\+h@{clock.\+h}}

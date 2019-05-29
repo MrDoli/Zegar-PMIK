@@ -1,0 +1,102 @@
+\hypertarget{ssd1306_8h}{}\section{Src/\+Library/\+Display/ssd1306.h File Reference}
+\label{ssd1306_8h}\index{Src/\+Library/\+Display/ssd1306.\+h@{Src/\+Library/\+Display/ssd1306.\+h}}
+
+
+Biblioteka zewnetrzna do obslugi wyswietlacza O\+L\+ED. Plik zawiera interfejs obslugi wyswietlacza.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ssd1306\+\_\+fonts.\+h\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_s_s_d1306__t}{S\+S\+D1306\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{ssd1306_8h_adb7cfd65deeaec67becf32be56d27171}{S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT}~hi2c2
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a40b6cafd3649547b7cf9629607d04a28}\label{ssd1306_8h_a40b6cafd3649547b7cf9629607d04a28}} 
+\#define {\bfseries S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}~(0x3\+C $<$$<$ 1)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a4e9409448a0df95c1686670e09b457b7}\label{ssd1306_8h_a4e9409448a0df95c1686670e09b457b7}} 
+\#define {\bfseries S\+S\+D1306\+\_\+\+H\+E\+I\+G\+HT}~64
+\item 
+\mbox{\Hypertarget{ssd1306_8h_ae5a2aa8865dd03537b97fd1c9037371b}\label{ssd1306_8h_ae5a2aa8865dd03537b97fd1c9037371b}} 
+\#define {\bfseries S\+S\+D1306\+\_\+\+W\+I\+D\+TH}~128
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a6f68a90e6eefe5396bcbec2cd699d500}\label{ssd1306_8h_a6f68a90e6eefe5396bcbec2cd699d500}} 
+enum {\bfseries S\+S\+D1306\+\_\+\+C\+O\+L\+OR} \{ {\bfseries Black} = 0x00, 
+{\bfseries White} = 0x01
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ssd1306_8h_ade2c3a936ceecc5b8a1d965cc302d2ed}\label{ssd1306_8h_ade2c3a936ceecc5b8a1d965cc302d2ed}} 
+void {\bfseries ssd1306\+\_\+\+Init} (void)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a77620914b6d1247e7515a36c38672391}\label{ssd1306_8h_a77620914b6d1247e7515a36c38672391}} 
+void {\bfseries ssd1306\+\_\+\+Fill} (S\+S\+D1306\+\_\+\+C\+O\+L\+OR color)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_aeca33ad55a12e5a6c23250a01c9e5032}\label{ssd1306_8h_aeca33ad55a12e5a6c23250a01c9e5032}} 
+void {\bfseries ssd1306\+\_\+\+Update\+Screen} (void)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_ad43cbb77ed1f735535e7251ca47ecf87}\label{ssd1306_8h_ad43cbb77ed1f735535e7251ca47ecf87}} 
+void {\bfseries ssd1306\+\_\+\+Draw\+Pixel} (uint8\+\_\+t x, uint8\+\_\+t y, S\+S\+D1306\+\_\+\+C\+O\+L\+OR color)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a04d8621d91892bb94c2a119e211927eb}\label{ssd1306_8h_a04d8621d91892bb94c2a119e211927eb}} 
+char {\bfseries ssd1306\+\_\+\+Write\+Char} (char ch, \hyperlink{struct_font_def}{Font\+Def} Font, S\+S\+D1306\+\_\+\+C\+O\+L\+OR color)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a7c6893df3ab41355adb9e4954cd52239}\label{ssd1306_8h_a7c6893df3ab41355adb9e4954cd52239}} 
+char {\bfseries ssd1306\+\_\+\+Write\+String} (char $\ast$str, \hyperlink{struct_font_def}{Font\+Def} Font, S\+S\+D1306\+\_\+\+C\+O\+L\+OR color)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a43b18d938dee01ee07fb8c364ea57996}\label{ssd1306_8h_a43b18d938dee01ee07fb8c364ea57996}} 
+void {\bfseries ssd1306\+\_\+\+Set\+Cursor} (uint8\+\_\+t x, uint8\+\_\+t y)
+\item 
+void \hyperlink{ssd1306_8h_a0de0de5160661b862134dd0ac9023236}{ssd1306\+\_\+\+Reset} (void)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a15046f764dd1127bce472d5924356ba0}\label{ssd1306_8h_a15046f764dd1127bce472d5924356ba0}} 
+void {\bfseries ssd1306\+\_\+\+Write\+Command} (uint8\+\_\+t byte)
+\item 
+\mbox{\Hypertarget{ssd1306_8h_a0b365c4271ce6d5551e637de49bdc8a3}\label{ssd1306_8h_a0b365c4271ce6d5551e637de49bdc8a3}} 
+void {\bfseries ssd1306\+\_\+\+Write\+Data} (uint8\+\_\+t $\ast$buffer, size\+\_\+t buff\+\_\+size)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ssd1306_8h_aa8a6dd1fbc0a752a73d9dee309749cc3}\label{ssd1306_8h_aa8a6dd1fbc0a752a73d9dee309749cc3}} 
+\hyperlink{struct_____i2_c___handle_type_def}{I2\+C\+\_\+\+Handle\+Type\+Def} {\bfseries S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Biblioteka zewnetrzna do obslugi wyswietlacza O\+L\+ED. Plik zawiera interfejs obslugi wyswietlacza. 
+
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ssd1306_8h_adb7cfd65deeaec67becf32be56d27171}\label{ssd1306_8h_adb7cfd65deeaec67becf32be56d27171}} 
+\index{ssd1306.\+h@{ssd1306.\+h}!S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT@{S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT}}
+\index{S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT@{S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT}!ssd1306.\+h@{ssd1306.\+h}}
+\subsubsection{\texorpdfstring{S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT}{SSD1306\_I2C\_PORT}}
+{\footnotesize\ttfamily \#define S\+S\+D1306\+\_\+\+I2\+C\+\_\+\+P\+O\+RT~hi2c2}
+
+This Library was originally written by Olivier Van den Eede (4ilo) in 2016. Some refactoring was done and S\+PI support was added by Aleksander Alekseev (afiskon) in 2018.
+
+\href{https://github.com/afiskon/stm32-ssd1306}{\tt https\+://github.\+com/afiskon/stm32-\/ssd1306} 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ssd1306_8h_a0de0de5160661b862134dd0ac9023236}\label{ssd1306_8h_a0de0de5160661b862134dd0ac9023236}} 
+\index{ssd1306.\+h@{ssd1306.\+h}!ssd1306\+\_\+\+Reset@{ssd1306\+\_\+\+Reset}}
+\index{ssd1306\+\_\+\+Reset@{ssd1306\+\_\+\+Reset}!ssd1306.\+h@{ssd1306.\+h}}
+\subsubsection{\texorpdfstring{ssd1306\+\_\+\+Reset()}{ssd1306\_Reset()}}
+{\footnotesize\ttfamily void ssd1306\+\_\+\+Reset (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+This Library was originally written by Olivier Van den Eede (4ilo) in 2016. Some refactoring was done and S\+PI support was added by Aleksander Alekseev (afiskon) in 2018.
+
+\href{https://github.com/afiskon/stm32-ssd1306}{\tt https\+://github.\+com/afiskon/stm32-\/ssd1306} 

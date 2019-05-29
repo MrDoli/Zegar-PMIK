@@ -1,0 +1,64 @@
+\hypertarget{flash_8c}{}\section{Src/\+Library/\+Flash/flash.c File Reference}
+\label{flash_8c}\index{Src/\+Library/\+Flash/flash.\+c@{Src/\+Library/\+Flash/flash.\+c}}
+
+
+Plik implementujacy metody zapisu do pamieci flash.  
+
+
+{\ttfamily \#include \char`\"{}flash.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{flash_8c_aabc6ec74d0d7289af917528166434058}{save\+Alarm\+Flash} (uint32\+\_\+t $\ast$flash\+\_\+data)
+\item 
+void \hyperlink{flash_8c_a1fb1eff11f88b524f5e3cf22d50c1cb5}{read\+Alarm\+Flash} (uint32\+\_\+t $\ast$flash\+\_\+data)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{flash_8c_a780f300480d19fb7e16ea3682818b070}{flash\+\_\+addresses} \mbox{[}3\mbox{]} = \{0x08040000,0x08040010,0x08040020\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Plik implementujacy metody zapisu do pamieci flash. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{flash_8c_a1fb1eff11f88b524f5e3cf22d50c1cb5}\label{flash_8c_a1fb1eff11f88b524f5e3cf22d50c1cb5}} 
+\index{flash.\+c@{flash.\+c}!read\+Alarm\+Flash@{read\+Alarm\+Flash}}
+\index{read\+Alarm\+Flash@{read\+Alarm\+Flash}!flash.\+c@{flash.\+c}}
+\subsubsection{\texorpdfstring{read\+Alarm\+Flash()}{readAlarmFlash()}}
+{\footnotesize\ttfamily void read\+Alarm\+Flash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{flash\+\_\+data }\end{DoxyParamCaption})}
+
+Odczytuje zapisana wczesniej godzine alarmu budzika. 
+\begin{DoxyParams}{Parameters}
+{\em flash\+\_\+data} & Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi -\/ minuty, trzeci -\/ sekundy. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{flash_8c_aabc6ec74d0d7289af917528166434058}\label{flash_8c_aabc6ec74d0d7289af917528166434058}} 
+\index{flash.\+c@{flash.\+c}!save\+Alarm\+Flash@{save\+Alarm\+Flash}}
+\index{save\+Alarm\+Flash@{save\+Alarm\+Flash}!flash.\+c@{flash.\+c}}
+\subsubsection{\texorpdfstring{save\+Alarm\+Flash()}{saveAlarmFlash()}}
+{\footnotesize\ttfamily void save\+Alarm\+Flash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{flash\+\_\+data }\end{DoxyParamCaption})}
+
+Zapisuje godzine alarmu budzika w pamieci Flash. 
+\begin{DoxyParams}{Parameters}
+{\em flash\+\_\+data} & Tablica z czasem do zapisu, gdzie pierwszy element to godzina, drugi -\/ minuty, trzeci -\/ sekundy. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{flash_8c_a780f300480d19fb7e16ea3682818b070}\label{flash_8c_a780f300480d19fb7e16ea3682818b070}} 
+\index{flash.\+c@{flash.\+c}!flash\+\_\+addresses@{flash\+\_\+addresses}}
+\index{flash\+\_\+addresses@{flash\+\_\+addresses}!flash.\+c@{flash.\+c}}
+\subsubsection{\texorpdfstring{flash\+\_\+addresses}{flash\_addresses}}
+{\footnotesize\ttfamily uint32\+\_\+t flash\+\_\+addresses\mbox{[}3\mbox{]} = \{0x08040000,0x08040010,0x08040020\}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em flas\+\_\+addresses} & Tablica z adresami pamieci pod ktore bedzia zapisywany czas. Pierwszy element to adres godziny, drugi -\/ adres minut, trzeci -\/ adres sekund. \\
+\hline
+\end{DoxyParams}

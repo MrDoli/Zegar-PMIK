@@ -72,6 +72,7 @@ $(function() {
 <p>Plik naglowkowy z metodami odpowiadajacymi za wyswietlanie ekranow zwiazanych z czasem (wyswietlanie, ustawianie).  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 </div>
 <p><a href="clock_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -92,10 +93,65 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cloc
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8h.html#a981739154a34d8b4b36647e5f6460532">setTimeScreen</a> ()</td></tr>
 <tr class="memdesc:a981739154a34d8b4b36647e5f6460532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyœwietlanie ekranu do ustawienia czasu w zegarze. <br /></td></tr>
 <tr class="separator:a981739154a34d8b4b36647e5f6460532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a041997281d40f6d24ec3b56bd662fe03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8h.html#a041997281d40f6d24ec3b56bd662fe03">showAlarmState</a> (bool alarmSet)</td></tr>
+<tr class="separator:a041997281d40f6d24ec3b56bd662fe03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8508d3f935332a387d592984060594f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clock_8h.html#ad8508d3f935332a387d592984060594f">showPlaceToSet</a> (char partToSet)</td></tr>
+<tr class="memdesc:ad8508d3f935332a387d592984060594f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wskazanie uzytkownikowi czy ustawia godzine, minuty lub sekundy.  <a href="#ad8508d3f935332a387d592984060594f">More...</a><br /></td></tr>
+<tr class="separator:ad8508d3f935332a387d592984060594f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Plik naglowkowy z metodami odpowiadajacymi za wyswietlanie ekranow zwiazanych z czasem (wyswietlanie, ustawianie). </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a041997281d40f6d24ec3b56bd662fe03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a041997281d40f6d24ec3b56bd662fe03">&#9670;&nbsp;</a></span>showAlarmState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void showAlarmState </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>alarmSet</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>@ brief Wyswietlenie informacji czy budzik wlaczony. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Flaga</td><td>czy alarm jest wlaczany. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad8508d3f935332a387d592984060594f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8508d3f935332a387d592984060594f">&#9670;&nbsp;</a></span>showPlaceToSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void showPlaceToSet </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>partToSet</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wskazanie uzytkownikowi czy ustawia godzine, minuty lub sekundy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">partToSet</td><td>Wartosc mowiaca o tym czy jest ustawiana godzina, minuta, lub sekunda. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae20d63e987468248c1821ec70ae7c650"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae20d63e987468248c1821ec70ae7c650">&#9670;&nbsp;</a></span>updateTime()</h2>
 

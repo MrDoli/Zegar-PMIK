@@ -345,7 +345,7 @@ var searchData=
   ['rccex_20private_20macros',['RCCEx Private Macros',['../group___r_c_c_ex___private___macros.html',1,'']]],
   ['rcr',['RCR',['../struct_t_i_m___type_def.html#ad432e2a315abf68e6c295fb4ebc37534',1,'TIM_TypeDef']]],
   ['rdplevel',['RDPLevel',['../struct_f_l_a_s_h___o_b_program_init_type_def.html#a1f613ba2b87cf9caa84dc1d493e96dae',1,'FLASH_OBProgramInitTypeDef']]],
-  ['readalarmflash',['readAlarmFlash',['../flash_8h.html#a7b46aca57b614c3ee825d3b9e7a4b9ef',1,'flash.c']]],
+  ['readalarmflash',['readAlarmFlash',['../flash_8c.html#a1fb1eff11f88b524f5e3cf22d50c1cb5',1,'readAlarmFlash(uint32_t *flash_data):&#160;flash.c'],['../flash_8h.html#a7b46aca57b614c3ee825d3b9e7a4b9ef',1,'readAlarmFlash(uint32_t *Flash_Data):&#160;flash.c']]],
   ['recording_2ec',['recording.c',['../recording_8c.html',1,'']]],
   ['recording_2eh',['recording.h',['../recording_8h.html',1,'']]],
   ['repetitioncounter',['RepetitionCounter',['../struct_t_i_m___base___init_type_def.html#aa949328175500fd1d112f64a4db5ae79',1,'TIM_Base_InitTypeDef']]],

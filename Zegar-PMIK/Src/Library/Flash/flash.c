@@ -5,7 +5,7 @@
 */
 
 /**
- * \file keypad.c
+ * \file flash.c
  * \brief Plik implementujacy metody zapisu do pamieci flash
  */
 

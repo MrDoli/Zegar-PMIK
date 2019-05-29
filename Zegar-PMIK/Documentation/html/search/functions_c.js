@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['savealarmflash',['saveAlarmFlash',['../flash_8h.html#a38e4a52a0a3add09d8b99fdd7fa8b72a',1,'flash.c']]],
+  ['savealarmflash',['saveAlarmFlash',['../flash_8c.html#aabc6ec74d0d7289af917528166434058',1,'saveAlarmFlash(uint32_t *flash_data):&#160;flash.c'],['../flash_8h.html#a38e4a52a0a3add09d8b99fdd7fa8b72a',1,'saveAlarmFlash(uint32_t *Flash_Data):&#160;flash.c']]],
   ['scb_5fcleandcache',['SCB_CleanDCache',['../group___c_m_s_i_s___core___cache_functions.html#ga55583e3065c6eabca204b8b89b121c4c',1,'core_cm7.h']]],
   ['scb_5fcleandcache_5fby_5faddr',['SCB_CleanDCache_by_Addr',['../group___c_m_s_i_s___core___cache_functions.html#ga696fadbf7b9cc71dad42fab61873a40d',1,'core_cm7.h']]],
   ['scb_5fcleaninvalidatedcache',['SCB_CleanInvalidateDCache',['../group___c_m_s_i_s___core___cache_functions.html#ga1b741def9e3b2ca97dc9ea49b8ce505c',1,'core_cm7.h']]],
@@ -14,7 +14,6 @@ var searchData=
   ['scb_5finvalidatedcache_5fby_5faddr',['SCB_InvalidateDCache_by_Addr',['../group___c_m_s_i_s___core___cache_functions.html#ga503ef7ef58c0773defd15a82f6336c09',1,'core_cm7.h']]],
   ['scb_5finvalidateicache',['SCB_InvalidateICache',['../group___c_m_s_i_s___core___cache_functions.html#ga50d373a785edd782c5de5a3b55e30ff3',1,'core_cm7.h']]],
   ['setactualscreen',['setActualScreen',['../controller_8c.html#a8040ffdaafd66b662197ab1122d0ca24',1,'setActualScreen(bool screenArray[]):&#160;controller.c'],['../controller_8h.html#a8040ffdaafd66b662197ab1122d0ca24',1,'setActualScreen(bool screenArray[]):&#160;controller.c']]],
-  ['setalarm',['setAlarm',['../main_8c.html#a9a499b4f2b81127685217aad900eb84f',1,'main.c']]],
   ['setalarminrtc',['setAlarmInRTC',['../controller_8c.html#a79a40763b553e9f5183d3c49c84be430',1,'setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds):&#160;controller.c'],['../controller_8h.html#a79a40763b553e9f5183d3c49c84be430',1,'setAlarmInRTC(uint8_t hours, uint8_t minutes, uint8_t seconds):&#160;controller.c']]],
   ['setalarmuser',['setAlarmUser',['../controller_8c.html#adb198ed0fedb3f9cb162713ca5243d49',1,'setAlarmUser():&#160;controller.c'],['../controller_8h.html#adb198ed0fedb3f9cb162713ca5243d49',1,'setAlarmUser():&#160;controller.c']]],
   ['sethourminorsecinalarm',['setHourMinOrSecInAlarm',['../controller_8c.html#a94404bd931931ce34796effd07f2e867',1,'setHourMinOrSecInAlarm(char whichPartToSet):&#160;controller.c'],['../controller_8h.html#a94404bd931931ce34796effd07f2e867',1,'setHourMinOrSecInAlarm(char whichPartToSet):&#160;controller.c']]],
@@ -23,8 +22,12 @@ var searchData=
   ['settimescreen',['setTimeScreen',['../clock_8c.html#a981739154a34d8b4b36647e5f6460532',1,'setTimeScreen():&#160;clock.c'],['../clock_8h.html#a981739154a34d8b4b36647e5f6460532',1,'setTimeScreen():&#160;clock.c']]],
   ['settimeuser',['setTimeUser',['../controller_8c.html#ae7b8f4074b8c8d645bdcbc2d2d01b3ef',1,'setTimeUser():&#160;controller.c'],['../controller_8h.html#ae7b8f4074b8c8d645bdcbc2d2d01b3ef',1,'setTimeUser():&#160;controller.c']]],
   ['showalarmscreen',['showAlarmScreen',['../alarm_8c.html#a7d32fa5921e6fee3563005ceb0ec98fd',1,'showAlarmScreen():&#160;alarm.c'],['../alarm_8h.html#a7d32fa5921e6fee3563005ceb0ec98fd',1,'showAlarmScreen():&#160;alarm.c']]],
+  ['showalarmstate',['showAlarmState',['../clock_8c.html#a041997281d40f6d24ec3b56bd662fe03',1,'showAlarmState(bool alarmSet):&#160;clock.c'],['../clock_8h.html#a041997281d40f6d24ec3b56bd662fe03',1,'showAlarmState(bool alarmSet):&#160;clock.c']]],
   ['showcity',['showCity',['../clock_8c.html#adc76b20553ff127659310c067dc60672',1,'showCity():&#160;clock.c'],['../clock_8h.html#adc76b20553ff127659310c067dc60672',1,'showCity():&#160;clock.c']]],
   ['showmenubuttons',['showMenuButtons',['../clock_8c.html#a47602407b878ee25d742663a6677ed36',1,'showMenuButtons():&#160;clock.c'],['../clock_8h.html#a47602407b878ee25d742663a6677ed36',1,'showMenuButtons():&#160;clock.c']]],
+  ['showplacetoset',['showPlaceToSet',['../clock_8c.html#ad8508d3f935332a387d592984060594f',1,'showPlaceToSet(char partToSet):&#160;clock.c'],['../clock_8h.html#ad8508d3f935332a387d592984060594f',1,'showPlaceToSet(char partToSet):&#160;clock.c']]],
+  ['ssd1306_5freset',['ssd1306_Reset',['../ssd1306_8c.html#a0de0de5160661b862134dd0ac9023236',1,'ssd1306_Reset(void):&#160;ssd1306.c'],['../ssd1306_8h.html#a0de0de5160661b862134dd0ac9023236',1,'ssd1306_Reset(void):&#160;ssd1306.c']]],
+  ['ssd1306_5ftestborder',['ssd1306_TestBorder',['../ssd1306__tests_8c.html#accb9d6693efeddc0891dba175299e817',1,'ssd1306_TestBorder():&#160;ssd1306_tests.c'],['../ssd1306__tests_8h.html#accb9d6693efeddc0891dba175299e817',1,'ssd1306_TestBorder():&#160;ssd1306_tests.c']]],
   ['svc_5fhandler',['SVC_Handler',['../stm32f4xx__it_8h.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c'],['../stm32f4xx__it_8c.html#a3e5ddb3df0d62f2dc357e64a3f04a6ce',1,'SVC_Handler(void):&#160;stm32f4xx_it.c']]],
   ['systemclock_5fconfig',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]],
   ['systemcoreclockupdate',['SystemCoreClockUpdate',['../group___s_t_m32_f4xx___system___exported___functions.html#gae0c36a9591fe6e9c45ecb21a794f0f0f',1,'SystemCoreClockUpdate(void):&#160;system_stm32f4xx.c'],['../group___s_t_m32_f4xx___system___private___functions.html#gae0c36a9591fe6e9c45ecb21a794f0f0f',1,'SystemCoreClockUpdate(void):&#160;system_stm32f4xx.c']]],

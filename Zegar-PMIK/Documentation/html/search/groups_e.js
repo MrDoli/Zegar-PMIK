@@ -9,7 +9,6 @@ var searchData=
   ['system_20clock_20source',['System Clock Source',['../group___r_c_c___system___clock___source.html',1,'']]],
   ['system_20clock_20source_20status',['System Clock Source Status',['../group___r_c_c___system___clock___source___status.html',1,'']]],
   ['system_20clock_20type',['System Clock Type',['../group___r_c_c___system___clock___type.html',1,'']]],
-  ['stm32f4_2ddiscovery_5faudio_5fplayer_5frecorder',['STM32F4-Discovery_Audio_Player_Recorder',['../group___s_t_m32_f4-_discovery___audio___player___recorder.html',1,'']]],
   ['stm32f411xe',['Stm32f411xe',['../group__stm32f411xe.html',1,'']]],
   ['stm32f4xx',['Stm32f4xx',['../group__stm32f4xx.html',1,'']]],
   ['stm32f4xx_5fhal_5fdriver',['STM32F4xx_HAL_Driver',['../group___s_t_m32_f4xx___h_a_l___driver.html',1,'']]],

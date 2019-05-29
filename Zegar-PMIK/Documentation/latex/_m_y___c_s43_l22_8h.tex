@@ -1,0 +1,117 @@
+\hypertarget{_m_y___c_s43_l22_8h}{}\section{Src/\+Library/\+Audio/\+M\+Y\+\_\+\+C\+S43\+L22.h File Reference}
+\label{_m_y___c_s43_l22_8h}\index{Src/\+Library/\+Audio/\+M\+Y\+\_\+\+C\+S43\+L22.\+h@{Src/\+Library/\+Audio/\+M\+Y\+\_\+\+C\+S43\+L22.\+h}}
+
+
+Biblioteka zewnetrzna do obslugi sterownika Audio znajdujacego sie na p³ytce rozwojowej.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a7022e16b12e0939d084e3e2398890056}\label{_m_y___c_s43_l22_8h_a7022e16b12e0939d084e3e2398890056}} 
+\#define {\bfseries P\+O\+W\+E\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L1}~0x02
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_aad30b7a3af2af2843129e48fbc5b3be1}\label{_m_y___c_s43_l22_8h_aad30b7a3af2af2843129e48fbc5b3be1}} 
+\#define {\bfseries P\+O\+W\+E\+R\+\_\+\+C\+O\+N\+T\+R\+O\+L2}~0x04
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a0d81bedf6f230975c1d48e8973aebc8b}\label{_m_y___c_s43_l22_8h_a0d81bedf6f230975c1d48e8973aebc8b}} 
+\#define {\bfseries C\+L\+O\+C\+K\+I\+N\+G\+\_\+\+C\+O\+N\+T\+R\+OL}~0x05
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_adf99a0211b2079c8e94dc37240cdfaf8}\label{_m_y___c_s43_l22_8h_adf99a0211b2079c8e94dc37240cdfaf8}} 
+\#define {\bfseries I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+C\+O\+N\+T\+R\+O\+L1}~0x06
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a6a72c94c634d2a4b39fe24a096948ccb}\label{_m_y___c_s43_l22_8h_a6a72c94c634d2a4b39fe24a096948ccb}} 
+\#define {\bfseries I\+N\+T\+E\+R\+F\+A\+C\+E\+\_\+\+C\+O\+N\+T\+R\+O\+L2}~0x07
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a51dd775398f28020f1634ef665891d62}\label{_m_y___c_s43_l22_8h_a51dd775398f28020f1634ef665891d62}} 
+\#define {\bfseries P\+A\+S\+S\+T\+H\+R\+O\+U\+G\+H\+\_\+A}~0x08
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_ae0aa3012cdc1c2544c0f0857d4099798}\label{_m_y___c_s43_l22_8h_ae0aa3012cdc1c2544c0f0857d4099798}} 
+\#define {\bfseries P\+A\+S\+S\+T\+H\+R\+O\+U\+G\+H\+\_\+B}~0x09
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a5a8217f94152204e8d56ba036cf050f3}\label{_m_y___c_s43_l22_8h_a5a8217f94152204e8d56ba036cf050f3}} 
+\#define {\bfseries M\+I\+S\+C\+E\+L\+L\+A\+N\+E\+O\+U\+S\+\_\+\+C\+O\+N\+T\+R\+LS}~0x0E
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a9163bb9426cf0dc6c36ea65edf1034b4}\label{_m_y___c_s43_l22_8h_a9163bb9426cf0dc6c36ea65edf1034b4}} 
+\#define {\bfseries P\+L\+A\+Y\+B\+A\+C\+K\+\_\+\+C\+O\+N\+T\+R\+OL}~0x0F
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_acc4fbc21d24b4b15c2dad5de72eb717a}\label{_m_y___c_s43_l22_8h_acc4fbc21d24b4b15c2dad5de72eb717a}} 
+\#define {\bfseries P\+A\+S\+S\+T\+H\+R\+O\+U\+G\+H\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+A}~0x14
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a404ea718964454036a51c350b673d652}\label{_m_y___c_s43_l22_8h_a404ea718964454036a51c350b673d652}} 
+\#define {\bfseries P\+A\+S\+S\+T\+H\+R\+O\+U\+G\+H\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+B}~0x15
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a4412a2b595831ce12743764c8f8a6015}\label{_m_y___c_s43_l22_8h_a4412a2b595831ce12743764c8f8a6015}} 
+\#define {\bfseries P\+C\+M\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+A}~0x1A
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a8cec9cf5c26c9d1b2401e7c0ca20afd9}\label{_m_y___c_s43_l22_8h_a8cec9cf5c26c9d1b2401e7c0ca20afd9}} 
+\#define {\bfseries P\+C\+M\+\_\+\+V\+O\+L\+U\+M\+E\+\_\+B}~0x1B
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a14d1dfaedd776b5597ec6cc0029a13d4}\label{_m_y___c_s43_l22_8h_a14d1dfaedd776b5597ec6cc0029a13d4}} 
+\#define {\bfseries C\+O\+N\+F\+I\+G\+\_\+00}~0x00
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a080fadf20202e3515fb037c090489982}\label{_m_y___c_s43_l22_8h_a080fadf20202e3515fb037c090489982}} 
+\#define {\bfseries C\+O\+N\+F\+I\+G\+\_\+47}~0x47
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a58a7e5a52b74587bc539af7786e51647}\label{_m_y___c_s43_l22_8h_a58a7e5a52b74587bc539af7786e51647}} 
+\#define {\bfseries C\+O\+N\+F\+I\+G\+\_\+32}~0x32
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a464f58c67fbeba1230b1a0ac11e2e8d7}\label{_m_y___c_s43_l22_8h_a464f58c67fbeba1230b1a0ac11e2e8d7}} 
+\#define {\bfseries C\+S43\+L22\+\_\+\+R\+E\+G\+\_\+\+M\+A\+S\+T\+E\+R\+\_\+\+A\+\_\+\+V\+OL}~0x20
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a80e8adac2dab40d6cabe538154f07c6c}\label{_m_y___c_s43_l22_8h_a80e8adac2dab40d6cabe538154f07c6c}} 
+\#define {\bfseries C\+S43\+L22\+\_\+\+R\+E\+G\+\_\+\+M\+A\+S\+T\+E\+R\+\_\+\+B\+\_\+\+V\+OL}~0x21
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a567afb3df750745579dc1ffc47e084f1}\label{_m_y___c_s43_l22_8h_a567afb3df750745579dc1ffc47e084f1}} 
+\#define {\bfseries D\+A\+C\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}~0x94
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a102b5b3ab3dd8bbaaa3fdf449baf5f57}\label{_m_y___c_s43_l22_8h_a102b5b3ab3dd8bbaaa3fdf449baf5f57}} 
+\#define {\bfseries C\+S43\+\_\+\+M\+U\+TE}~0x00
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_ab71a070aca98e72bbd262d1967248284}\label{_m_y___c_s43_l22_8h_ab71a070aca98e72bbd262d1967248284}} 
+\#define {\bfseries C\+S43\+\_\+\+R\+I\+G\+HT}~0x01
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a5446c3ba351a4bdee98430880631f396}\label{_m_y___c_s43_l22_8h_a5446c3ba351a4bdee98430880631f396}} 
+\#define {\bfseries C\+S43\+\_\+\+L\+E\+FT}~0x02
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a211748ea350a61700147dbc6be2909d1}\label{_m_y___c_s43_l22_8h_a211748ea350a61700147dbc6be2909d1}} 
+\#define {\bfseries C\+S43\+\_\+\+R\+I\+G\+H\+T\+\_\+\+L\+E\+FT}~0x03
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a7f0266737a9f9d7253574f525ae023c5}\label{_m_y___c_s43_l22_8h_a7f0266737a9f9d7253574f525ae023c5}} 
+\#define {\bfseries V\+O\+L\+U\+M\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+A}(Volume)~(((Volume) $>$ 100)? 255\+:((uint8\+\_\+t)(((Volume) $\ast$ 255) / 100)))
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a99a7d372de42c47f8045b6220e3dc0f8}\label{_m_y___c_s43_l22_8h_a99a7d372de42c47f8045b6220e3dc0f8}} 
+\#define {\bfseries V\+O\+L\+U\+M\+E\+\_\+\+C\+O\+N\+V\+E\+R\+T\+\_\+D}(Volume)~(((Volume) $>$ 100)? 24\+:((uint8\+\_\+t)((((Volume) $\ast$ 48) / 100) -\/ 24)))
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a122691c391719a286e1f0a5b735c1f32}\label{_m_y___c_s43_l22_8h_a122691c391719a286e1f0a5b735c1f32}} 
+enum {\bfseries C\+S43\+\_\+\+M\+O\+DE} \{ {\bfseries M\+O\+D\+E\+\_\+\+I2S} = 0, 
+{\bfseries M\+O\+D\+E\+\_\+\+A\+N\+A\+L\+OG}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a8610c410921a1fbec9e618b16b26d60e}\label{_m_y___c_s43_l22_8h_a8610c410921a1fbec9e618b16b26d60e}} 
+void {\bfseries C\+S43\+\_\+\+Init} (\hyperlink{struct_____i2_c___handle_type_def}{I2\+C\+\_\+\+Handle\+Type\+Def} i2c\+\_\+handle, C\+S43\+\_\+\+M\+O\+DE output\+Mode)
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a67ead8a84e80eb45c0fd38260850b7bc}\label{_m_y___c_s43_l22_8h_a67ead8a84e80eb45c0fd38260850b7bc}} 
+void {\bfseries C\+S43\+\_\+\+Enable\+\_\+\+Right\+Left} (uint8\+\_\+t side)
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_af6cdf8287b7cc6e4ce2b58a80d6b47f3}\label{_m_y___c_s43_l22_8h_af6cdf8287b7cc6e4ce2b58a80d6b47f3}} 
+void {\bfseries C\+S43\+\_\+\+Set\+Volume} (uint8\+\_\+t volume)
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a212cc156e52c621b794b22e80799fd5d}\label{_m_y___c_s43_l22_8h_a212cc156e52c621b794b22e80799fd5d}} 
+void {\bfseries C\+S43\+\_\+\+Start} (void)
+\item 
+\mbox{\Hypertarget{_m_y___c_s43_l22_8h_a071da87bfff106728c338fa46eef54e7}\label{_m_y___c_s43_l22_8h_a071da87bfff106728c338fa46eef54e7}} 
+void {\bfseries C\+S43\+\_\+\+Stop} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Biblioteka zewnetrzna do obslugi sterownika Audio znajdujacego sie na p³ytce rozwojowej. 
+

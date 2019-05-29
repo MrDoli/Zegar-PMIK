@@ -6,6 +6,7 @@ var searchData=
   ['tamperpullup',['TamperPullUp',['../struct_r_t_c___tamper_type_def.html#a6e849894076222b74c7fa8430b6e176c',1,'RTC_TamperTypeDef']]],
   ['tcr',['TCR',['../struct_i_t_m___type.html#a04b9fbc83759cb818dfa161d39628426',1,'ITM_Type']]],
   ['ter',['TER',['../struct_i_t_m___type.html#acd03c6858f7b678dab6a6121462e7807',1,'ITM_Type']]],
+  ['time_5fclock',['time_clock',['../controller_8c.html#ac885880bf13fd15fee01e15a8cab59c8',1,'time_clock():&#160;main.c'],['../main_8c.html#a66820b8570dbf55d3b8614e11eb51355',1,'time_clock():&#160;main.c']]],
   ['timeformat',['TimeFormat',['../struct_r_t_c___time_type_def.html#a701c21c52472e8caf9e23653ec2fd604',1,'RTC_TimeTypeDef']]],
   ['timestampontamperdetection',['TimeStampOnTamperDetection',['../struct_r_t_c___tamper_type_def.html#ae2685d2368c30ca2eeb3bd05c5094b2a',1,'RTC_TamperTypeDef']]],
   ['tpr',['TPR',['../struct_i_t_m___type.html#ae907229ba50538bf370fbdfd54c099a2',1,'ITM_Type']]],
